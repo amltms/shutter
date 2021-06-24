@@ -1,4 +1,4 @@
-import {ItemGrid} from './ItemGrid';
+import {ItemGrid} from '../items/ItemGrid';
 
 export const SearchResults = ({searchData, loading, itemOverview}) => {
     return (

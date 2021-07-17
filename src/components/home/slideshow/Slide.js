@@ -3,7 +3,7 @@ export const Slide = ({slide}) => {
 		slide.backdrop_path &&
 		<div className='slide'>
 			<div className='slide-content'>
-				<h1>{slide.title}</h1>
+				<h1>{slide.original_title ? slide.original_title : slide.original_name}</h1>
 				<p>{slide.overview}</p>
 				<button>More Details</button>
 			</div>

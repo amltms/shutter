@@ -3,7 +3,7 @@ import {MdSearch} from 'react-icons/md';
 import {HiUserCircle} from 'react-icons/hi';
 import { useState } from 'react';
 
-export const Nav = ({handleInput}) => {
+export const Nav = ({handleInput, setContentType}) => {
 	const searchInput = useRef(null)
 	const [displaySearch, setDisplaySearch] = useState(false)
 	
@@ -12,8 +12,12 @@ export const Nav = ({handleInput}) => {
 		setDisplaySearch(v => !v)
 	}
 	return (
-		<nav>
-  		<a className='logo' href="#home">Cactus</a>
+		<nav className='flex align-center space-between'>
+			<div className='nav-left flex align-center'>
+  			<button className='logo btn' onClick={()=>setContentType('all')}>Cactus</button>
+				<button onClick={()=>setContentType('movie')}>Films</button>
+				<button onClick={()=>setContentType('tv')}>TV</button>
+			</div>
 			<div class="nav-right">
 				<input onChange={handleInput} ref={searchInput} className={`search-bar ${displaySearch && 'display'}`}/>
 				<MdSearch onClick={() =>	startSearch() } />

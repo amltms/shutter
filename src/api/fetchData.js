@@ -1,8 +1,8 @@
 import axios from 'axios';
 const apikey = "5042d9bd250e2fbd1f65fceff13e225d";
 
-export const fetchPopular = async () => {
-    return await axios.get('https://api.themoviedb.org/3/movie/popular?api_key='+apikey+'&language=en-UK&page=1')
+export const fetchPopular = async (contentType) => {
+    return await axios.get(`https://api.themoviedb.org/3/trending/${contentType}/week?api_key=${apikey}&language=en-UK&page=1`)
     .then(res => res.data)
     .catch(err => console.log(err))
 }
@@ -10,7 +10,7 @@ export const fetchPopular = async () => {
 
 export const fetchItem = async (id) => {
     return await axios.get('https://api.themoviedb.org/3/movie/'+id+'?api_key='+apikey)
-    .then(res => res.data)
+    .then(res => console.log(res.data))
     .catch(err => console.log(err))
 }
 

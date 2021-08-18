@@ -6,7 +6,6 @@ import {Slider} from './slideshow/Slider';
 import {WatchList} from "./WatchList";
 import { ItemOverview } from "../items/ItemOverview";
 import { SearchResults } from "../search/SearchResults";
-import YoutubeBackground from 'react-youtube-background'
 
 export const Home = ({loading, setLoading, contentType, searchData}) => {
   const [movies, setMovies] = useState([]);

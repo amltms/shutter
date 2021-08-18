@@ -127,13 +127,18 @@ nav button {
   font-size: 1.2rem;
 }
 
+.nav-left > *:hover,
+.nav-right svg:hover {
+  color: #1abc9c;
+}
+
 .nav-left .logo {
   font-size: 1.5rem;
   margin-right: 30%;
 }
 
 .nav-left > * {
-  margin-right: 5%;
+  margin-right: 15%;
 }
 
 .nav-right svg {
@@ -374,14 +379,14 @@ nav button {
 
 .btn-slider {
   z-index: 10;
-  position: absolute;
-  height: 100%;
+  height: 50%;
   border: none;
   background: none;
   color: white;
   font-size: 5rem;
   opacity: 0;
   transition: 0.2s;
+  position: absolute;
 }
 
 .next {
@@ -452,6 +457,9 @@ nav button {
 }
 
 @media only screen and (min-width: 1800px) {
+  .btn-slider {
+    height: 100%;
+  }
   .slide h1 {
     font-size: 8rem;
   }

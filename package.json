@@ -1,18 +1,20 @@
 {
-  "name": "movie-finder",
+  "name": "screens",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.13.0",
+    "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^12.20.19",
+    "@types/react": "^17.0.17",
+    "@types/react-dom": "^17.0.9",
     "axios": "^0.21.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-icons": "^4.2.0",
     "react-scripts": "4.0.3",
-    "react-spinners": "^0.11.0",
-    "react-youtube-background": "^1.0.0",
+    "typescript": "^4.3.5",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

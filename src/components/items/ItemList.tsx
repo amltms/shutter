@@ -4,7 +4,9 @@ import { FC } from "react";
 import styled from "styled-components";
 type ItemListProps = {
   items: ItemAttributes[];
-  setSelectedItem: React.Dispatch<React.SetStateAction<ItemAttributes>>;
+  setSelectedItem: React.Dispatch<
+    React.SetStateAction<ItemAttributes | undefined>
+  >;
 };
 
 const Grid = styled.div`

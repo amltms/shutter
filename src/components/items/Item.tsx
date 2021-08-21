@@ -4,7 +4,9 @@ import styled from "styled-components";
 
 export type ItemProps = {
   item: ItemAttributes;
-  setSelectedItem: React.Dispatch<React.SetStateAction<ItemAttributes>>;
+  setSelectedItem: React.Dispatch<
+    React.SetStateAction<ItemAttributes | undefined>
+  >;
 };
 
 const ItemImg = styled.img`
@@ -20,10 +22,12 @@ const ItemImg = styled.img`
 
 export const Item: FC<ItemProps> = (props) => {
   return (
-    <ItemImg
-      src={`https://image.tmdb.org/t/p/original/${props.item.poster_path}`}
-      alt="poster"
-      onClick={() => props.setSelectedItem(props.item)}
-    />
+    <div>
+      <ItemImg
+        src={`https://image.tmdb.org/t/p/original/${props.item.poster_path}`}
+        alt="poster"
+        onClick={() => props.setSelectedItem(props.item)}
+      />
+    </div>
   );
 };

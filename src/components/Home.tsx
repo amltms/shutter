@@ -5,14 +5,16 @@ import { ItemAttributes } from "../components/interfaces";
 import { FC } from "react";
 
 export type HomeProps = {
-  setSelectedItem: React.Dispatch<React.SetStateAction<ItemAttributes>>;
+  setSelectedItem: React.Dispatch<
+    React.SetStateAction<ItemAttributes | undefined>
+  >;
 };
 
 export const Home: FC<HomeProps> = (props) => {
   const [popularItems, setPopularItems] = useState<ItemAttributes[]>([]);
   useEffect(() => {
     fetchPopular("all").then((data) => {
-      setPopularItems(data);
+      setPopularItems(data.results);
     });
   }, []);
 

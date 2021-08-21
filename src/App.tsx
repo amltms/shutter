@@ -9,20 +9,29 @@ import { ItemAttributes } from "./components/interfaces";
 
 const App: FC = () => {
   const [searchItems, setSearchItems] = useState<ItemAttributes[]>([]);
-  const [selectedItem, setSelectedItem] = useState<ItemAttributes>({});
+  const [selectedItem, setSelectedItem] = useState<ItemAttributes>();
+  const [overviewOpen, setOverviewOpen] = useState(false);
+
   useEffect(() => {
-    console.log(selectedItem);
+    selectedItem !== null && setOverviewOpen(true);
+    console.log("hi");
   }, [selectedItem]);
 
   const handleSearchInput = async (e: ChangeEvent<HTMLInputElement>) => {
     e.target.value
-      ? fetchSearch(e.target.value).then((data) => setSearchItems(data))
+      ? fetchSearch(e.target.value).then((data) => setSearchItems(data.results))
       : setSearchItems([]);
   };
 
   return (
     <div className="App">
-      <ItemOverview selectedItem={selectedItem} />
+      {selectedItem && overviewOpen && (
+        <ItemOverview
+          selectedItem={selectedItem}
+          setOverviewOpen={setOverviewOpen}
+        />
+      )}
+
       <Nav handleSearchInput={handleSearchInput} />
       {searchItems.length === 0 ? (
         <Home setSelectedItem={setSelectedItem} />

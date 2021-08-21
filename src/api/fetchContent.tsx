@@ -2,11 +2,15 @@ import axios from "axios";
 const apikey = "5042d9bd250e2fbd1f65fceff13e225d";
 
 const getData = async (url: string, urlVars?: string) => {
+  console.log(
+    `https://api.themoviedb.org/3/${url}?api_key=${apikey}&language=en-UK${urlVars}`
+  );
+
   return await axios
     .get(
       `https://api.themoviedb.org/3/${url}?api_key=${apikey}&language=en-UK${urlVars}`
     )
-    .then((res) => res.data.results)
+    .then((res) => res.data)
     .catch((err) => console.log(err));
 };
 

@@ -27,5 +27,5 @@ export const fetchCredits = (contentType: string, id: number) => {
 };
 
 export const fetchSearch = (search: string) => {
-  return getData(`search/movie`, `&query=${search}`);
+  return getData(`search/multi`, `&query=${search}`);
 };

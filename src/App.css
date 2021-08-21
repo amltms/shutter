@@ -1,10 +1,48 @@
-body {
-  background-color: black;
+@font-face {
+  font-family: Helvetica;
+  src: url(./fonts/HelveticaWorld-Regular.ttf);
+}
+
+@font-face {
+  font-family: Helvetica;
+  src: url(./fonts/HelveticaWorld-Bold.ttf);
+  font-weight: bold;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap");
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
   color: white;
 }
+
+body {
+  background-color: black;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+h1 {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 4em;
+}
+p {
+  font-family: "Roboto", sans-serif;
+}
+
+img {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}
+
 button {
   background: none;
   border: none;

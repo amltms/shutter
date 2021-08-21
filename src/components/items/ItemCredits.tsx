@@ -1,5 +1,15 @@
-interface Props {}
+import { FC } from "react";
+import { Credits } from "../interfaces";
+interface Props {
+  credits: Credits;
+}
 
-export const ItemCredits = (props: Props) => {
-  return <div></div>;
+export const ItemCredits: FC<Props> = ({ credits }) => {
+  return (
+    <div>
+      {credits.cast.map((c) => (
+        <p>{c.name}</p>
+      ))}
+    </div>
+  );
 };

@@ -2,15 +2,15 @@ import { FC, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { VscChromeClose } from "react-icons/vsc";
 import styled from "styled-components";
-import { ItemAttributes, Details } from "../interfaces";
+import { ItemAttributes, Details, Credits } from "../interfaces";
 import { fetchItem, fetchCredits } from "../../api/fetchContent";
 import { ItemDetails } from "./ItemDetails";
 
 const Overview = styled.div`
   position: absolute;
   top: 0;
-  height: 100vh;
   z-index: 2000;
+  height: 100vh;
   width: 100%;
   background: black;
 `;
@@ -20,6 +20,7 @@ const ExitBtn = styled.button`
   right: 0;
   position: absolute;
   margin: 2rem;
+  z-index: 100;
   font-size: 2rem;
 `;
 
@@ -30,7 +31,7 @@ interface Props {
 
 export const ItemOverview: FC<Props> = ({ setOverviewOpen, selectedItem }) => {
   const [item, setItem] = useState<Details>();
-  const [credits, setCredits] = useState();
+  const [credits, setCredits] = useState<Credits>();
 
   useEffect(() => {
     fetchItem(selectedItem.media_type, selectedItem.id).then((data) => {
@@ -47,7 +48,7 @@ export const ItemOverview: FC<Props> = ({ setOverviewOpen, selectedItem }) => {
       <ExitBtn onClick={() => setOverviewOpen(false)}>
         <VscChromeClose />
       </ExitBtn>
-      {item && <ItemDetails details={item} />}
+      {item && credits && <ItemDetails details={item} credits={credits} />}
     </Overview>,
     document.getElementById("portal")!
   );

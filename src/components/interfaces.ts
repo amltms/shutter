@@ -1,14 +1,16 @@
-export type ItemAttributes = {
+export interface ItemAttributes {
   id: number;
+  overview: string;
   poster_path: string;
+  backdrop_path: string;
   media_type: string;
   title?: string;
   original_name?: string;
   release_date?: string;
   first_air_date?: string;
-};
+}
 
-export type Details = {
+export interface Details {
   id: number;
   backdrop_path: string;
   genres: { id: number; name: string }[];
@@ -22,24 +24,19 @@ export type Details = {
   original_name?: string;
   release_date?: string;
   first_air_date?: string;
-};
+}
 
-export type Credits = {
+export interface Credits {
   id: number;
   cast: Cast[];
-  crew: Crew[];
-};
+  crew: Cast[];
+}
 
-type Cast = {
+export interface Cast {
+  id: number;
   name: string;
   profile_path: string;
-  character: string;
-};
-
-type Crew = {
-  name: string;
-  profile_path: string;
-  character: string;
-  job: string;
-  department: string;
-};
+  character?: string;
+  job?: string;
+  department?: string;
+}

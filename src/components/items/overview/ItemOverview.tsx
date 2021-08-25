@@ -2,15 +2,16 @@ import { FC, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { VscChromeClose } from "react-icons/vsc";
 import styled from "styled-components";
-import { ItemAttributes, Details, Credits } from "../interfaces";
-import { fetchItem, fetchCredits } from "../../api/fetchContent";
+
+import { ItemAttributes, Details, Credits } from "../../interfaces";
+import { fetchItem, fetchCredits } from "../../../api/fetchContent";
 import { ItemDetails } from "./ItemDetails";
 
 const Overview = styled.div`
   position: absolute;
   top: 0;
   z-index: 2000;
-  height: 100vh;
+  height: auto;
   width: 100%;
   background: black;
 `;

@@ -2,7 +2,8 @@ import { Item } from "./Item";
 import { ItemAttributes } from "../interfaces";
 import { FC } from "react";
 import styled from "styled-components";
-type ItemListProps = {
+
+export type ItemListProps = {
   items: ItemAttributes[];
   setSelectedItem: React.Dispatch<
     React.SetStateAction<ItemAttributes | undefined>

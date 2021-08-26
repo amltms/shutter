@@ -9,6 +9,7 @@ interface Props {
 const SlideContainer = styled.div`
   position:relative;
 	height:auto;
+  min-width: 100%;
 }
 `;
 const Backdrop = styled.img`
@@ -41,6 +42,16 @@ const DetailsBtn = styled.button`
   font-weight: 500;
 }
 `;
+
+const OverviewText = styled.p`
+	overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+`;
+
 export const Slide: FC<Props> = ({ item }) => {
   return (
     <>
@@ -48,7 +59,7 @@ export const Slide: FC<Props> = ({ item }) => {
         <SlideContainer>
           <SlideContent>
             <h1>{item.title || item.original_name}</h1>
-            <p>{item.overview}</p>
+            <OverviewText>{item.overview}</OverviewText>
             <DetailsBtn>More Details</DetailsBtn>
           </SlideContent>
           <Backdrop

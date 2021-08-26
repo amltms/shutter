@@ -4,6 +4,8 @@ import { ItemList, ItemListProps } from "./items/ItemList";
 export const SearchResults: FC<ItemListProps> = ({
   setSelectedItem,
   items,
+  saved,
+  setSaved,
 }) => {
   return (
     <div>
@@ -11,7 +13,12 @@ export const SearchResults: FC<ItemListProps> = ({
       {items.length === 0 ? (
         <h1>No Results</h1>
       ) : (
-        <ItemList setSelectedItem={setSelectedItem} items={items} />
+        <ItemList
+          saved={saved}
+          setSaved={setSaved}
+          setSelectedItem={setSelectedItem}
+          items={items}
+        />
       )}
     </div>
   );

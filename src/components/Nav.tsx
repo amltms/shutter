@@ -13,9 +13,9 @@ const Bar = styled.div<Scroll>`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  transition: 0.5s;
+  transition: 0.3s;
   ${({ scrolled }) =>
-    scrolled && "background: rgba(0, 0, 0, 0.8); padding:1rem;"};
+    scrolled && "background: rgba(0, 0, 0, 0.9); padding:1rem;"};
 `;
 
 const Search = styled.input`

@@ -3,16 +3,19 @@ import { useEffect, useState } from "react";
 import { fetchPopular } from "../../api/fetchContent";
 import { ItemList } from "../items/ItemList";
 import { ItemAttributes } from "../interfaces";
-import { Slider } from "./slideshow/Slider";
+import { SlideShow } from "./slideshow/SlideShow";
+import { SavedItems } from "./SavedItems";
 
 export type HomeProps = {
-  setSelectedItem: React.Dispatch<
-    React.SetStateAction<ItemAttributes | undefined>
-  >;
+  saved: ItemAttributes[];
+  setSaved: (newVal: ItemAttributes[]) => void;
+  setSelectedItem: (newVal: ItemAttributes) => void;
 };
 
-export const Home: FC<HomeProps> = ({ setSelectedItem }) => {
+export const Home: FC<HomeProps> = ({ setSelectedItem, saved, setSaved }) => {
   const [popularItems, setPopularItems] = useState<ItemAttributes[]>([]);
+  const [savedItems, setSavedItems] = useState([]);
+
   useEffect(() => {
     fetchPopular("all").then((data) => {
       setPopularItems(data.results);
@@ -21,8 +24,18 @@ export const Home: FC<HomeProps> = ({ setSelectedItem }) => {
 
   return (
     <div>
-      <Slider popularItems={popularItems} />
-      <ItemList setSelectedItem={setSelectedItem} items={popularItems} />
+      <SlideShow popularItems={popularItems} />
+      <SavedItems
+        setSelectedItem={setSelectedItem}
+        saved={saved}
+        setSaved={setSaved}
+      />
+      <ItemList
+        saved={saved}
+        setSaved={setSaved}
+        setSelectedItem={setSelectedItem}
+        items={popularItems}
+      />
     </div>
   );
 };

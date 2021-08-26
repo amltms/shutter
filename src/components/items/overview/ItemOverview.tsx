@@ -11,7 +11,7 @@ const Overview = styled.div`
   position: absolute;
   top: 0;
   z-index: 2000;
-  height: auto;
+  min-height: 100vh;
   width: 100%;
   background: black;
 `;

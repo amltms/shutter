@@ -4,10 +4,10 @@ import { FC } from "react";
 import styled from "styled-components";
 
 export type ItemListProps = {
+  setSaved: (newVal: ItemAttributes[]) => void;
+  saved: ItemAttributes[];
   items: ItemAttributes[];
-  setSelectedItem: React.Dispatch<
-    React.SetStateAction<ItemAttributes | undefined>
-  >;
+  setSelectedItem: (newVal: ItemAttributes) => void;
 };
 
 const Grid = styled.div`
@@ -16,13 +16,24 @@ const Grid = styled.div`
   justify-content: center;
 `;
 
-export const ItemList: FC<ItemListProps> = (props) => {
+export const ItemList: FC<ItemListProps> = ({
+  items,
+  saved,
+  setSaved,
+  setSelectedItem,
+}) => {
   return (
     <Grid>
-      {props.items.map(
+      {items.map(
         (i) =>
           i.poster_path && (
-            <Item item={i} key={i.id} setSelectedItem={props.setSelectedItem} />
+            <Item
+              setSaved={setSaved}
+              saved={saved}
+              item={i}
+              key={i.id}
+              setSelectedItem={setSelectedItem}
+            />
           )
       )}
     </Grid>

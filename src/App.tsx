@@ -1,7 +1,12 @@
 import "./App.css";
 import { FC, ChangeEvent, useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  BrowserRouter,
+} from "react-router-dom";
 import { fetchSearch } from "./api/fetchContent";
-import { ItemList } from "./components/items/ItemList";
 import { Home } from "./components/home/Home";
 import { Nav } from "./components/Nav";
 import { SearchResults } from "./components/SearchResults";
@@ -12,6 +17,7 @@ const App: FC = () => {
   const [searchItems, setSearchItems] = useState<ItemAttributes[]>([]);
   const [selectedItem, setSelectedItem] = useState<ItemAttributes>();
   const [overviewOpen, setOverviewOpen] = useState(false);
+  const [saved, setSaved] = useState<ItemAttributes[]>([]);
   const [searching, setSearching] = useState(false);
 
   useEffect(() => {
@@ -38,9 +44,18 @@ const App: FC = () => {
 
       <Nav handleSearchInput={handleSearchInput} />
       {searching ? (
-        <SearchResults setSelectedItem={setSelectedItem} items={searchItems} />
+        <SearchResults
+          saved={saved}
+          setSaved={setSaved}
+          setSelectedItem={setSelectedItem}
+          items={searchItems}
+        />
       ) : (
-        <Home setSelectedItem={setSelectedItem} />
+        <Home
+          saved={saved}
+          setSaved={setSaved}
+          setSelectedItem={setSelectedItem}
+        />
       )}
     </div>
   );

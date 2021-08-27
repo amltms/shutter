@@ -1,13 +1,11 @@
 import { ItemAttributes } from "../interfaces";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import styled from "styled-components";
+import { ItemContext } from "../context/ItemContext";
 
 export type ItemProps = {
-  setSaved: (newVal: ItemAttributes[]) => void;
-  saved: ItemAttributes[];
   item: ItemAttributes;
-  setSelectedItem: (newVal: ItemAttributes) => void;
 };
 
 const ItemContainer = styled.div`
@@ -56,12 +54,10 @@ const PreviewContent = styled.div`
   width: 100%;
 `;
 
-export const Item: FC<ItemProps> = ({
-  setSaved,
-  item,
-  setSelectedItem,
-  saved,
-}) => {
+export const Item: FC<ItemProps> = ({ item }) => {
+  const { saved, setSaved } = useContext(ItemContext);
+  const { setSelectedItem } = useContext(ItemContext);
+
   const savedValidation = (item: ItemAttributes) => {
     if (saved && saved.some((i: ItemAttributes) => i.id === item.id)) {
       setSaved(saved.filter((i: ItemAttributes) => i.id !== item.id));
@@ -74,7 +70,7 @@ export const Item: FC<ItemProps> = ({
     <ItemContainer>
       <ItemPreview>
         <SaveIcon onClick={() => savedValidation(item)}>
-          {saved && saved.some((i) => i.id === item.id) ? (
+          {saved && saved.some((i: ItemAttributes) => i.id === item.id) ? (
             <BsBookmarkFill />
           ) : (
             <BsBookmark />

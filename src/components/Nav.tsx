@@ -1,7 +1,7 @@
 import { ChangeEventHandler, useState, useEffect } from "react";
 import styled from "styled-components";
 import { MdSearch } from "react-icons/md";
-
+import { NavLink } from "react-router-dom";
 interface Scroll {
   scrolled: boolean;
 }

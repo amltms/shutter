@@ -4,17 +4,9 @@ import { fetchPopular } from "../../api/fetchContent";
 import { ItemList } from "../items/ItemList";
 import { ItemAttributes } from "../interfaces";
 import { SlideShow } from "./slideshow/SlideShow";
-import { SavedItems } from "./SavedItems";
 
-export type HomeProps = {
-  saved: ItemAttributes[];
-  setSaved: (newVal: ItemAttributes[]) => void;
-  setSelectedItem: (newVal: ItemAttributes) => void;
-};
-
-export const Home: FC<HomeProps> = ({ setSelectedItem, saved, setSaved }) => {
+export const Home: FC = () => {
   const [popularItems, setPopularItems] = useState<ItemAttributes[]>([]);
-  const [savedItems, setSavedItems] = useState([]);
 
   useEffect(() => {
     fetchPopular("all").then((data) => {
@@ -25,17 +17,7 @@ export const Home: FC<HomeProps> = ({ setSelectedItem, saved, setSaved }) => {
   return (
     <div>
       <SlideShow popularItems={popularItems} />
-      <SavedItems
-        setSelectedItem={setSelectedItem}
-        saved={saved}
-        setSaved={setSaved}
-      />
-      <ItemList
-        saved={saved}
-        setSaved={setSaved}
-        setSelectedItem={setSelectedItem}
-        items={popularItems}
-      />
+      <ItemList items={popularItems} />
     </div>
   );
 };

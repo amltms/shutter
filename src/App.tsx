@@ -1,11 +1,6 @@
 import "./App.css";
 import { FC, ChangeEvent, useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  BrowserRouter,
-} from "react-router-dom";
+import { ItemContext } from "./components/context/ItemContext";
 import { fetchSearch } from "./api/fetchContent";
 import { Home } from "./components/home/Home";
 import { Nav } from "./components/Nav";
@@ -34,30 +29,21 @@ const App: FC = () => {
   };
 
   return (
-    <div className="App">
-      {selectedItem && overviewOpen && (
-        <ItemOverview
-          selectedItem={selectedItem}
-          setOverviewOpen={setOverviewOpen}
-        />
-      )}
+    <ItemContext.Provider
+      value={{ saved, setSaved, selectedItem, setSelectedItem }}
+    >
+      <div className="App">
+        <Nav handleSearchInput={handleSearchInput} />
+        {selectedItem && overviewOpen && (
+          <ItemOverview
+            selectedItem={selectedItem}
+            setOverviewOpen={setOverviewOpen}
+          />
+        )}
 
-      <Nav handleSearchInput={handleSearchInput} />
-      {searching ? (
-        <SearchResults
-          saved={saved}
-          setSaved={setSaved}
-          setSelectedItem={setSelectedItem}
-          items={searchItems}
-        />
-      ) : (
-        <Home
-          saved={saved}
-          setSaved={setSaved}
-          setSelectedItem={setSelectedItem}
-        />
-      )}
-    </div>
+        {searching ? <SearchResults items={searchItems} /> : <Home />}
+      </div>
+    </ItemContext.Provider>
   );
 };
 

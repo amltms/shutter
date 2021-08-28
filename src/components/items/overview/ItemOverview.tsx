@@ -8,7 +8,7 @@ import { fetchItem, fetchCredits } from "../../../api/fetchContent";
 import { ItemDetails } from "./ItemDetails";
 
 const Overview = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   z-index: 2000;
   min-height: 100vh;

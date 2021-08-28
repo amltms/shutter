@@ -1,18 +1,20 @@
 import "./App.css";
 import { FC, ChangeEvent, useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ItemContext } from "./components/context/ItemContext";
 import { fetchSearch } from "./api/fetchContent";
-import { Home } from "./components/home/Home";
 import { Nav } from "./components/Nav";
+import { Home } from "./components/home/Home";
+import { SavedItems } from "./components/home/SavedItems";
 import { SearchResults } from "./components/SearchResults";
 import { ItemOverview } from "./components/items/overview/ItemOverview";
 import { ItemAttributes } from "./components/interfaces";
 
 const App: FC = () => {
-  const [searchItems, setSearchItems] = useState<ItemAttributes[]>([]);
   const [selectedItem, setSelectedItem] = useState<ItemAttributes>();
   const [overviewOpen, setOverviewOpen] = useState(false);
   const [saved, setSaved] = useState<ItemAttributes[]>([]);
+  const [searchItems, setSearchItems] = useState<ItemAttributes[]>([]);
   const [searching, setSearching] = useState(false);
 
   useEffect(() => {
@@ -33,15 +35,25 @@ const App: FC = () => {
       value={{ saved, setSaved, selectedItem, setSelectedItem }}
     >
       <div className="App">
-        <Nav handleSearchInput={handleSearchInput} />
         {selectedItem && overviewOpen && (
           <ItemOverview
             selectedItem={selectedItem}
             setOverviewOpen={setOverviewOpen}
           />
         )}
-
-        {searching ? <SearchResults items={searchItems} /> : <Home />}
+        <Router>
+          <Nav handleSearchInput={handleSearchInput} />
+          <Switch>
+            <Route exact path="/saved" component={SavedItems} />
+            {searching ? (
+              <SearchResults items={searchItems} />
+            ) : (
+              <>
+                <Route path={["/:type", "/"]} component={Home} />
+              </>
+            )}
+          </Switch>
+        </Router>
       </div>
     </ItemContext.Provider>
   );

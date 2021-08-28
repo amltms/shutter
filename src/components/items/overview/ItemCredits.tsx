@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import styled from "styled-components";
-import { Credits, Cast } from "../../interfaces";
+import { Credits } from "../../interfaces";
 import { CreditsProfile } from "./CreditsProfile";
 
 interface Props {
@@ -12,33 +11,21 @@ const CastList = styled.div`
   flex-wrap: wrap;
 `;
 
-const findCrewType = (PersonArr: Cast[], type: string) => {
-  return PersonArr.filter((person) => person.job === type);
-};
-
-const test = (credits: Credits) => {
-  let writers = credits.crew.filter((person) => person.job === "Writer");
-  let director = credits.crew.filter((person) => person.job === "Director")[0];
-  if (director && writers) {
-    if (writers.some((e) => e.id === director.id)) {
-      return <CreditsProfile person={director} />;
-    }
-    return <CreditsProfile person={director} />;
-  }
+const filterByjob = (credits: Credits, job: string) => {
+  return credits.crew.filter((person) => person.job === job);
 };
 
 export const ItemCredits: FC<Props> = ({ credits }) => {
-  const [writers, setWriters] = useState(
-    credits.crew.filter((person) => person.job === "Writer")
-  );
-  const [director, setDirector] = useState<Cast>(
-    credits.crew.filter((person) => person.job === "Director")[0]
-  );
+  const [writers, setWriters] = useState(filterByjob(credits, "Writer"));
+  const [director, setDirector] = useState(filterByjob(credits, "Director")[0]);
 
   useEffect(() => {
-    if (writers.some((e) => e.job === "Director")) {
+    if (writers.some((e) => e.id === director.id)) {
+      setDirector({ ...director, job: "Director / Writer" });
+      setWriters(writers.filter((writer) => writer.id !== director.id));
     }
-  }, []);
+  }, [director, writers]);
+
   return (
     <>
       <h2>Cast</h2>
@@ -49,7 +36,12 @@ export const ItemCredits: FC<Props> = ({ credits }) => {
       </CastList>
 
       <h2>Crew</h2>
-      <CastList>{test(credits)}</CastList>
+      <CastList>
+        <CreditsProfile person={director} />
+        {writers.map((w) => (
+          <CreditsProfile person={w} />
+        ))}
+      </CastList>
     </>
   );
 };

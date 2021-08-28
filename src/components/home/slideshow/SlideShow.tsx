@@ -38,7 +38,7 @@ scrollbar-width: none;
 	width: 100%;
   display: flex;
   transition: 0.8s;
-	transform: translateX(${(props) => props.currentSlide}%);
+	transform: translateX(${(props) => -props.currentSlide * 100}%);
 	
 }
 `;
@@ -48,23 +48,23 @@ export const SlideShow: FC<Props> = ({ popularItems }) => {
   let slideArr = [6, 7, 8];
 
   useEffect(() => {
-    if (currentSlide === 100) {
-      setCurrentSlide(-(slideArr.length * 100 - 100));
-    } else if (currentSlide === -slideArr.length * 100) {
+    if (currentSlide > slideArr.length - 1) {
       setCurrentSlide(0);
+    } else if (currentSlide < 0) {
+      setCurrentSlide(slideArr.length - 1);
     }
-  }, [currentSlide]);
+  }, [currentSlide, slideArr.length]);
 
   return (
     <Container>
       <NavBtn
         style={{ right: 0 }}
-        onClick={() => setCurrentSlide(currentSlide - 100)}
+        onClick={() => setCurrentSlide(currentSlide + 1)}
       >
         <MdNavigateNext />
       </NavBtn>
 
-      <NavBtn onClick={() => setCurrentSlide(currentSlide + 100)}>
+      <NavBtn onClick={() => setCurrentSlide(currentSlide - 1)}>
         <MdNavigateBefore />
       </NavBtn>
       <Slider currentSlide={currentSlide}>

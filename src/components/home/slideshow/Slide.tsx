@@ -1,6 +1,7 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { ItemAttributes } from "../../interfaces";
 import styled from "styled-components";
+import { ItemContext } from "../../context/ItemContext";
 
 interface Props {
   item: ItemAttributes;
@@ -40,12 +41,16 @@ const DetailsBtn = styled.button`
   color: black;
   background-color: white;
   font-weight: 500;
+	:hover{
+		background:#1abc9c;
+	}
 }
 `;
 
 const OverviewText = styled.p`
 	overflow: hidden;
   text-overflow: ellipsis;
+	margin-top:2vw;
   display: -webkit-box;
   -webkit-line-clamp: 3; /* number of lines to show */
   -webkit-box-orient: vertical;
@@ -53,6 +58,7 @@ const OverviewText = styled.p`
 `;
 
 export const Slide: FC<Props> = ({ item }) => {
+  const { setSelectedItem } = useContext(ItemContext);
   return (
     <>
       {item && (
@@ -60,7 +66,9 @@ export const Slide: FC<Props> = ({ item }) => {
           <SlideContent>
             <h1>{item.title || item.original_name}</h1>
             <OverviewText>{item.overview}</OverviewText>
-            <DetailsBtn>More Details</DetailsBtn>
+            <DetailsBtn onClick={() => setSelectedItem(item)}>
+              More Details
+            </DetailsBtn>
           </SlideContent>
           <Backdrop
             src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}

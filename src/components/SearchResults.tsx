@@ -1,11 +1,30 @@
 import { FC } from "react";
+import styled from "styled-components";
 import { ItemList, ItemListProps } from "./items/ItemList";
 
+const SearchContainer = styled.div`
+	padding:7vw;
+}
+`;
+const Text = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h2 {
+    color: #333;
+  }
+`;
 export const SearchResults: FC<ItemListProps> = ({ items }) => {
   return (
-    <div>
-      <h1>Search Results...</h1>
-      {items.length === 0 ? <h1>No Results</h1> : <ItemList items={items} />}
-    </div>
+    <SearchContainer>
+      {items.length === 0 ? (
+        <Text>
+          <h2>No Results</h2>
+        </Text>
+      ) : (
+        <ItemList items={items} />
+      )}
+    </SearchContainer>
   );
 };

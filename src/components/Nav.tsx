@@ -14,8 +14,14 @@ const Bar = styled.div<Scroll>`
   align-items: flex-end;
   justify-content: space-between;
   transition: 0.3s;
-  ${({ scrolled }) =>
-    scrolled && "background: rgba(0, 0, 0, 0.9); padding:1rem;"};
+  ${({ scrolled }) => scrolled && "background: rgb(0, 0, 0); padding:1rem;"};
+
+  a {
+    padding-right: 1.5rem;
+    :hover {
+      color: #1abc9c;
+    }
+  }
 `;
 
 const Search = styled.input`
@@ -41,14 +47,6 @@ const SearchBox = styled.form`
   font-size: 1.5rem;
 `;
 
-const NavItem = styled.a`
-  padding-right: 1.5rem;
-  :hover {
-    color: #1abc9c;
-  }
-  font-size: 1.2rem;
-`;
-
 const NavRight = styled.div`
   display: flex;
   font-size: 2rem;
@@ -57,6 +55,7 @@ const NavRight = styled.div`
     margin-left: 0.5rem;
   }
 `;
+
 interface Props {
   handleSearchInput: ChangeEventHandler<HTMLInputElement>;
 }
@@ -79,12 +78,20 @@ export const Nav = ({ handleSearchInput }: Props) => {
   return (
     <Bar scrolled={scrolled}>
       <div className="flex center">
-        <NavItem>
-          <h3>Screens</h3>
-        </NavItem>
-        <NavItem>Films</NavItem>
-        <NavItem>TV</NavItem>
-        <NavItem>Saved</NavItem>
+        <h3>
+          <NavLink activeClassName="active" to="/">
+            Screens
+          </NavLink>
+        </h3>
+        <NavLink activeClassName="active" exact to="/movie">
+          Movies
+        </NavLink>
+        <NavLink activeClassName="active" exact to="/tv">
+          TV
+        </NavLink>
+        <NavLink activeClassName="active" exact to="/saved">
+          Saved
+        </NavLink>
       </div>
       <NavRight>
         <SearchBox className="search-box">

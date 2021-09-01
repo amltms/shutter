@@ -37,7 +37,8 @@ export const ItemCredits: FC<Props> = ({ credits }) => {
 
       <h2>Crew</h2>
       <CastList>
-        <CreditsProfile person={director} />
+        {director && <CreditsProfile person={director} />}
+
         {writers.map((w) => (
           <CreditsProfile person={w} />
         ))}

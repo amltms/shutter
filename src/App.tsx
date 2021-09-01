@@ -1,5 +1,5 @@
 import "./App.css";
-import { FC, ChangeEvent, useState, useEffect } from "react";
+import { FC, ChangeEvent, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ItemContext } from "./components/context/ItemContext";
 import { fetchSearch } from "./api/fetchContent";
@@ -17,10 +17,6 @@ const App: FC = () => {
   const [searchItems, setSearchItems] = useState<ItemAttributes[]>([]);
   const [searching, setSearching] = useState(false);
 
-  useEffect(() => {
-    selectedItem !== null && setOverviewOpen(true);
-  }, [selectedItem]);
-
   const handleSearchInput = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
       setSearching(true);
@@ -32,7 +28,13 @@ const App: FC = () => {
 
   return (
     <ItemContext.Provider
-      value={{ saved, setSaved, selectedItem, setSelectedItem }}
+      value={{
+        saved,
+        setSaved,
+        selectedItem,
+        setSelectedItem,
+        setOverviewOpen,
+      }}
     >
       <div className="App">
         {selectedItem && overviewOpen && (

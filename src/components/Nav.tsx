@@ -7,19 +7,19 @@ interface Scroll {
 }
 const Bar = styled.div<Scroll>`
   position: fixed;
+  display: flex;
   z-index: 1000;
   width: 100%;
   padding: 2rem;
-  display: flex;
-  align-items: flex-end;
   justify-content: space-between;
   transition: 0.3s;
   ${({ scrolled }) => scrolled && "background: rgb(0, 0, 0); padding:1rem;"};
 
   a {
+    font-size: 1.3rem;
     padding-right: 1.5rem;
     :hover {
-      color: #1abc9c;
+      color: #da5d5d;
     }
   }
 `;
@@ -47,12 +47,16 @@ const SearchBox = styled.form`
   font-size: 1.5rem;
 `;
 
-const NavRight = styled.div`
+const NavLeft = styled.div`
   display: flex;
-  font-size: 2rem;
-  align-items: center;
-  > * {
-    margin-left: 0.5rem;
+  align-items: flex-end;
+`;
+
+const Logo = styled.div`
+  a {
+    line-height: 0.7;
+    font-size: 2.5rem;
+    font-weight: bold;
   }
 `;
 
@@ -65,7 +69,7 @@ export const Nav = ({ handleSearchInput }: Props) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const show = window.scrollY > 310;
+      const show = window.scrollY > 300;
       show ? setScrolled(true) : setScrolled(false);
     };
 
@@ -77,12 +81,12 @@ export const Nav = ({ handleSearchInput }: Props) => {
 
   return (
     <Bar scrolled={scrolled}>
-      <div className="flex center">
-        <h3>
+      <NavLeft>
+        <Logo>
           <NavLink activeClassName="active" to="/">
             Screens
           </NavLink>
-        </h3>
+        </Logo>
         <NavLink activeClassName="active" exact to="/movie">
           Movies
         </NavLink>
@@ -92,17 +96,12 @@ export const Nav = ({ handleSearchInput }: Props) => {
         <NavLink activeClassName="active" exact to="/saved">
           Saved
         </NavLink>
-      </div>
-      <NavRight>
-        <SearchBox className="search-box">
-          <MdSearch />
-          <Search
-            type="text"
-            placeholder="Search"
-            onChange={handleSearchInput}
-          />
-        </SearchBox>
-      </NavRight>
+      </NavLeft>
+
+      <SearchBox className="search-box">
+        <MdSearch />
+        <Search type="text" placeholder="Search" onChange={handleSearchInput} />
+      </SearchBox>
     </Bar>
   );
 };

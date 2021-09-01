@@ -27,22 +27,26 @@ const SlideContent = styled.div`
   position: absolute;
   width: 100%;
   z-index: 2;
-  bottom: 12vw;
-	width:80%;
+  bottom: 8vw;
+	width:100%;
   padding: 7vw;
 }
 `;
 
 const DetailsBtn = styled.button`
-  padding: 1rem 1.5rem;
-  border-radius: 2.5rem;
-  font-size: 1.2rem;
-  margin-top: 1rem;
-  color: black;
-  background-color: white;
+	font-size: 1.5rem;
+	color: black;
   font-weight: 500;
+  margin-top: 1.5rem;
+  padding: 1.2rem 2rem;
+  background-color:none;
+	color:white;
+	border:1px solid white;
+	border-radius: 2.5rem;
+
 	:hover{
-		background:#1abc9c;
+		background:white;
+		color:black;
 	}
 }
 `;
@@ -52,8 +56,12 @@ const OverviewText = styled.p`
   text-overflow: ellipsis;
 	margin-top:2vw;
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* number of lines to show */
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+	 @media (min-width: 1800px) {
+		-webkit-line-clamp: 5;
+    width:60%;
+  }
 }
 `;
 

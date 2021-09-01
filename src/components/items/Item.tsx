@@ -55,8 +55,8 @@ const PreviewContent = styled.div`
 `;
 
 export const Item: FC<ItemProps> = ({ item }) => {
-  const { saved, setSaved } = useContext(ItemContext);
-  const { setSelectedItem } = useContext(ItemContext);
+  const { saved, setSaved, setSelectedItem, setOverviewOpen } =
+    useContext(ItemContext);
 
   const savedValidation = (item: ItemAttributes) => {
     if (saved && saved.some((i: ItemAttributes) => i.id === item.id)) {
@@ -64,6 +64,11 @@ export const Item: FC<ItemProps> = ({ item }) => {
     } else {
       setSaved([...saved, item]);
     }
+  };
+
+  const overviewHandle = () => {
+    setOverviewOpen(true);
+    setSelectedItem(item);
   };
 
   return (
@@ -76,7 +81,7 @@ export const Item: FC<ItemProps> = ({ item }) => {
             <BsBookmark />
           )}
         </SaveIcon>
-        <PreviewContent onClick={() => setSelectedItem(item)}></PreviewContent>
+        <PreviewContent onClick={() => overviewHandle()}></PreviewContent>
       </ItemPreview>
       <ItemImg
         src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}

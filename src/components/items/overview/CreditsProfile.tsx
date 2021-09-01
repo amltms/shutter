@@ -38,7 +38,11 @@ export const CreditsProfile: FC<Props> = ({ person }) => {
   return (
     <Person>
       <PersonImg
-        img={`https://image.tmdb.org/t/p/original/${person.profile_path}`}
+        img={
+          person.profile_path
+            ? `https://image.tmdb.org/t/p/original/${person.profile_path}`
+            : `photo.jpg`
+        }
       />
       <Info>
         <div>

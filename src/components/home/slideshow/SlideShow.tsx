@@ -45,7 +45,7 @@ scrollbar-width: none;
 
 export const SlideShow: FC<Props> = ({ popularItems }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  let slideArr = [6, 7, 8];
+  let slideArr = [6, 1, 2];
 
   useEffect(() => {
     if (currentSlide > slideArr.length - 1) {

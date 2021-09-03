@@ -38,7 +38,7 @@ const DetailsBtn = styled.button`
 	color: black;
   font-weight: 500;
   margin-top: 1.5rem;
-  padding: 1.2rem 2rem;
+  padding: 1rem 1.5rem;
   background-color:none;
 	color:white;
 	border:1px solid white;

@@ -23,8 +23,6 @@ const ItemImg = styled.img`
   border-radius: 1.2rem;
   transition: 0.5s;
   position: relative;
-  min-width: 200px;
-  height: 300px;
   overflow: hidden;
 `;
 
@@ -84,7 +82,7 @@ export const Item: FC<ItemProps> = ({ item }) => {
         <PreviewContent onClick={() => overviewHandle()}></PreviewContent>
       </ItemPreview>
       <ItemImg
-        src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+        src={`https://image.tmdb.org/t/p/w200/${item.poster_path}`}
         alt="poster"
       />
     </ItemContainer>

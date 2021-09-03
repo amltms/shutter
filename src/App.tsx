@@ -46,12 +46,12 @@ const App: FC = () => {
         <Router>
           <Nav handleSearchInput={handleSearchInput} />
           <Switch>
-            <Route exact path="/saved" component={SavedItems} />
             {searching ? (
               <SearchResults items={searchItems} />
             ) : (
               <>
                 <Route path={["/:type", "/"]} component={Home} />
+                <Route exact path="/saved" component={SavedItems} />
               </>
             )}
           </Switch>

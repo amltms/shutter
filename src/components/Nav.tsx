@@ -2,9 +2,11 @@ import { ChangeEventHandler, useState, useEffect } from "react";
 import styled from "styled-components";
 import { MdSearch } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+
 interface Scroll {
   scrolled: boolean;
 }
+
 const Bar = styled.div<Scroll>`
   position: fixed;
   display: flex;
@@ -87,10 +89,10 @@ export const Nav = ({ handleSearchInput }: Props) => {
             Screens
           </NavLink>
         </Logo>
-        <NavLink activeClassName="active" exact to="/movie">
+        <NavLink activeClassName="active" exact to="/index/movie">
           Movies
         </NavLink>
-        <NavLink activeClassName="active" exact to="/tv">
+        <NavLink activeClassName="active" exact to="/index/tv">
           TV
         </NavLink>
         <NavLink activeClassName="active" exact to="/saved">

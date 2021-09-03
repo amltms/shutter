@@ -1,7 +1,7 @@
-import { FC, useContext } from "react";
+import { FC } from "react";
 import { ItemAttributes } from "../../interfaces";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { ItemContext } from "../../context/ItemContext";
 
 interface Props {
   item: ItemAttributes;
@@ -66,7 +66,10 @@ const OverviewText = styled.p`
 `;
 
 export const Slide: FC<Props> = ({ item }) => {
-  const { setSelectedItem } = useContext(ItemContext);
+  const history = useHistory();
+  const overviewHandle = () => {
+    history.push(`/overview/${item.media_type}/${item.id}`);
+  };
   return (
     <>
       {item && (
@@ -74,7 +77,7 @@ export const Slide: FC<Props> = ({ item }) => {
           <SlideContent>
             <h1>{item.title || item.original_name}</h1>
             <OverviewText>{item.overview}</OverviewText>
-            <DetailsBtn onClick={() => setSelectedItem(item)}>
+            <DetailsBtn onClick={() => overviewHandle()}>
               More Details
             </DetailsBtn>
           </SlideContent>

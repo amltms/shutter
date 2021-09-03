@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Cast } from "../../interfaces";
+import { Cast } from "../../../interfaces";
 import styled from "styled-components";
 
 interface Props {
@@ -25,13 +25,17 @@ const Role = styled.p`
 `;
 
 const PersonImg = styled.div<ImgProps>`
-  height: 150px;
-  width: 150px;
+  height: 10vw;
+  width: 10vw;
   border-radius: 50%;
   background: url(${(p) => p.img});
   background-repeat: no-repeat;
-  background-size: 150px auto;
+  background-size: 100% auto;
   background-position: 0 25%;
+  @media (min-width: 1700px) {
+    height: 6vw;
+    width: 6vw;
+  }
 `;
 
 export const CreditsProfile: FC<Props> = ({ person }) => {
@@ -41,7 +45,7 @@ export const CreditsProfile: FC<Props> = ({ person }) => {
         img={
           person.profile_path
             ? `https://image.tmdb.org/t/p/original/${person.profile_path}`
-            : `photo.jpg`
+            : `https://lh3.googleusercontent.com/proxy/1yM50LgcpEz5pKeqI4e2L-80dDrNKnRr3fdVn3HH0HufRdSZQwkSHYhtFYG_j-iAYIduhzewMbxsO13wT5Y8Sg1vKfbyk92NMqnm2vAwbpk`
         }
       />
       <Info>

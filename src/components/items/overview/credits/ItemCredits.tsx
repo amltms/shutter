@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import styled from "styled-components";
-import { Credits } from "../../interfaces";
+import { Credits } from "../../../interfaces";
 import { CreditsProfile } from "./CreditsProfile";
 
 interface Props {

@@ -39,13 +39,12 @@ scrollbar-width: none;
   display: flex;
   transition: 0.8s;
 	transform: translateX(${(props) => -props.currentSlide * 100}%);
-	
 }
 `;
 
 export const SlideShow: FC<Props> = ({ popularItems }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  let slideArr = [6, 1, 2];
+  let slideArr = [11, 10, 3];
 
   useEffect(() => {
     if (currentSlide > slideArr.length - 1) {

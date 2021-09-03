@@ -1,4 +1,5 @@
 import { ItemAttributes } from "../interfaces";
+import { useHistory } from "react-router-dom";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { FC, useContext } from "react";
 import styled from "styled-components";
@@ -53,8 +54,9 @@ const PreviewContent = styled.div`
 `;
 
 export const Item: FC<ItemProps> = ({ item }) => {
-  const { saved, setSaved, setSelectedItem, setOverviewOpen } =
-    useContext(ItemContext);
+  const history = useHistory();
+
+  const { saved, setSaved } = useContext(ItemContext);
 
   const savedValidation = (item: ItemAttributes) => {
     if (saved && saved.some((i: ItemAttributes) => i.id === item.id)) {
@@ -65,8 +67,7 @@ export const Item: FC<ItemProps> = ({ item }) => {
   };
 
   const overviewHandle = () => {
-    setOverviewOpen(true);
-    setSelectedItem(item);
+    history.push(`/overview/${item.media_type}/${item.id}`);
   };
 
   return (

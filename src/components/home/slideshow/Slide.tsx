@@ -17,9 +17,9 @@ const Backdrop = styled.img`
   width:100%;
   mask-image: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0) 10%,
-    rgba(0, 0, 0, 0.7) 90%
+    rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.4) 100%
   );
+
 }
 `;
 
@@ -35,10 +35,9 @@ const SlideContent = styled.div`
 
 const DetailsBtn = styled.button`
 	font-size: 1.5rem;
-	color: black;
   font-weight: 500;
   margin-top: 1.5rem;
-  padding: 1rem 1.5rem;
+  padding: 1rem;
   background-color:none;
 	color:white;
 	border:1px solid white;

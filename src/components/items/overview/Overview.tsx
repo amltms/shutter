@@ -38,7 +38,7 @@ export const Overview: FC<Props> = (props) => {
         setCredits(data);
       }
     );
-  }, [props.match.params.id]);
+  }, [props.match.params.id, props.match.params.type]);
 
   return (
     <>

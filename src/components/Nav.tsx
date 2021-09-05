@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import styled from "styled-components";
 import { MdSearch } from "react-icons/md";
 import { NavLink } from "react-router-dom";
@@ -12,46 +12,26 @@ const Bar = styled.div<Scroll>`
   display: flex;
   z-index: 1000;
   width: 100%;
-  padding: 2rem;
+  padding: 5rem;
   justify-content: space-between;
   transition: 0.3s;
-  ${({ scrolled }) => scrolled && "background: rgb(0, 0, 0); padding:1rem;"};
 
-  a {
-    font-size: 1.3rem;
-    padding-right: 1.5rem;
-    :hover {
-      color: #da5d5d;
-    }
+  ${({ scrolled }) => scrolled && "background: rgb(0, 0, 0); padding:1.5rem;"};
+  > a {
+    font-size: 1.8rem;
   }
-`;
-
-const Search = styled.input`
-  font-size: 1rem;
-  border: none;
-  background: transparent;
-  color: white;
-  border-radius: 10vw;
-  transition: 0.2s;
-  padding: 0 0.5rem;
-  ::placeholder {
-    color: white;
-    opacity: 0.8;
-  }
-`;
-
-const SearchBox = styled.form`
-  padding: 0.5rem;
-  border: 1px solid white;
-  border-radius: 10vw;
-  display: flex;
-  align-items: center;
-  font-size: 1.5rem;
 `;
 
 const NavLeft = styled.div`
   display: flex;
   align-items: flex-end;
+  a {
+    font-size: 1.2rem;
+    padding-right: 1.5rem;
+    :hover {
+      color: #da5d5d;
+    }
+  }
 `;
 
 const Logo = styled.div`
@@ -62,16 +42,12 @@ const Logo = styled.div`
   }
 `;
 
-interface Props {
-  handleSearchInput: ChangeEventHandler<HTMLInputElement>;
-}
-
-export const Nav = ({ handleSearchInput }: Props) => {
+export const Nav: FC = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const show = window.scrollY > 300;
+      const show = window.scrollY > 100;
       show ? setScrolled(true) : setScrolled(false);
     };
 
@@ -99,11 +75,9 @@ export const Nav = ({ handleSearchInput }: Props) => {
           Saved
         </NavLink>
       </NavLeft>
-
-      <SearchBox className="search-box">
+      <NavLink activeClassName="active" exact to="/search">
         <MdSearch />
-        <Search type="text" placeholder="Search" onChange={handleSearchInput} />
-      </SearchBox>
+      </NavLink>
     </Bar>
   );
 };

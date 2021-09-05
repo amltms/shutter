@@ -11,13 +11,13 @@ const CastList = styled.div`
   flex-wrap: wrap;
 `;
 
-const filterByjob = (credits: Credits, job: string) => {
+const filterByJob = (credits: Credits, job: string) => {
   return credits.crew.filter((person) => person.job === job);
 };
 
 export const ItemCredits: FC<Props> = ({ credits }) => {
-  const [writers, setWriters] = useState(filterByjob(credits, "Writer"));
-  const [director, setDirector] = useState(filterByjob(credits, "Director")[0]);
+  const [writers, setWriters] = useState(filterByJob(credits, "Writer"));
+  const [director, setDirector] = useState(filterByJob(credits, "Director")[0]);
 
   useEffect(() => {
     if (writers.some((e) => e.id === director.id)) {

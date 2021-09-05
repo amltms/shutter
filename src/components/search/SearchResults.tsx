@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { ItemList, ItemListProps } from "./items/ItemList";
+import { ItemList, ItemListProps } from "../items/ItemList";
 
 const SearchContainer = styled.div`
 	padding:7vw;

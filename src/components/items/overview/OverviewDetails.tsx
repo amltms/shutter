@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Details } from "../../interfaces";
+import { GoStar } from "react-icons/go";
 import styled from "styled-components";
 interface Props {
   item: Details;
@@ -7,7 +8,7 @@ interface Props {
 
 const DetailsContainer = styled.div`
 	display: flex;
-	margin-bottom:2rem;
+	margin:2.5rem 0;
 }
 `;
 
@@ -20,13 +21,18 @@ const Genres = styled.p`
 	margin:1rem 0;
 }`;
 
-const Rating = styled.div`
-	display:flex;
-	flex-direction: column;
-	justify-content: center;
-  align-items: center;
-	flex:1;
-}`;
+const ItemImg = styled.img`
+  object-fit: contain;
+  border-radius: 1.2rem;
+  transition: 0.5s;
+  position: relative;
+  overflow: hidden;
+  margin-right: 2.5rem;
+  height: 300px;
+  @media (min-width: 1700px) {
+    height: 15vw;
+  }
+`;
 
 const Attribute = styled.span`
 	margin-right:2rem;
@@ -38,6 +44,10 @@ export const OverviewDetails: FC<Props> = ({ item }) => {
       <h1>{item.title || item.original_name}</h1>
 
       <DetailsContainer>
+        <ItemImg
+          src={`https://image.tmdb.org/t/p/w300/${item.poster_path}`}
+          alt="poster"
+        />
         <Info>
           <p>
             <Attribute>
@@ -46,7 +56,10 @@ export const OverviewDetails: FC<Props> = ({ item }) => {
                 4
               )}
             </Attribute>
-            <span>{item.runtime} mins</span>
+            {item.runtime && <Attribute>{item.runtime} mins</Attribute>}
+            <Attribute>
+              {item.vote_average} <GoStar />
+            </Attribute>
           </p>
 
           <Genres>
@@ -56,10 +69,6 @@ export const OverviewDetails: FC<Props> = ({ item }) => {
           </Genres>
           <p>{item.overview}</p>
         </Info>
-        <Rating>
-          <h1>{item.vote_average}</h1>
-          <p>{item.vote_count}</p>
-        </Rating>
       </DetailsContainer>
     </>
   );

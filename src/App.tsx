@@ -1,11 +1,6 @@
 import "./App.css";
 import { FC, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ItemContext } from "./components/context/ItemContext";
 import { Nav } from "./components/Nav";
 import { Home } from "./components/home/Home";
@@ -31,10 +26,8 @@ const App: FC = () => {
             <Route exact path="/overview/:type/:id" component={Overview} />
             <Route exact path="/saved" component={SavedItems} />
             <Route exact path="/search" component={Search} />
-            <Route exact path="/">
-              <Redirect to="/index/all" />
-            </Route>
-            <Route exact path="/index/:type" component={Home} />
+
+            <Route exact path={["/", "/:type"]} component={Home} />
           </Switch>
         </Router>
       </div>

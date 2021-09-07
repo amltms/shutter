@@ -13,33 +13,30 @@ interface SliderProps {
 }
 
 const NavBtn = styled.button`
-  position:absolute;
-	z-index:100;
-	font-size:5rem;
-	opacity:0;
-	padding:1rem;
-	height:100%;
+  position: absolute;
+  z-index: 100;
+  font-size: 5rem;
+  opacity: 0;
+  padding: 1rem;
+  height: 100%;
 
-	&:hover {
-    opacity:1;
+  &:hover {
+    opacity: 1;
   }
-}
 `;
 
 const Container = styled.div`
-  height:auto;
-	position:relative;
-	overflow:hidden;
-}
+  height: auto;
+  position: relative;
+  overflow: hidden;
 `;
 
 const Slider = styled.div<SliderProps>`
-scrollbar-width: none;
-	width: 100%;
+  scrollbar-width: none;
+  width: 100%;
   display: flex;
   transition: 0.8s;
-	transform: translateX(${(props) => -props.currentSlide * 100}%);
-}
+  transform: translateX(${(props) => -props.currentSlide * 100}%);
 `;
 
 export const SlideShow: FC<Props> = ({ popularItems }) => {

@@ -65,10 +65,10 @@ export const Nav: FC = () => {
             Screens
           </NavLink>
         </Logo>
-        <NavLink activeClassName="active" exact to="/index/movie">
+        <NavLink activeClassName="active" exact to="/movie">
           Movies
         </NavLink>
-        <NavLink activeClassName="active" exact to="/index/tv">
+        <NavLink activeClassName="active" exact to="/tv">
           TV
         </NavLink>
         <NavLink activeClassName="active" exact to="/saved">

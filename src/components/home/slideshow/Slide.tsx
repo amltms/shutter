@@ -8,19 +8,18 @@ interface Props {
 }
 
 const SlideContainer = styled.div`
-  position:relative;
-	height:auto;
+  position: relative;
+  height: auto;
   min-width: 100%;
-}
 `;
 const Backdrop = styled.img`
-  width:100%;
+  width: 100%;
   mask-image: linear-gradient(
     to top,
-    rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.4) 100%
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.4) 100%
   );
-
-}
 `;
 
 const SlideContent = styled.div`
@@ -28,40 +27,37 @@ const SlideContent = styled.div`
   width: 100%;
   z-index: 2;
   bottom: 8vw;
-	width:100%;
+  width: 100%;
   padding: 7vw;
-}
 `;
 
 const DetailsBtn = styled.button`
-	font-size: 1.5rem;
+  font-size: 1.5rem;
   font-weight: 500;
   margin-top: 1.5rem;
   padding: 1rem;
-  background-color:none;
-	color:white;
-	border:1px solid white;
-	border-radius: 2.5rem;
+  background-color: none;
+  color: white;
+  border: 1px solid white;
+  border-radius: 2.5rem;
 
-	:hover{
-		background:white;
-		color:black;
-	}
-}
+  :hover {
+    background: white;
+    color: black;
+  }
 `;
 
 const OverviewText = styled.p`
-	overflow: hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
-	margin-top:2vw;
+  margin-top: 2vw;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-	 @media (min-width: 1800px) {
-		-webkit-line-clamp: 5;
-    width:60%;
+  @media (min-width: 1800px) {
+    -webkit-line-clamp: 5;
+    width: 60%;
   }
-}
 `;
 
 export const Slide: FC<Props> = ({ item }) => {

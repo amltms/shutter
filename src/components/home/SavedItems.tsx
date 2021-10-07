@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { ItemContext } from "../context/ItemContext";
 
 const SavedContainer = styled.div`
-  padding: 6vw;
+  padding: 10vw 6vw;
 `;
 
 const Text = styled.div`

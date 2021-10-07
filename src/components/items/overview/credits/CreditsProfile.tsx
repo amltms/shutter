@@ -45,7 +45,7 @@ export const CreditsProfile: FC<Props> = ({ person }) => {
         img={
           person.profile_path
             ? `https://image.tmdb.org/t/p/original/${person.profile_path}`
-            : `https://lh3.googleusercontent.com/proxy/1yM50LgcpEz5pKeqI4e2L-80dDrNKnRr3fdVn3HH0HufRdSZQwkSHYhtFYG_j-iAYIduhzewMbxsO13wT5Y8Sg1vKfbyk92NMqnm2vAwbpk`
+            : `photo.jpeg`
         }
       />
       <Info>

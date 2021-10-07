@@ -8,7 +8,7 @@ import styled from "styled-components";
 interface Props {
   match: { params: { type: string } };
 }
-
+const HomeContainer = styled.div``;
 const ItemContainer = styled.div`
   margin-top: -10%;
 `;
@@ -22,11 +22,11 @@ export const Home: FC<Props> = (props) => {
   }, [props.match.params.type]);
 
   return (
-    <div>
+    <HomeContainer>
       <SlideShow popularItems={popularItems} />
       <ItemContainer>
         <ItemList items={popularItems} />
       </ItemContainer>
-    </div>
+    </HomeContainer>
   );
 };

@@ -13,17 +13,22 @@ const ItemDetails = styled.div`
 `;
 
 const Backdrop = styled.img`
-	z-index:-1;
-	position:fixed;
-	opacity:1;
-  width:100%;
-	filter: brightness(60%);
+  z-index: -1;
+  position: fixed;
+  opacity: 1;
+  width: 100%;
+  filter: brightness(60%);
   mask-image: linear-gradient(
     to top,
     rgba(0, 0, 0, 0) 30%,
     rgba(0, 0, 0, 0.7) 100%
   );
-}
+  @media screen and (max-width: 900px) {
+    height: 100vh;
+    width: auto;
+    margin-left: 50%;
+    transform: translate(-50%, 0%);
+  }
 `;
 export const Overview: FC<Props> = (props) => {
   const [item, setItem] = useState<Details>();

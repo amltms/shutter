@@ -1,35 +1,61 @@
 import { useState, useEffect, FC } from "react";
+import { useHistory, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { MdSearch } from "react-icons/md";
-import { NavLink } from "react-router-dom";
 
 interface Scroll {
   scrolled: boolean;
+  showDropDown: boolean;
+}
+interface NavProps {
+  showDropDown: boolean;
 }
 
 const Bar = styled.div<Scroll>`
   position: fixed;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   z-index: 1000;
   width: 100%;
-  padding: 5rem;
-  justify-content: space-between;
+  padding: 5rem 5rem 0rem 5rem;
   transition: 0.3s;
-
-  ${({ scrolled }) => scrolled && "background: rgb(0, 0, 0); padding:1.5rem;"};
+  ${({ scrolled }) => scrolled && "background: rgb(0, 0, 0); padding:1rem;"};
   > a {
     font-size: 1.8rem;
   }
+  @media screen and (max-width: 900px) {
+    padding: 1rem;
+  }
 `;
 
-const NavLeft = styled.div`
+const NavLeft = styled.div<NavProps>`
   display: flex;
-  align-items: flex-end;
+  align-items: baseline;
   a {
     font-size: 1.2rem;
-    padding-right: 1.5rem;
+    padding-left: 1.5rem;
     :hover {
       color: #da5d5d;
+    }
+  }
+  a:last-of-type {
+    font-size: 2rem;
+  }
+  @media screen and (max-width: 900px) {
+    display: ${(props) => (props.showDropDown ? "flex" : "none")};
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    height: 100vh;
+    width: 100%;
+    z-index: -1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    a {
+      padding: 2.5rem;
     }
   }
 `;
@@ -42,8 +68,33 @@ const Logo = styled.div`
   }
 `;
 
+const Bars = styled.div`
+  display: none;
+  @media screen and (max-width: 901px) {
+    display: block;
+    cursor: pointer;
+  }
+`;
+
+const Search = styled(MdSearch)`
+  position: absolute;
+  right: 4%;
+  top: 75%;
+  @media screen and (max-width: 901px) {
+    position: relative;
+  }
+`;
+
 export const Nav: FC = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [showDropdown, setShowDropDown] = useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    return history.listen((location) => {
+      setShowDropDown(false);
+    });
+  }, [history]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,26 +109,36 @@ export const Nav: FC = () => {
   }, []);
 
   return (
-    <Bar scrolled={scrolled}>
-      <NavLeft>
+    <Bar showDropDown={showDropdown} scrolled={scrolled}>
+      <div className="flex">
         <Logo>
           <NavLink activeClassName="active" to="/">
-            Screens
+            Sweep
           </NavLink>
         </Logo>
-        <NavLink activeClassName="active" exact to="/movie">
-          Movies
-        </NavLink>
-        <NavLink activeClassName="active" exact to="/tv">
-          TV
-        </NavLink>
-        <NavLink activeClassName="active" exact to="/saved">
-          Saved
-        </NavLink>
-      </NavLeft>
-      <NavLink activeClassName="active" exact to="/search">
-        <MdSearch />
-      </NavLink>
+        <NavLeft showDropDown={showDropdown}>
+          <NavLink exact to="/">
+            Home
+          </NavLink>
+          <NavLink to="/movie">Movies</NavLink>
+          <NavLink to="/tv">TV</NavLink>
+          <NavLink to="/saved">Saved</NavLink>
+          <NavLink to="/search">
+            <Search />
+          </NavLink>
+        </NavLeft>
+      </div>
+      <Bars>
+        <div
+          onClick={() => setShowDropDown(!showDropdown)}
+          className={`nav-icon ${showDropdown && " open"}`}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </Bars>
     </Bar>
   );
 };

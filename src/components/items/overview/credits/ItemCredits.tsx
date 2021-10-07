@@ -34,15 +34,18 @@ export const ItemCredits: FC<Props> = ({ credits }) => {
           <CreditsProfile person={person} />
         ))}
       </CastList>
+      {director && (
+        <>
+          <h2>Crew</h2>
+          <CastList>
+            {director && <CreditsProfile person={director} />}
 
-      <h2>Crew</h2>
-      <CastList>
-        {director && <CreditsProfile person={director} />}
-
-        {writers.map((w) => (
-          <CreditsProfile person={w} />
-        ))}
-      </CastList>
+            {writers.map((w) => (
+              <CreditsProfile person={w} />
+            ))}
+          </CastList>
+        </>
+      )}
     </>
   );
 };

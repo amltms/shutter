@@ -5,7 +5,7 @@ export interface ItemAttributes {
   backdrop_path: string;
   media_type: string;
   title?: string;
-  original_name?: string;
+  name?: string;
   release_date?: string;
   first_air_date?: string;
 }
@@ -21,7 +21,7 @@ export interface Details {
   vote_count: number;
   runtime: number;
   title?: string;
-  original_name?: string;
+  name?: string;
   release_date?: string;
   first_air_date?: string;
 }

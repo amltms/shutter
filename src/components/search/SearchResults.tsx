@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { ItemList, ItemListProps } from "../items/ItemList";
 
 const SearchContainer = styled.div`
-	padding:7vw;
-}
+  padding: 7vw;
 `;
 const Text = styled.div`
   height: 100vh;

@@ -25,6 +25,10 @@ const ItemImg = styled.img`
   transition: 0.5s;
   position: relative;
   overflow: hidden;
+  height: 20rem;
+  @media screen and (max-width: 900px) {
+    height: 25rem;
+  }
 `;
 
 const ItemPreview = styled.div`
@@ -83,7 +87,7 @@ export const Item: FC<ItemProps> = ({ item }) => {
         <PreviewContent onClick={() => overviewHandle()}></PreviewContent>
       </ItemPreview>
       <ItemImg
-        src={`https://image.tmdb.org/t/p/w200/${item.poster_path}`}
+        src={`https://image.tmdb.org/t/p/w300/${item.poster_path}`}
         alt="poster"
       />
     </ItemContainer>

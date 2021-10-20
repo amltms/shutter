@@ -25,7 +25,7 @@ const ItemImg = styled.img`
   transition: 0.5s;
   position: relative;
   overflow: hidden;
-  height: 20rem;
+  height: 300px;
   @media screen and (max-width: 900px) {
     height: 25rem;
   }

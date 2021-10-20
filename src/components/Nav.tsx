@@ -76,14 +76,7 @@ const Bars = styled.div`
   }
 `;
 
-const Search = styled(MdSearch)`
-  position: absolute;
-  right: 4%;
-  top: 75%;
-  @media screen and (max-width: 901px) {
-    position: relative;
-  }
-`;
+const Search = styled(MdSearch)``;
 
 export const Nav: FC = () => {
   const [scrolled, setScrolled] = useState(false);

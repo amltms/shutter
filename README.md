@@ -1,4 +1,4 @@
-# Screens
+# Sweep
 
 A web application that allows you to search through a database of films and tv shows. Provides an overview on each item.
 

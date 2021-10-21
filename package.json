@@ -1,6 +1,6 @@
 {
   "homepage": "https://amltms.github.io/screens/",
-  "name": "screens",
+  "name": "sweep",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

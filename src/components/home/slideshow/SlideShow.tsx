@@ -65,7 +65,7 @@ export const SlideShow: FC<Props> = ({ popularItems }) => {
       </NavBtn>
       <Slider currentSlide={currentSlide}>
         {slideArr.map((i) => (
-          <Slide item={popularItems[i]} />
+          <Slide key={i} item={popularItems[i]} />
         ))}
       </Slider>
     </Container>

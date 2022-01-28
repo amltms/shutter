@@ -1,0 +1,51 @@
+/* width */
+::-webkit-scrollbar {
+	width: 13px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #222;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #111;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #813939;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
+	color: white;
+}
+
+body {
+	background-color: black;
+	height: 2000px;
+}
+
+a,
+button,
+input,
+svg {
+	cursor: pointer;
+	vertical-align: sub;
+}
+
+textarea:focus,
+input:focus {
+	outline: none;
+}
+
+a {
+	transition: 0.2s;
+	text-decoration: none;
+	color: white;
+}

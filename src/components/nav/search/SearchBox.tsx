@@ -1,7 +1,7 @@
 import { FC, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
-import { fetchSearch } from '../../api/fetchContent';
+import { fetchSearch } from '../../../api/fetchContent';
 
 interface Props {
 	setSearching: any;

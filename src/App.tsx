@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Home } from './components/Home';
+import { Home } from './components/home/Home';
 import { ItemAttributes } from './components/interfaces';
 import { Nav } from './components/Nav';
 import { SearchBox } from './components/search/SearchBox';

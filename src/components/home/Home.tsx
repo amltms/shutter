@@ -1,11 +1,10 @@
 import { useEffect, useState, FC } from 'react';
-import { fetchPopular } from '../api/fetchContent';
-import { ItemAttributes } from './interfaces';
-import { ItemList } from './items/ItemList';
+import { fetchPopular } from '../../api/fetchContent';
+import { ItemAttributes } from '../interfaces';
+import { ItemList } from '../items/ItemList';
+import { SlideShow } from './slideshow/SlideShow';
 
-interface Props {}
-
-export const Home: FC = (props: Props) => {
+export const Home: FC = () => {
 	const [popularItems, setPopularItems] = useState<ItemAttributes[]>([]);
 
 	useEffect(() => {
@@ -14,7 +13,8 @@ export const Home: FC = (props: Props) => {
 		});
 	}, []);
 	return (
-		<div className="App">
+		<div>
+			<SlideShow popularItems={popularItems} />
 			<ItemList items={popularItems} />
 		</div>
 	);

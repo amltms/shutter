@@ -18,10 +18,21 @@ const Bar = styled.div<Scroll>`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	${({ scrolled }) => scrolled && 'background: rgb(0, 0, 0); padding:1rem;'};
-	> a {
-		font-size: 1.8rem;
+	:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		transform: scaleY(${({ scrolled }) => (scrolled ? '1' : '0')});
+		transform-origin: top center;
+		background: #000000;
+		z-index: -1;
+		transition: transform 0.3s;
 	}
+	${({ scrolled }) => scrolled && 'padding:1rem;'};
+
 	@media screen and (max-width: 900px) {
 		padding: 1rem;
 	}

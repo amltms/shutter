@@ -8,24 +8,16 @@ export type ItemProps = {
 
 const ItemContainer = styled.div`
 	margin: 1rem 1rem 1rem 0rem;
-	transition: 0.3s;
+	border-radius: 1.2rem;
+	height: 300px;
+	width: 200px;
 	position: relative;
-	:hover {
-		z-index: 2;
-		transform: scale(1.1);
-	}
+	overflow: hidden;
 `;
 
 const ItemImg = styled.img`
+	height: 100%;
 	object-fit: contain;
-	border-radius: 1.2rem;
-	transition: 0.5s;
-	position: relative;
-	overflow: hidden;
-	height: 300px;
-	@media screen and (max-width: 900px) {
-		height: 25rem;
-	}
 `;
 
 export const Item: FC<ItemProps> = ({ item }) => {

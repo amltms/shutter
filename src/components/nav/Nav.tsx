@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FC, useEffect, useState } from 'react';
-
+import { Link } from 'react-router-dom';
 interface Props {
 	children: React.ReactNode;
 }
@@ -10,7 +10,7 @@ interface Scroll {
 }
 
 const Bar = styled.div<Scroll>`
-	z-index: 100;
+	z-index: 1000;
 	width: 100%;
 	position: fixed;
 	transition: 0.3s;
@@ -38,10 +38,23 @@ const Bar = styled.div<Scroll>`
 	}
 `;
 
+const NavLeft = styled.div`
+	display: flex;
+	align-items: baseline;
+	a {
+		font-size: 1.2rem;
+		padding-left: 1.5rem;
+		:hover {
+			color: #da5d5d;
+		}
+	}
+`;
+
 const Logo = styled.a`
 	line-height: 0.7;
-	font-size: 2.5rem;
+	font-size: 2.2rem !important;
 	font-weight: bold;
+	color: #da5d5d;
 `;
 
 export const Nav: FC<Props> = (props) => {
@@ -61,7 +74,12 @@ export const Nav: FC<Props> = (props) => {
 
 	return (
 		<Bar scrolled={scrolled}>
-			<Logo>Sweep</Logo>
+			<NavLeft>
+				<Logo>Sweep</Logo>
+				<Link to="movie">Movies</Link>
+				<Link to="tv">TV</Link>
+				<Link to="saved">Saved</Link>
+			</NavLeft>
 			{props.children}
 		</Bar>
 	);

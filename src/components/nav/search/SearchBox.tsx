@@ -1,11 +1,16 @@
 import { FC, ChangeEvent } from 'react';
 import styled from 'styled-components';
-import { MdSearch } from 'react-icons/md';
+import { MdSearch, MdClear } from 'react-icons/md';
 import { fetchSearch } from '../../../api/fetchContent';
 
 interface Props {
 	setSearching: any;
+	searching: boolean;
 	setSearchItems: any;
+}
+
+interface ClearProps {
+	searching: boolean;
 }
 
 const SearchInput = styled.input`
@@ -20,7 +25,6 @@ const SearchInput = styled.input`
 `;
 
 const Box = styled.div`
-	width: 20%;
 	border: 1px solid white;
 	border-radius: 5vw;
 	transition: 0.2s;
@@ -28,10 +32,17 @@ const Box = styled.div`
 	align-items: center;
 	padding: 0.8rem;
 `;
+
 const Search = styled(MdSearch)`
 	font-size: 1.3rem;
+	display: block;
+	margin-right: 0.4rem;
 `;
-export const SearchBox: FC<Props> = ({ setSearching, setSearchItems }) => {
+
+const Clear = styled(MdClear)<ClearProps>`
+	opacity: ${({ searching }) => (searching ? '1' : '0')};
+`;
+export const SearchBox: FC<Props> = ({ setSearching, searching, setSearchItems }) => {
 	let filterTimeout: NodeJS.Timeout;
 
 	const handleSearchInput = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -51,6 +62,7 @@ export const SearchBox: FC<Props> = ({ setSearching, setSearchItems }) => {
 		<Box>
 			<Search />
 			<SearchInput type="text" placeholder="Search" onChange={handleSearchInput} />
+			<Clear searching={searching} />
 		</Box>
 	);
 };

@@ -14,5 +14,5 @@ const Grid = styled.div`
 `;
 
 export const ItemList: FC<ItemListProps> = ({ items }) => {
-	return <Grid>{items.map((i) => i.poster_path && <Item item={i} />)}</Grid>;
+	return <Grid>{items.map((i) => i.poster_path && <Item key={i.id} item={i} />)}</Grid>;
 };

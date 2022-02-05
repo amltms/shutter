@@ -65,7 +65,7 @@ export const SlideShow: FC<Props> = ({ popularItems }) => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const timer: { current: NodeJS.Timeout | null } = useRef(null);
 
-	let slideArr = [0, 1, 2];
+	let slideArr = [0, 1, 2, 3];
 
 	useEffect(() => {
 		clearInterval(timer.current as NodeJS.Timeout);
@@ -99,7 +99,7 @@ export const SlideShow: FC<Props> = ({ popularItems }) => {
 			</Slider>
 			<DotContainer>
 				{slideArr.map((i) => (
-					<Dot dotNumber={i} currentSlide={currentSlide} onClick={() => setCurrentSlide(i)} />
+					<Dot key={i} dotNumber={i} currentSlide={currentSlide} onClick={() => setCurrentSlide(i)} />
 				))}
 			</DotContainer>
 		</Container>

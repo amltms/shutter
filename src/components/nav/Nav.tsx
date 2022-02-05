@@ -50,7 +50,7 @@ const NavLeft = styled.div`
 	}
 `;
 
-const Logo = styled.a`
+const Logo = styled(Link)`
 	line-height: 0.7;
 	font-size: 2.2rem !important;
 	font-weight: bold;
@@ -75,7 +75,7 @@ export const Nav: FC<Props> = (props) => {
 	return (
 		<Bar scrolled={scrolled}>
 			<NavLeft>
-				<Logo>Sweep</Logo>
+				<Logo to="/">Sweep</Logo>
 				<Link to="movie">Movies</Link>
 				<Link to="tv">TV</Link>
 				<Link to="saved">Saved</Link>

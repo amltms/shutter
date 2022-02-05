@@ -16,14 +16,16 @@ const Text = styled.div`
 `;
 export const SearchResults: FC<ItemListProps> = ({ items }) => {
 	return (
-		<SearchContainer>
+		<>
 			{items.length === 0 ? (
 				<Text>
 					<h2>No Results</h2>
 				</Text>
 			) : (
-				<ItemList items={items} />
+				<SearchContainer>
+					<ItemList items={items} />
+				</SearchContainer>
 			)}
-		</SearchContainer>
+		</>
 	);
 };

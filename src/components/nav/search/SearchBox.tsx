@@ -1,12 +1,13 @@
-import { FC, ChangeEvent } from 'react';
+import { FC, ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import { MdSearch, MdClear } from 'react-icons/md';
 import { fetchSearch } from '../../../api/fetchContent';
+import { ItemAttributes } from '../../interfaces';
 
 interface Props {
-	setSearching: any;
+	setSearching: React.Dispatch<React.SetStateAction<boolean>>;
+	setSearchItems: React.Dispatch<React.SetStateAction<ItemAttributes[]>>;
 	searching: boolean;
-	setSearchItems: any;
 }
 
 interface ClearProps {
@@ -42,11 +43,15 @@ const Search = styled(MdSearch)`
 const Clear = styled(MdClear)<ClearProps>`
 	opacity: ${({ searching }) => (searching ? '1' : '0')};
 `;
+
 export const SearchBox: FC<Props> = ({ setSearching, searching, setSearchItems }) => {
+	const [searchValue, setSearchValue] = useState('');
+
 	let filterTimeout: NodeJS.Timeout;
 
 	const handleSearchInput = async (e: ChangeEvent<HTMLInputElement>) => {
 		clearTimeout(filterTimeout);
+		setSearchValue(e.target.value);
 
 		if (e.target.value) {
 			setSearching(true);
@@ -61,8 +66,14 @@ export const SearchBox: FC<Props> = ({ setSearching, searching, setSearchItems }
 	return (
 		<Box>
 			<Search />
-			<SearchInput type="text" placeholder="Search" onChange={handleSearchInput} />
-			<Clear searching={searching} />
+			<SearchInput type="text" value={searchValue} placeholder="Search" onChange={handleSearchInput} />
+			<Clear
+				onClick={() => {
+					setSearchValue('');
+					setSearching(false);
+				}}
+				searching={searching}
+			/>
 		</Box>
 	);
 };

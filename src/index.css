@@ -32,12 +32,12 @@
 }
 
 .animate-text {
-	animation: textTransition 0.4s;
+	animation: textTransition 0.5s;
 }
 
 @keyframes textTransition {
 	0% {
-		transform: translateY(-200px);
+		transform: translateY(-50%);
 	}
 	100% {
 		transform: translateY(0);
@@ -118,4 +118,58 @@ button {
 	outline: none;
 	color: white;
 	transition: 0.5s;
+}
+
+.nav-icon {
+	width: 45px;
+	height: 40px;
+	position: relative;
+	transform: rotate(0deg);
+	transition: 0.5s ease-in-out;
+	cursor: pointer;
+}
+
+.nav-icon span {
+	display: block;
+	position: absolute;
+	height: 3px;
+	width: 100%;
+	background: white;
+	opacity: 1;
+	left: 0;
+	transform: rotate(0deg);
+	transition: 0.25s ease-in-out;
+}
+
+.nav-icon span:nth-child(1) {
+	top: 0px;
+}
+
+.nav-icon span:nth-child(2),
+.nav-icon span:nth-child(3) {
+	top: 18px;
+}
+
+.nav-icon span:nth-child(4) {
+	top: 36px;
+}
+
+.nav-icon.open span:nth-child(1) {
+	top: 18px;
+	width: 0%;
+	left: 50%;
+}
+
+.nav-icon.open span:nth-child(2) {
+	transform: rotate(45deg);
+}
+
+.nav-icon.open span:nth-child(3) {
+	transform: rotate(-45deg);
+}
+
+.nav-icon.open span:nth-child(4) {
+	top: 18px;
+	width: 0%;
+	left: 50%;
 }

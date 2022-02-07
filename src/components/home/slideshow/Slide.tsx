@@ -14,6 +14,7 @@ const SlideContainer = styled.div`
 `;
 const Backdrop = styled.img`
 	width: 100%;
+	filter: brightness(60%);
 	mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.4) 100%);
 	@media screen and (max-width: 900px) {
 		height: 70vh;

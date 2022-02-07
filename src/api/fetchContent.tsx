@@ -12,11 +12,11 @@ export const fetchPopular = (contentType: string) => {
 	return getData(`trending/${contentType}/week`);
 };
 
-export const fetchItem = (contentType: string, id: number) => {
+export const fetchItem = (contentType: string | undefined, id: number | undefined) => {
 	return getData(`${contentType}/${id}`);
 };
 
-export const fetchCredits = (contentType: string, id: number) => {
+export const fetchCredits = (contentType: string | undefined, id: number | undefined) => {
 	return getData(`${contentType}/${id}/credits`);
 };
 

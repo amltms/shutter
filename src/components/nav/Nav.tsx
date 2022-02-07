@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import { FC, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-interface Props {
-	children: React.ReactNode;
-}
+import { SearchBox } from './search/SearchBox';
 interface Scroll {
 	scrolled: boolean;
 }
@@ -11,12 +9,12 @@ interface NavProps {
 	showDropDown: boolean;
 }
 
-const Bar = styled.div<Scroll>`
+const NavBar = styled.div<Scroll>`
 	z-index: 1000;
 	width: 100%;
 	position: fixed;
 	transition: 0.3s;
-	padding: 5rem;
+	padding: 5rem 5rem 0rem 5rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -33,7 +31,7 @@ const Bar = styled.div<Scroll>`
 		z-index: -1;
 		transition: transform 0.3s;
 	}
-	${({ scrolled }) => scrolled && 'padding:1rem;'};
+	${({ scrolled }) => scrolled && 'padding:1.5rem;'};
 
 	@media screen and (max-width: 900px) {
 		padding: 1rem;
@@ -47,7 +45,7 @@ const MenuLinks = styled.div<NavProps>`
 		font-size: 1.2rem;
 		padding-left: 1.5rem;
 		:hover {
-			color: #da5d5d;
+			color: #c37373;
 		}
 	}
 	@media screen and (max-width: 900px) {
@@ -71,13 +69,6 @@ const MenuLinks = styled.div<NavProps>`
 const NavLeft = styled.div`
 	display: flex;
 	align-items: baseline;
-	a {
-		font-size: 1.2rem;
-		padding-left: 1.5rem;
-		:hover {
-			color: #da5d5d;
-		}
-	}
 `;
 
 const Logo = styled(NavLink)`
@@ -87,15 +78,15 @@ const Logo = styled(NavLink)`
 	color: #da5d5d;
 `;
 
-const Bars = styled.div`
+const HamburgerMenu = styled.div`
 	display: none;
-	@media screen and (max-width: 901px) {
+	@media screen and (max-width: 900px) {
 		display: block;
 		cursor: pointer;
 	}
 `;
 
-export const Nav: FC<Props> = (props) => {
+export const Nav: FC = () => {
 	const [scrolled, setScrolled] = useState(false);
 	const [showDropdown, setShowDropDown] = useState(false);
 
@@ -112,7 +103,7 @@ export const Nav: FC<Props> = (props) => {
 	}, []);
 
 	return (
-		<Bar scrolled={scrolled}>
+		<NavBar scrolled={scrolled}>
 			<NavLeft>
 				<Logo to="/">Sweep</Logo>
 				<MenuLinks showDropDown={showDropdown}>
@@ -121,15 +112,13 @@ export const Nav: FC<Props> = (props) => {
 					<NavLink to="saved">Saved</NavLink>
 				</MenuLinks>
 			</NavLeft>
-			{props.children}
-			<Bars>
-				<div onClick={() => setShowDropDown(!showDropdown)} className={`nav-icon ${showDropdown && ' open'}`}>
-					<span></span>
-					<span></span>
-					<span></span>
-					<span></span>
-				</div>
-			</Bars>
-		</Bar>
+			<SearchBox />
+			<HamburgerMenu onClick={() => setShowDropDown(!showDropdown)} className={`nav-icon ${showDropdown && ' open'}`}>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</HamburgerMenu>
+		</NavBar>
 	);
 };

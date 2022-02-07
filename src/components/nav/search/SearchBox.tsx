@@ -1,17 +1,10 @@
 import { FC, ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import { MdSearch, MdClear } from 'react-icons/md';
-import { fetchSearch } from '../../../api/fetchContent';
-import { ItemAttributes } from '../../interfaces';
-
-interface Props {
-	setSearching: React.Dispatch<React.SetStateAction<boolean>>;
-	setSearchItems: React.Dispatch<React.SetStateAction<ItemAttributes[]>>;
-	searching: boolean;
-}
+import { useNavigate } from 'react-router-dom';
 
 interface ClearProps {
-	searching: boolean;
+	searching: string;
 }
 
 const SearchInput = styled.input`
@@ -44,22 +37,17 @@ const Clear = styled(MdClear)<ClearProps>`
 	opacity: ${({ searching }) => (searching ? '1' : '0')};
 `;
 
-export const SearchBox: FC<Props> = ({ setSearching, searching, setSearchItems }) => {
+export const SearchBox: FC = () => {
 	const [searchValue, setSearchValue] = useState('');
-
-	let filterTimeout: NodeJS.Timeout;
+	let navigate = useNavigate();
 
 	const handleSearchInput = async (e: ChangeEvent<HTMLInputElement>) => {
-		clearTimeout(filterTimeout);
 		setSearchValue(e.target.value);
 
 		if (e.target.value) {
-			setSearching(true);
-			filterTimeout = setTimeout(() => {
-				fetchSearch(e.target.value).then((data) => setSearchItems(data.results));
-			}, 400);
+			navigate(`/search/${e.target.value}`);
 		} else {
-			setSearching(false);
+			navigate(`/`);
 		}
 	};
 
@@ -67,13 +55,7 @@ export const SearchBox: FC<Props> = ({ setSearching, searching, setSearchItems }
 		<Box>
 			<Search />
 			<SearchInput type="text" value={searchValue} placeholder="Search" onChange={handleSearchInput} />
-			<Clear
-				onClick={() => {
-					setSearchValue('');
-					setSearching(false);
-				}}
-				searching={searching}
-			/>
+			<Clear onClick={() => setSearchValue('')} searching={searchValue} />
 		</Box>
 	);
 };

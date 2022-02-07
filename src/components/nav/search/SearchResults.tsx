@@ -1,6 +1,9 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ItemList, ItemListProps } from '../../items/ItemList';
+import { useParams } from 'react-router-dom';
+import { fetchSearch } from '../../../api/fetchContent';
+import { ItemAttributes } from '../../interfaces';
+import { ItemList } from '../../items/ItemList';
 
 const SearchContainer = styled.div`
 	padding: 7vw;
@@ -14,16 +17,24 @@ const Text = styled.div`
 		color: #333;
 	}
 `;
-export const SearchResults: FC<ItemListProps> = ({ items }) => {
+
+export const SearchResults2: FC = () => {
+	const [searchItems, setSearchItems] = useState<ItemAttributes[]>([]);
+	let { search } = useParams();
+
+	useEffect(() => {
+		search && fetchSearch(search).then((data) => setSearchItems(data.results));
+	}, [search]);
+
 	return (
 		<>
-			{items.length === 0 ? (
+			{searchItems.length === 0 ? (
 				<Text>
 					<h2>No Results</h2>
 				</Text>
 			) : (
 				<SearchContainer>
-					<ItemList items={items} />
+					<ItemList items={searchItems} />
 				</SearchContainer>
 			)}
 		</>

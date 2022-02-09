@@ -68,12 +68,12 @@ const MenuLinks = styled.div<NavProps>`
 
 const NavLeft = styled.div`
 	display: flex;
-	align-items: baseline;
+	align-items: center;
 `;
 
 const Logo = styled(NavLink)`
 	line-height: 0.7;
-	font-size: 2.2rem !important;
+	font-size: 3rem !important;
 	font-weight: bold;
 	color: #da5d5d;
 `;

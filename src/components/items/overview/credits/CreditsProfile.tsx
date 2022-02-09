@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { Cast } from '../../../interfaces';
 import styled from 'styled-components';
-
 interface Props {
 	person: Cast;
 }
@@ -12,7 +11,7 @@ interface ImgProps {
 
 const Person = styled.div`
 	display: flex;
-	margin: 0vw 2vw 2vw 0;
+	margin: 0vw 3vw 3vw 0;
 `;
 const Info = styled.div`
 	display: flex;
@@ -25,23 +24,23 @@ const Role = styled.p`
 `;
 
 const PersonImg = styled.div<ImgProps>`
-	height: 10vw;
-	width: 10vw;
+	height: 8vw;
+	width: 8vw;
 	border-radius: 50%;
 	background: url(${(p) => p.img});
 	background-repeat: no-repeat;
 	background-size: 100% auto;
 	background-position: 0 25%;
 	@media (min-width: 1700px) {
-		height: 6vw;
-		width: 6vw;
+		height: 5vw;
+		width: 5vw;
 	}
 `;
 
 export const CreditsProfile: FC<Props> = ({ person }) => {
 	return (
 		<Person>
-			<PersonImg img={person.profile_path ? `https://image.tmdb.org/t/p/original/${person.profile_path}` : `/photo.jpg`} />
+			<PersonImg img={person.profile_path ? `https://image.tmdb.org/t/p/original/${person.profile_path}` : `${process.env.PUBLIC_URL}/photo.jpg`} />
 			<Info>
 				<div>
 					<h3>{person.name}</h3>

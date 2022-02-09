@@ -53,7 +53,7 @@ const ItemImg = styled.img`
 	position: relative;
 	overflow: hidden;
 	margin-right: 2.5rem;
-	height: 25vw;
+	height: 20rem;
 	@media (min-width: 1900px) {
 		height: 15vw;
 	}

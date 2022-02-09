@@ -1,7 +1,7 @@
-import { FC, ChangeEvent, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { MdSearch, MdClear } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface ClearProps {
 	searching: string;
@@ -40,21 +40,27 @@ const Clear = styled(MdClear)<ClearProps>`
 export const SearchBox: FC = () => {
 	const [searchValue, setSearchValue] = useState('');
 	let navigate = useNavigate();
+	const { pathname } = useLocation();
 
-	const handleSearchInput = async (e: ChangeEvent<HTMLInputElement>) => {
-		setSearchValue(e.target.value);
+	useEffect(() => {
+		// clear searchbox if not searching and changing page
+		!pathname.startsWith('/search') && searchValue && setSearchValue('');
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [pathname]);
 
-		if (e.target.value) {
-			navigate(`/search/${e.target.value}`);
+	useEffect(() => {
+		if (searchValue) {
+			navigate(`/search/${searchValue}`);
 		} else {
 			navigate(`/`);
 		}
-	};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [searchValue]);
 
 	return (
 		<Box>
 			<Search />
-			<SearchInput type="text" value={searchValue} placeholder="Search" onChange={handleSearchInput} />
+			<SearchInput type="text" value={searchValue} placeholder="Search" onChange={(e) => setSearchValue(e.target.value)} />
 			<Clear onClick={() => setSearchValue('')} searching={searchValue} />
 		</Box>
 	);

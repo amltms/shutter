@@ -35,7 +35,7 @@ const DetailsBtn = styled.button`
 	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #da5d5d 50%);
 	transition: background-position 0.3s;
 	:hover {
-		background-position: 0 -100%;
+		background-position: 0 -98%;
 	}
 
 	@media screen and (max-width: 900px) {

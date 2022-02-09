@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { fetchSearch } from '../../../api/fetchContent';
@@ -6,7 +6,7 @@ import { ItemAttributes } from '../../interfaces';
 import { ItemList } from '../../items/ItemList';
 
 const SearchContainer = styled.div`
-	padding: 7vw;
+	padding: 12vw 7vw;
 `;
 const Text = styled.div`
 	height: 100vh;
@@ -21,9 +21,14 @@ const Text = styled.div`
 export const SearchResults2: FC = () => {
 	const [searchItems, setSearchItems] = useState<ItemAttributes[]>([]);
 	let { search } = useParams();
+	let filterTimeout: { current: NodeJS.Timeout | null } = useRef(null);
 
 	useEffect(() => {
-		search && fetchSearch(search).then((data) => setSearchItems(data.results));
+		/*debounce */
+		clearInterval(filterTimeout.current as NodeJS.Timeout);
+		filterTimeout.current = setTimeout(() => {
+			search && fetchSearch(search).then((data) => setSearchItems(data.results));
+		}, 400);
 	}, [search]);
 
 	return (

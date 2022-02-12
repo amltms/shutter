@@ -28,7 +28,7 @@ const DotContainer = styled.div`
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
-	bottom: 12%;
+	bottom: 8vw;
 	z-index: 10;
 	width: auto;
 	cursor: pointer;

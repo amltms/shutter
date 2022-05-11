@@ -1,12 +1,12 @@
 import { FC, useState, useEffect, useRef } from 'react';
-import { ItemAttributes } from '../../interfaces';
 import styled from 'styled-components';
+import { ItemAttributes } from '../../types';
 import { Slide } from './Slide';
 import { SlideContent } from './SlideContent';
 import { SlideNavigation } from './SlideNavigation';
 
 interface Props {
-	popularItems: ItemAttributes[];
+	items: ItemAttributes[];
 }
 
 interface SliderProps {
@@ -27,7 +27,7 @@ const Slider = styled.div<SliderProps>`
 	transform: translateX(${({ currentSlide }) => -currentSlide * 100}%);
 `;
 
-export const SlideShow: FC<Props> = ({ popularItems }) => {
+export const SlideShow: FC<Props> = ({ items }) => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const timer: { current: NodeJS.Timeout | null } = useRef(null);
 	let slideArr = [0, 1, 2, 3];
@@ -35,7 +35,9 @@ export const SlideShow: FC<Props> = ({ popularItems }) => {
 	useEffect(() => {
 		clearInterval(timer.current as NodeJS.Timeout);
 		timer.current = setInterval(() => {
-			setCurrentSlide(currentSlide + 1);
+			if (document.hasFocus()) {
+				setCurrentSlide(currentSlide + 1);
+			}
 		}, 10000);
 
 		if (currentSlide > slideArr.length - 1) {
@@ -48,10 +50,10 @@ export const SlideShow: FC<Props> = ({ popularItems }) => {
 	return (
 		<Container>
 			<SlideNavigation setCurrentSlide={setCurrentSlide} currentSlide={currentSlide} slideArr={slideArr} />
-			<SlideContent slideContent={popularItems[currentSlide]} />
+			<SlideContent slideContent={items[currentSlide]} />
 			<Slider currentSlide={currentSlide}>
 				{slideArr.map((i) => (
-					<Slide key={i} item={popularItems[i]} />
+					<Slide key={i} item={items[i]} />
 				))}
 			</Slider>
 		</Container>

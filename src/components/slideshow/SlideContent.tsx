@@ -1,21 +1,24 @@
 import { FC } from 'react';
-import { ItemAttributes } from '../../interfaces';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { ItemAttributes } from '../../types';
+import * as palette from '../../styles/palette';
 
 interface Props {
 	slideContent: ItemAttributes;
 }
+
 const Content = styled.div`
 	position: absolute;
 	left: 0;
 	width: 100%;
 	z-index: 2;
-	bottom: 4vw;
+	bottom: 0;
 	width: 100%;
-	padding: 7vw;
+	padding: 8vw;
+	text-align: center;
+
 	@media screen and (max-width: 900px) {
-		bottom: 10%;
 		h1 {
 			font-size: 3rem;
 		}
@@ -26,21 +29,34 @@ const Content = styled.div`
 `;
 
 const DetailsBtn = styled.button`
+	transition: 0.3s;
 	font-size: 1.5rem;
 	margin-top: 1.5rem;
-	padding: 1.3rem;
-	border-radius: 2.5rem;
-	border: 2px solid #da5d5d;
-	background-size: 100% 200%;
-	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #da5d5d 50%);
-	transition: background-position 0.3s;
-	:hover {
-		background-position: 0 -100%;
-	}
-
+	padding: 1rem 0;
+	position: relative;
+	display: inline-block;
 	@media screen and (max-width: 900px) {
 		padding: 0.8rem;
 		font-size: 1rem;
+	}
+	:after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		transform: scaleX(1);
+		height: 1px;
+		bottom: -8px;
+		left: 0;
+		background-color: ${palette.baseColor};
+		transform-origin: bottom left;
+		transition: transform 0.3s ease-out;
+	}
+	:hover:after {
+		transform-origin: bottom right;
+		transform: scaleX(0);
+	}
+	:hover {
+		color: ${palette.baseColor};
 	}
 `;
 
@@ -48,7 +64,9 @@ const OverviewText = styled.p`
 	overflow: hidden;
 	font-size: 1.5rem;
 	text-overflow: ellipsis;
+	color: ${palette.secondaryTextColor};
 	margin-top: 2vw;
+	margin: 0 auto;
 	display: -webkit-box;
 	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
@@ -56,6 +74,13 @@ const OverviewText = styled.p`
 		-webkit-line-clamp: 5;
 		width: 50%;
 	}
+`;
+
+const AnimateContainer = styled.div`
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 export const SlideContent: FC<Props> = ({ slideContent }) => {
@@ -68,10 +93,12 @@ export const SlideContent: FC<Props> = ({ slideContent }) => {
 		<>
 			{slideContent && (
 				<Content>
-					<div key={slideContent.id} className="animate-text">
-						<h1>{slideContent.title || slideContent.name}</h1>
-						<OverviewText>{slideContent.overview}</OverviewText>
-					</div>
+					<AnimateContainer>
+						<div key={slideContent.id} className="animate-text">
+							<h1>{slideContent.title || slideContent.name}</h1>
+							<OverviewText>{slideContent.overview}</OverviewText>
+						</div>
+					</AnimateContainer>
 					<DetailsBtn onClick={() => overviewHandle()}>More Details</DetailsBtn>
 				</Content>
 			)}

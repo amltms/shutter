@@ -1,8 +1,8 @@
 import { Item } from './Item';
-import { ItemAttributes } from '../interfaces';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
+import { ItemAttributes } from '../../types';
 
 export type ItemListProps = {
 	items: ItemAttributes[];
@@ -41,7 +41,9 @@ const NavBtn = styled.button`
 
 export const ItemList: FC<ItemListProps> = ({ items }) => {
 	const [currentSlide, setCurrentSlide] = useState(0);
-	let slideArr = [0, 1];
+	const listRef = useRef();
+
+	let slideArr = [0, 1, 3, 4, 5];
 
 	useEffect(() => {
 		if (currentSlide > slideArr.length - 1) {

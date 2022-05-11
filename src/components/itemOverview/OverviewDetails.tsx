@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Details } from '../../interfaces';
 import { GoStar } from 'react-icons/go';
 import styled from 'styled-components';
+import { Details } from '../../types';
 interface Props {
 	item: Details;
 }
@@ -9,7 +9,6 @@ interface Props {
 const DetailsContainer = styled.div`
 	display: flex;
 	margin: 2.5rem 0;
-
 	@media screen and (max-width: 900px) {
 		flex-direction: column;
 		align-items: center;
@@ -33,7 +32,6 @@ const Info = styled.div`
 const Genres = styled.div`
 	margin: 1rem 0;
 	font-size: 1.25rem;
-
 	div {
 		border: 1px solid #da5d5d;
 		padding: 0.7rem;

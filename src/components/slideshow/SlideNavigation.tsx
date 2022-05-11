@@ -1,14 +1,15 @@
 import { FC } from 'react';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import styled from 'styled-components';
+import * as palette from '../../styles/palette';
 
 interface Props {
 	setCurrentSlide: any;
 	currentSlide: number;
 	slideArr: number[];
 }
-interface DotProps {
-	dotNumber: number;
+interface IndicatorProps {
+	currentIndicator: number;
 	currentSlide: number;
 }
 
@@ -25,22 +26,24 @@ const NavBtn = styled.button`
 `;
 
 const DotContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	width: 100%;
 	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	bottom: 8vw;
+	bottom: 2rem;
 	z-index: 10;
-	width: auto;
 	cursor: pointer;
+	> div {
+		display: inline-block;
+		padding: 1rem 0.2rem;
+	}
 `;
 
-const Dot = styled.div<DotProps>`
-	height: 1rem;
-	width: 1rem;
-	background-color: ${({ dotNumber, currentSlide }) => (dotNumber === currentSlide ? '#da5d5d;' : '#3d3d3d')};
-	border-radius: 50%;
+const Indicator = styled.div<IndicatorProps>`
+	height: 3px;
+	width: 3rem;
+	background-color: ${({ currentIndicator, currentSlide }) => (currentIndicator === currentSlide ? palette.baseColor : 'rgba(122, 122, 122, 0.2)')};
 	display: inline-block;
-	margin: 0.3rem;
 `;
 
 export const SlideNavigation: FC<Props> = ({ setCurrentSlide, currentSlide, slideArr }) => {
@@ -53,10 +56,11 @@ export const SlideNavigation: FC<Props> = ({ setCurrentSlide, currentSlide, slid
 			<NavBtn onClick={() => setCurrentSlide(currentSlide - 1)}>
 				<MdNavigateBefore />
 			</NavBtn>
-
 			<DotContainer>
 				{slideArr.map((i) => (
-					<Dot key={i} dotNumber={i} currentSlide={currentSlide} onClick={() => setCurrentSlide(i)} />
+					<div onClick={() => setCurrentSlide(i)}>
+						<Indicator key={i} currentIndicator={i} currentSlide={currentSlide} />
+					</div>
 				))}
 			</DotContainer>
 		</>

@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Cast } from '../../../interfaces';
 import styled from 'styled-components';
+import { Cast } from '../../../types';
 interface Props {
 	person: Cast;
 }

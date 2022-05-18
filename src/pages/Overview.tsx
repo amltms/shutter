@@ -5,7 +5,7 @@ import { ItemCredits } from '../components/itemOverview/credits/ItemCredits';
 import { OverviewDetails } from '../components/itemOverview/OverviewDetails';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
-import { getItem } from '../features/item/itemSlice';
+import { getItem, getCredits } from '../features/item/itemSlice';
 
 const ItemDetails = styled.div`
 	padding: 20% 10vw 0 10vw;
@@ -27,19 +27,23 @@ const Backdrop = styled.img`
 `;
 
 export const Overview: FC = () => {
-	const { selectedItem } = useAppSelector((state: RootState) => state.item);
+	const { selectedItem, credits } = useAppSelector((state: RootState) => state.item);
 	const dispatch = useAppDispatch();
 
 	let { type, id } = useParams();
 
 	useEffect(() => {
 		type && id && dispatch(getItem({ type: type, id: id }));
+		type && id && dispatch(getCredits({ type: type, id: id }));
 	}, [id, type, dispatch]);
 
 	return (
 		<>
 			<Backdrop src={`https://image.tmdb.org/t/p/original/${selectedItem?.backdrop_path}`} alt="backdrop" />
-			<ItemDetails>{selectedItem && <OverviewDetails item={selectedItem} />}</ItemDetails>
+			<ItemDetails>
+				{selectedItem && <OverviewDetails item={selectedItem} />}
+				{credits && <ItemCredits credits={credits} />}
+			</ItemDetails>
 		</>
 	);
 };

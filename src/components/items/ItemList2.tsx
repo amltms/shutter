@@ -1,4 +1,4 @@
-import { Item } from './Item2';
+import { Item } from './Item';
 import { FC, useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';

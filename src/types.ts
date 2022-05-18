@@ -33,7 +33,7 @@ export interface Credits {
 }
 
 export interface Cast {
-	id: number;
+	id: string;
 	name: string;
 	profile_path?: string;
 	character?: string;

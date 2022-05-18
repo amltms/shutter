@@ -6,12 +6,14 @@ export interface ItemState {
 	items: any;
 	selectedItem: Details | null;
 	status: 'idle' | 'loading' | 'failed';
+	credits: Credits | null;
 }
 
 const initialState: ItemState = {
 	items: [],
 	selectedItem: null,
 	status: 'idle',
+	credits: null,
 };
 
 export const getTrending = createAsyncThunk('item/getTrending', async (contentType: string) => {
@@ -23,6 +25,12 @@ export const getTrending = createAsyncThunk('item/getTrending', async (contentTy
 export const getItem = createAsyncThunk('item/getItem', async (itemData: { type: string; id: string }) => {
 	const { type, id } = itemData;
 	const response = await itemService.getItem(type, id);
+
+	return response;
+});
+export const getCredits = createAsyncThunk('item/getCredits', async (itemData: { type: string; id: string }) => {
+	const { type, id } = itemData;
+	const response = await itemService.getCredits(type, id);
 
 	return response;
 });
@@ -53,6 +61,13 @@ export const itemSlice = createSlice({
 			.addCase(getItem.fulfilled, (state, action) => {
 				state.status = 'idle';
 				state.selectedItem = action.payload;
+			})
+			.addCase(getCredits.pending, (state) => {
+				state.status = 'loading';
+			})
+			.addCase(getCredits.fulfilled, (state, action) => {
+				state.status = 'idle';
+				state.credits = action.payload;
 			})
 			.addCase(getSearch.pending, (state) => {
 				state.status = 'loading';

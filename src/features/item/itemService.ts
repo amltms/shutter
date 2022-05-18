@@ -16,6 +16,10 @@ const getItem = async (type: String, id: String) => {
 	return getData(`${type}/${id}`);
 };
 
+const getCredits = async (type: String, id: String) => {
+	return getData(`${type}/${id}/credits`);
+};
+
 const getSearch = async (search: String) => {
 	return getData(`search/multi`, `&query=${search}`);
 };
@@ -24,6 +28,7 @@ const itemService = {
 	getTrending,
 	getItem,
 	getSearch,
+	getCredits,
 };
 
 export default itemService;

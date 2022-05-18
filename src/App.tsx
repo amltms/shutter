@@ -1,13 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Nav } from './components/utilities/Nav';
-import { ItemContext } from './ItemContext';
+import { ItemContext } from './components/context/ItemContext';
 import { Overview } from './pages/Overview';
 import { Trending } from './pages/Trending';
 import { ItemAttributes } from './types';
+import { useLocation } from 'react-router';
+import { SearchResults } from './pages/SearchResults';
+import { SavedItems } from './pages/SavedItems';
 
 function App() {
 	const [saved, setSaved] = useState<ItemAttributes[]>([]);
+	const location = useLocation();
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [location]);
+
 	return (
 		<ItemContext.Provider value={{ saved, setSaved }}>
 			<div className="App">
@@ -16,7 +25,9 @@ function App() {
 					<Route path="/" element={<Trending />}>
 						<Route path=":type" element={<Trending />} />
 					</Route>
+					<Route path="/saved" element={<SavedItems />} />
 					<Route path="/overview/:type/:id" element={<Overview />} />
+					<Route path="/search/:search" element={<SearchResults />} />
 				</Routes>
 			</div>
 		</ItemContext.Provider>

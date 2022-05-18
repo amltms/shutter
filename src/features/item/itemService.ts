@@ -16,9 +16,14 @@ const getItem = async (type: String, id: String) => {
 	return getData(`${type}/${id}`);
 };
 
+const getSearch = async (search: String) => {
+	return getData(`search/multi`, `&query=${search}`);
+};
+
 const itemService = {
 	getTrending,
 	getItem,
+	getSearch,
 };
 
 export default itemService;

@@ -28,12 +28,18 @@ const Info = styled.div`
 		align-items: center;
 	}
 `;
+const Synopsis = styled.p`
+	width: 80%;
+	@media screen and (max-width: 900px) {
+		width: 100%;
+	}
+`;
 
 const Genres = styled.div`
 	margin: 1rem 0;
 	font-size: 1.25rem;
 	div {
-		border: 1px solid #da5d5d;
+		border: 2px solid rgba(255, 165, 20, 0.6);
 		padding: 0.7rem;
 		margin: 0.5rem 1rem 0.5rem 0rem;
 		border-radius: 0.5rem;
@@ -86,7 +92,7 @@ export const OverviewDetails: FC<Props> = ({ item }) => {
 							<Attribute>{g.name}</Attribute>
 						))}
 					</Genres>
-					<p>{item.overview}</p>
+					<Synopsis>{item.overview}</Synopsis>
 				</Info>
 			</DetailsContainer>
 		</>

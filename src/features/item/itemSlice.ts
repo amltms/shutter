@@ -27,11 +27,16 @@ export const getItem = createAsyncThunk('item/getItem', async (itemData: { type:
 	return response;
 });
 
+export const getSearch = createAsyncThunk('item/getSearch', async (search: string) => {
+	const response = await itemService.getSearch(search);
+	return response.results;
+});
+
 export const itemSlice = createSlice({
 	name: 'item',
 	initialState,
 	reducers: {
-		reset: (state) => initialState,
+		reset: (state: any) => initialState,
 	},
 	extraReducers: (builder) => {
 		builder
@@ -48,6 +53,13 @@ export const itemSlice = createSlice({
 			.addCase(getItem.fulfilled, (state, action) => {
 				state.status = 'idle';
 				state.selectedItem = action.payload;
+			})
+			.addCase(getSearch.pending, (state) => {
+				state.status = 'loading';
+			})
+			.addCase(getSearch.fulfilled, (state, action) => {
+				state.status = 'idle';
+				state.items = action.payload;
 			});
 	},
 });

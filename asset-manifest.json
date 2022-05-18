@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/shutter/static/css/main.21dcf219.css",
-    "main.js": "/shutter/static/js/main.723715b3.js",
+    "main.js": "/shutter/static/js/main.bdc653c9.js",
     "static/media/HelveticaWorld-Regular.ttf": "/shutter/static/media/HelveticaWorld-Regular.afea414c8e60504175fa.ttf",
     "static/media/HelveticaWorld-Bold.ttf": "/shutter/static/media/HelveticaWorld-Bold.41820a53eb351d9f5ff6.ttf",
     "index.html": "/shutter/index.html",
     "main.21dcf219.css.map": "/shutter/static/css/main.21dcf219.css.map",
-    "main.723715b3.js.map": "/shutter/static/js/main.723715b3.js.map"
+    "main.bdc653c9.js.map": "/shutter/static/js/main.bdc653c9.js.map"
   },
   "entrypoints": [
     "static/css/main.21dcf219.css",
-    "static/js/main.723715b3.js"
+    "static/js/main.bdc653c9.js"
   ]
 }

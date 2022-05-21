@@ -5,7 +5,7 @@ import { ItemCredits } from '../components/itemOverview/credits/ItemCredits';
 import { OverviewDetails } from '../components/itemOverview/OverviewDetails';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
-import { getItem, getCredits } from '../features/item/itemSlice';
+import { getItem, getCredits, reset } from '../features/item/itemSlice';
 
 const ItemDetails = styled.div`
 	padding: 20% 10vw 0 10vw;
@@ -35,6 +35,10 @@ export const Overview: FC = () => {
 	useEffect(() => {
 		type && id && dispatch(getItem({ type: type, id: id }));
 		type && id && dispatch(getCredits({ type: type, id: id }));
+
+		return () => {
+			dispatch(reset());
+		};
 	}, [id, type, dispatch]);
 
 	return (

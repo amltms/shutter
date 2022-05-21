@@ -1,11 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
-import { ItemAttributes } from '../types';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
 import { ItemList } from '../components/items/ItemList';
-import { getSearch } from '../features/item/itemSlice';
+import { getSearch, reset } from '../features/item/itemSlice';
 
 const SearchContainer = styled.div`
 	padding: 12vw 7vw;
@@ -27,6 +26,9 @@ export const SearchResults: FC = () => {
 
 	useEffect(() => {
 		search && dispatch(getSearch(search));
+		return () => {
+			dispatch(reset());
+		};
 	}, [search, dispatch]);
 
 	return (

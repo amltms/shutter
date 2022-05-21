@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
 import { ItemList } from '../components/items/ItemList';
 import { SlideShow } from '../components/slideshow/SlideShow';
-import { getTrending } from '../features/item/itemSlice';
+import { getTrending, reset } from '../features/item/itemSlice';
 
 export function Trending() {
 	const { items } = useAppSelector((state: RootState) => state.item);
@@ -13,6 +13,10 @@ export function Trending() {
 
 	useEffect(() => {
 		dispatch(getTrending(type || 'all'));
+
+		return () => {
+			dispatch(reset());
+		};
 	}, [dispatch, type]);
 
 	return (

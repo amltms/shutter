@@ -27,7 +27,7 @@ const Backdrop = styled.img`
 `;
 
 export const Overview: FC = () => {
-	const { selectedItem, credits } = useAppSelector((state: RootState) => state.item);
+	const { selectedItem, credits, status } = useAppSelector((state: RootState) => state.item);
 	const dispatch = useAppDispatch();
 
 	let { type, id } = useParams();

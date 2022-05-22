@@ -1,10 +1,10 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
 import { ItemList } from '../components/items/ItemList';
-import { getSearch, reset } from '../features/item/itemSlice';
+import { getSearch } from '../features/item/itemSlice';
 
 const SearchContainer = styled.div`
 	padding: 12vw 7vw;
@@ -20,20 +20,22 @@ const Text = styled.div`
 `;
 
 export const SearchResults: FC = () => {
-	let { search } = useParams();
-	const { items } = useAppSelector((state: RootState) => state.item);
+	const { search } = useParams();
+	let filterTimeout: { current: NodeJS.Timeout | null } = useRef(null);
+	const { items, status } = useAppSelector((state: RootState) => state.item);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		search && dispatch(getSearch(search));
-		return () => {
-			dispatch(reset());
-		};
+		/*debounce */
+		clearInterval(filterTimeout.current as NodeJS.Timeout);
+		filterTimeout.current = setTimeout(() => {
+			search && dispatch(getSearch(search));
+		}, 400);
 	}, [search, dispatch]);
 
 	return (
 		<>
-			{items.length === 0 ? (
+			{items.length === 0 && status !== 'idle' ? (
 				<Text>
 					<h2>No Results</h2>
 				</Text>

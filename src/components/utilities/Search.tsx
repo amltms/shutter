@@ -41,6 +41,10 @@ const SearchBox = styled.div<searchProps>`
 export const Search: FC = () => {
 	const [searchActive, setSearchActive] = useState(false);
 	const [searchValue, setSearchValue] = useState('');
+	const [focused, setFocused] = useState(false);
+	const onFocus = () => setFocused(true);
+	const onBlur = () => setFocused(false);
+
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
 
@@ -65,11 +69,18 @@ export const Search: FC = () => {
 		searchActive && searchInput.current && searchInput.current.focus();
 	}, [searchActive]);
 
+	useEffect(() => {
+		if (!pathname.startsWith('/search') && !focused) {
+			setSearchActive(false);
+			setSearchValue('');
+		}
+	}, [focused, pathname]);
+
 	return (
 		<>
 			<SearchBox active={searchActive}>
 				<MdSearch size={30} onClick={() => setSearchActive(!searchActive)} />
-				<SearchInput onChange={(e) => setSearchValue(e.target.value)} ref={searchInput} placeholder="Search" active={searchActive} />
+				<SearchInput onChange={(e) => setSearchValue(e.target.value)} ref={searchInput} value={searchValue} onFocus={onFocus} onBlur={onBlur} placeholder="Search" active={searchActive} />
 			</SearchBox>
 		</>
 	);

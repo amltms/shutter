@@ -1,5 +1,16 @@
-export const baseColor = '#f39c12';
-export const darkerBaseColor = '#f39c12';
-export const lighterBaseColor = '#ee8d8d';
-export const primaryTextColor = 'white';
-export const secondaryTextColor = '#bdbcbc';
+export const palette = {
+	primary: '#f39c12',
+	secondary: '#e74c3c',
+	success: '#2ecc71',
+	info: '#3498db',
+	warning: '#f1c40f',
+	danger: '#e74c3c',
+	light: '#ecf0f1',
+	dark: '#95a5a6',
+	white: '#ffffff',
+	black: '#000000',
+	darkerBaseColor: '#f39c12',
+	lighterBaseColor: '#ee8d8d',
+	primaryTextColor: 'white',
+	secondaryTextColor: '#bdbcbc',
+};

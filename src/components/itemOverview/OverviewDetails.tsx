@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { GoStar } from 'react-icons/go';
 import styled from 'styled-components';
+import { palette } from '../../styles/palette';
 import { Details } from '../../types';
 interface Props {
 	item: Details;
@@ -17,6 +18,7 @@ const DetailsContainer = styled.div`
 
 const Info = styled.div`
 	flex: 4;
+
 	p:first-child {
 		div:last-child {
 			margin-right: 0;
@@ -39,6 +41,8 @@ const Genres = styled.div`
 	margin: 1rem 0;
 	font-size: 1.25rem;
 	div {
+		margin-right: 2rem;
+		display: inline-block;
 		border: 2px solid rgba(255, 165, 20, 0.6);
 		padding: 0.7rem;
 		margin: 0.5rem 1rem 0.5rem 0rem;
@@ -69,6 +73,12 @@ const ItemImg = styled.img`
 const Attribute = styled.div`
 	margin-right: 2rem;
 	display: inline-block;
+	color: ${palette.secondaryTextColor};
+`;
+
+const Star = styled(GoStar)`
+	fill: ${palette.secondaryTextColor};
+	margin-bottom: 0.15rem;
 `;
 
 export const OverviewDetails: FC<Props> = ({ item }) => {
@@ -83,13 +93,13 @@ export const OverviewDetails: FC<Props> = ({ item }) => {
 						<Attribute>{(item.release_date || item.first_air_date || '----').substring(0, 4)}</Attribute>
 						{item.runtime && <Attribute>{item.runtime} mins</Attribute>}
 						<Attribute>
-							{item.vote_average} <GoStar style={{ marginBottom: 2 }} />
+							{item.vote_average} <Star />
 						</Attribute>
 					</p>
 
 					<Genres>
 						{item?.genres.map((g) => (
-							<Attribute>{g.name}</Attribute>
+							<div>{g.name}</div>
 						))}
 					</Genres>
 					<Synopsis>{item.overview}</Synopsis>

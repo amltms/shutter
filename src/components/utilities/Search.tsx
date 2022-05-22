@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FC, useEffect, useRef, useState } from 'react';
-import * as palette from '../../styles/palette';
+import { palette } from '../../styles/palette';
 import { MdSearch } from 'react-icons/md';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -31,7 +31,11 @@ const SearchBox = styled.div<searchProps>`
 	border-radius: 1.5rem;
 	display: flex;
 	svg {
+		transition: 0.5s;
 		fill: ${({ active }) => (active ? 'white' : palette.secondaryTextColor)};
+	}
+	svg:hover {
+		fill: white;
 	}
 	@media screen and (max-width: 900px) {
 		padding: 1rem;

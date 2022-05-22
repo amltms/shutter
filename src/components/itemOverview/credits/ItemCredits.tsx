@@ -6,7 +6,11 @@ import { CreditsProfile } from './CreditsProfile';
 interface Props {
 	credits: Credits;
 }
+
+const CastContainer = styled.div``;
+
 const CastList = styled.div`
+	margin-top: 1.5rem;
 	display: flex;
 	flex-wrap: wrap;
 `;
@@ -20,15 +24,15 @@ export const ItemCredits: FC<Props> = ({ credits }) => {
 	const [director, setDirector] = useState(filterByJob(credits, 'Director')[0]);
 
 	useEffect(() => {
-		if (writers.some((e) => e.id === director.id)) {
+		if (director && writers.some((e) => e.id === director.id)) {
 			setDirector({ ...director, job: 'Director / Writer' });
 			setWriters(writers.filter((writer) => writer.id !== director.id));
 		}
 	}, [director, writers]);
 
 	return (
-		<>
-			<h2>Cast</h2>
+		<CastContainer>
+			<p>Cast</p>
 			<CastList>
 				{credits.cast.slice(0, 3).map((person) => (
 					<CreditsProfile person={person} />
@@ -36,7 +40,7 @@ export const ItemCredits: FC<Props> = ({ credits }) => {
 			</CastList>
 			{director && (
 				<>
-					<h2>Crew</h2>
+					<p>Crew</p>
 					<CastList>
 						{director && <CreditsProfile person={director} />}
 
@@ -46,6 +50,6 @@ export const ItemCredits: FC<Props> = ({ credits }) => {
 					</CastList>
 				</>
 			)}
-		</>
+		</CastContainer>
 	);
 };

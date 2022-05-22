@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import styled from 'styled-components';
-import * as palette from '../../styles/palette';
+import { palette } from '../../styles/palette';
 
 interface Props {
 	setCurrentSlide: any;
@@ -42,7 +42,7 @@ const DotContainer = styled.div`
 const Indicator = styled.div<IndicatorProps>`
 	height: 3px;
 	width: 3rem;
-	background-color: ${({ currentIndicator, currentSlide }) => (currentIndicator === currentSlide ? palette.baseColor : 'rgba(122, 122, 122, 0.2)')};
+	background-color: ${({ currentIndicator, currentSlide }) => (currentIndicator === currentSlide ? palette.primary : 'rgba(122, 122, 122, 0.2)')};
 	display: inline-block;
 `;
 

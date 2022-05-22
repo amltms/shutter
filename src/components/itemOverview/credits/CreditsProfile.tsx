@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { Cast } from '../../../types';
+import { palette } from '../../../styles/palette';
 interface Props {
 	person: Cast;
 }
@@ -20,7 +21,8 @@ const Info = styled.div`
 `;
 
 const Role = styled.p`
-	color: #ccc;
+	font-size: 20px;
+	color: ${palette.secondaryTextColor};
 `;
 
 const PersonImg = styled.div<ImgProps>`

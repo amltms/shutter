@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { FC, useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import * as palette from '../../styles/palette';
+import { palette } from '../../styles/palette';
 import { Search } from './Search';
 
 interface Scroll {
@@ -19,7 +19,7 @@ const NavBar = styled.div<Scroll>`
 	padding: 3rem 8vw;
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: baseline;
 	:after {
 		content: '';
 		position: absolute;
@@ -56,7 +56,7 @@ const MenuLinks = styled.div<NavProps>`
 			height: 2px;
 			bottom: -8px;
 			left: 0;
-			background-color: ${palette.baseColor};
+			background-color: ${palette.primary};
 			transition: transform 0.3s ease-out;
 		}
 		:hover:after {
@@ -96,8 +96,8 @@ const Logo = styled(Link)`
 	margin-right: 1.5rem;
 	transition: 0.3s;
 	letter-spacing: 0.1rem;
-	color: ${palette.baseColor};
-	-webkit-text-stroke: 1px ${palette.baseColor};
+	color: ${palette.primary};
+	-webkit-text-stroke: 1px ${palette.primary};
 	:hover {
 		color: rgba(0, 0, 0, 0);
 	}

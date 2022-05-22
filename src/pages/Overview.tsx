@@ -6,9 +6,10 @@ import { OverviewDetails } from '../components/itemOverview/OverviewDetails';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
 import { getItem, getCredits, reset } from '../features/item/itemSlice';
+import Spinner from '../components/utilities/Spinner';
 
 const ItemDetails = styled.div`
-	padding: 20% 10vw 0 10vw;
+	padding: 20% 8vw;
 `;
 
 const Backdrop = styled.img`
@@ -40,6 +41,10 @@ export const Overview: FC = () => {
 			dispatch(reset());
 		};
 	}, [id, type, dispatch]);
+
+	if (status === 'loading') {
+		return <Spinner />;
+	}
 
 	return (
 		<>

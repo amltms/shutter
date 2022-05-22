@@ -2,7 +2,7 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { ItemAttributes } from '../../types';
-import * as palette from '../../styles/palette';
+import { palette } from '../../styles/palette';
 
 interface Props {
 	slideContent: ItemAttributes;
@@ -47,7 +47,7 @@ const DetailsBtn = styled.button`
 		height: 1px;
 		bottom: -8px;
 		left: 0;
-		background-color: ${palette.baseColor};
+		background-color: ${palette.primary};
 		transform-origin: bottom left;
 		transition: transform 0.3s ease-out;
 	}
@@ -56,7 +56,7 @@ const DetailsBtn = styled.button`
 		transform: scaleX(0);
 	}
 	:hover {
-		color: ${palette.baseColor};
+		color: ${palette.primary};
 	}
 `;
 

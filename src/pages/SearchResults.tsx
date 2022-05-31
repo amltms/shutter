@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
@@ -21,21 +21,24 @@ const Text = styled.div`
 
 export const SearchResults: FC = () => {
 	const { search } = useParams();
+	const [typing, setTyping] = useState(false);
 	let filterTimeout: { current: NodeJS.Timeout | null } = useRef(null);
 	const { items, status } = useAppSelector((state: RootState) => state.item);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
+		setTyping(true);
 		/*debounce */
 		clearInterval(filterTimeout.current as NodeJS.Timeout);
 		filterTimeout.current = setTimeout(() => {
 			search && dispatch(getSearch(search));
+			setTyping(false);
 		}, 400);
 	}, [search, dispatch]);
 
 	return (
 		<>
-			{items.length === 0 && status !== 'idle' ? (
+			{items.length === 0 && status === 'idle' && typing === false ? (
 				<Text>
 					<h2>No Results</h2>
 				</Text>

@@ -20,6 +20,14 @@ const getCredits = async (type: String, id: String) => {
 	return getData(`${type}/${id}/credits`);
 };
 
+const getGenres = async (type: String) => {
+	return getData(`/genre/${type}/list`);
+};
+
+const getGenreItems = async (type: String, genre: number) => {
+	return getData(`discover/${type}`, `&with_genres=${genre}`);
+};
+
 const getSearch = async (search: String) => {
 	return getData(`search/multi`, `&query=${search}`);
 };
@@ -29,6 +37,8 @@ const itemService = {
 	getItem,
 	getSearch,
 	getCredits,
+	getGenres,
+	getGenreItems,
 };
 
 export default itemService;

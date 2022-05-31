@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import itemService from './itemService';
-import { Credits, Details } from '../../types';
+import { Credits, Details, Genre } from '../../types';
 
 export interface ItemState {
 	items: any;
 	selectedItem: Details | null;
 	status: 'idle' | 'loading' | 'failed';
 	credits: Credits | null;
+	genres: Genre[];
 }
 
 const initialState: ItemState = {
@@ -14,6 +15,7 @@ const initialState: ItemState = {
 	selectedItem: null,
 	status: 'idle',
 	credits: null,
+	genres: [],
 };
 
 export const getTrending = createAsyncThunk('item/getTrending', async (contentType: string) => {
@@ -31,8 +33,19 @@ export const getItem = createAsyncThunk('item/getItem', async (itemData: { type:
 export const getCredits = createAsyncThunk('item/getCredits', async (itemData: { type: string; id: string }) => {
 	const { type, id } = itemData;
 	const response = await itemService.getCredits(type, id);
-
 	return response;
+});
+
+export const getGenres = createAsyncThunk('item/getGenres', async (type: string) => {
+	const response = await itemService.getGenres(type);
+
+	return response.genres;
+});
+
+export const getGenreItems = createAsyncThunk('item/getGenreItems', async (genreData: { type: string; id: number }) => {
+	const response = await itemService.getGenreItems(genreData.type, genreData.id);
+
+	return response.results;
 });
 
 export const getSearch = createAsyncThunk('item/getSearch', async (search: string) => {
@@ -68,6 +81,20 @@ export const itemSlice = createSlice({
 			.addCase(getCredits.fulfilled, (state, action) => {
 				state.status = 'idle';
 				state.credits = action.payload;
+			})
+			.addCase(getGenres.pending, (state) => {
+				state.status = 'loading';
+			})
+			.addCase(getGenres.fulfilled, (state, action) => {
+				state.status = 'idle';
+				state.genres = action.payload;
+			})
+			.addCase(getGenreItems.pending, (state) => {
+				state.status = 'loading';
+			})
+			.addCase(getGenreItems.fulfilled, (state, action) => {
+				state.status = 'idle';
+				state.items = action.payload;
 			})
 			.addCase(getSearch.pending, (state) => {
 				state.status = 'loading';

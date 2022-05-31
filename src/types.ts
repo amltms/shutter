@@ -40,3 +40,10 @@ export interface Cast {
 	job?: string;
 	department?: string;
 }
+
+export interface Genre {
+	id: number;
+	name: string;
+	img?: string;
+	item?: ItemAttributes;
+}

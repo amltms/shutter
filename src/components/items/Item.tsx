@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { FC, useContext } from 'react';
 import styled from 'styled-components';
@@ -59,6 +59,7 @@ const PreviewContent = styled.div`
 export const Item: FC<ItemProps> = ({ item }) => {
 	const { saved, setSaved } = useContext(ItemContext);
 	let navigate = useNavigate();
+	let { type } = useParams();
 
 	const savedValidation = (item: ItemAttributes) => {
 		if (saved && saved.some((i: ItemAttributes) => i.id === item.id)) {
@@ -69,7 +70,7 @@ export const Item: FC<ItemProps> = ({ item }) => {
 	};
 
 	const overviewHandle = () => {
-		navigate(`/overview/${item.media_type}/${item.id}`);
+		navigate(`/overview/${item.media_type ? item.media_type : type}/${item.id}`);
 	};
 
 	return (

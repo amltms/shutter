@@ -58,7 +58,7 @@ export const SlideNavigation: FC<Props> = ({ setCurrentSlide, currentSlide, slid
 			</NavBtn>
 			<DotContainer>
 				{slideArr.map((i) => (
-					<div onClick={() => setCurrentSlide(i)}>
+					<div key={i} onClick={() => setCurrentSlide(i)}>
 						<Indicator key={i} currentIndicator={i} currentSlide={currentSlide} />
 					</div>
 				))}

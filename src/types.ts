@@ -4,6 +4,7 @@ export interface ItemAttributes {
 	poster_path: string;
 	backdrop_path: string;
 	media_type: string;
+	genre_ids: number[];
 	title?: string;
 	name?: string;
 	release_date?: string;

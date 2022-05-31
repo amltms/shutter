@@ -41,7 +41,7 @@ const GenreContainer = styled.div`
 		color: ${palette.primary};
 	}
 	&:hover ${GenreImg} {
-		filter: brightness(5%) blur(1px);
+		filter: brightness(15%) grayscale(1);
 		transform: scale(3);
 	}
 `;

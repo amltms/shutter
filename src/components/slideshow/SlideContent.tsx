@@ -87,8 +87,11 @@ export const SlideContent: FC<Props> = ({ slideContent }) => {
 	const { genres } = useAppSelector((state: RootState) => state.item);
 	const filteredGenres = slideContent?.genre_ids && genres.filter((genre) => slideContent.genre_ids.includes(genre.id));
 
-	const overviewHandle = () => {
+	const handleOverview = () => {
 		navigate(`/overview/${slideContent.media_type}/${slideContent.id}`);
+	};
+	const handleGenre = (genreId: number) => {
+		navigate(`/${slideContent.media_type}/genre/${genreId}`);
 	};
 
 	return (
@@ -100,12 +103,14 @@ export const SlideContent: FC<Props> = ({ slideContent }) => {
 							<h1>{slideContent.title || slideContent.name}</h1>
 							<p>
 								{filteredGenres.map((genre) => (
-									<GenreName key={genre.id}>{genre.name} </GenreName>
+									<GenreName key={genre.id} onClick={() => handleGenre(genre.id)}>
+										{genre.name}{' '}
+									</GenreName>
 								))}
 							</p>
 						</div>
 					</AnimateContainer>
-					<DetailsBtn onClick={() => overviewHandle()}>More Details</DetailsBtn>
+					<DetailsBtn onClick={() => handleOverview()}>More Details</DetailsBtn>
 				</Content>
 			)}
 		</>

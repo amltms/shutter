@@ -30,7 +30,7 @@ function App() {
 					<Route path="/saved" element={<SavedItems />} />
 					<Route path="/overview/:type/:id" element={<Overview />} />
 					<Route path="/search/:search" element={<SearchResults />} />
-					<Route path="/:type/genres/:id" element={<Genre />} />
+					<Route path="/:type/genre/:id" element={<Genre />} />
 				</Routes>
 			</div>
 		</ItemContext.Provider>

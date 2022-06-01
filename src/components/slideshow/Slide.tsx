@@ -15,10 +15,15 @@ const SlideContainer = styled.div`
 `;
 const Backdrop = styled.img`
 	filter: brightness(60%);
-	height: 100vh;
-	min-width: 100%;
+	min-height: 100vh;
+	width: 100%;
 	margin-left: 50%;
 	transform: translate(-50%, 0%);
+	@media screen and (max-width: 900px) {
+		height: 100vh;
+		min-width: 100%;
+		width: auto;
+	}
 `;
 
 export const Slide: FC<Props> = ({ item }) => {

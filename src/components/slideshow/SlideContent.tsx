@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { ItemAttributes } from '../../types';
 import { palette } from '../../styles/palette';
+import { useAppSelector } from '../../app/hooks';
+import { RootState } from '../../app/store';
 
 interface Props {
 	slideContent: ItemAttributes;
@@ -15,8 +17,10 @@ const Content = styled.div`
 	z-index: 2;
 	bottom: 0;
 	width: 100%;
-	padding: 8vw;
-	text-align: center;
+	padding: 5vw 8vw;
+	h1 {
+		font-size: 6vw;
+	}
 
 	@media screen and (max-width: 900px) {
 		h1 {
@@ -32,6 +36,7 @@ const DetailsBtn = styled.button`
 	transition: 0.3s;
 	font-size: 1.5rem;
 	margin-top: 1.5rem;
+	margin-left: 0.5rem;
 	padding: 1rem 0;
 	position: relative;
 	display: inline-block;
@@ -60,31 +65,28 @@ const DetailsBtn = styled.button`
 	}
 `;
 
-const OverviewText = styled.p`
-	overflow: hidden;
-	font-size: 1.5rem;
-	text-overflow: ellipsis;
-	color: ${palette.secondaryTextColor};
-	margin-top: 2vw;
-	margin: 0 auto;
-	display: -webkit-box;
-	-webkit-line-clamp: 3;
-	-webkit-box-orient: vertical;
-	@media (min-width: 1800px) {
-		-webkit-line-clamp: 5;
-		width: 50%;
-	}
-`;
-
 const AnimateContainer = styled.div`
 	overflow: hidden;
 	display: flex;
-	align-items: center;
-	justify-content: center;
+`;
+
+const GenreName = styled.span`
+	font-size: 1.6rem;
+	padding-right: 2rem;
+	color: ${palette.secondaryTextColor};
+	padding-left: 0.5rem;
+	transition: 0.4s;
+	:hover {
+		cursor: pointer;
+		color: ${palette.primary};
+	}
 `;
 
 export const SlideContent: FC<Props> = ({ slideContent }) => {
 	let navigate = useNavigate();
+	const { genres } = useAppSelector((state: RootState) => state.item);
+	const filteredGenres = slideContent?.genre_ids && genres.filter((genre) => slideContent.genre_ids.includes(genre.id));
+
 	const overviewHandle = () => {
 		navigate(`/overview/${slideContent.media_type}/${slideContent.id}`);
 	};
@@ -96,7 +98,11 @@ export const SlideContent: FC<Props> = ({ slideContent }) => {
 					<AnimateContainer>
 						<div key={slideContent.id} className="animate-text">
 							<h1>{slideContent.title || slideContent.name}</h1>
-							<OverviewText>{slideContent.overview}</OverviewText>
+							<p>
+								{filteredGenres.map((genre) => (
+									<GenreName key={genre.id}>{genre.name} </GenreName>
+								))}
+							</p>
 						</div>
 					</AnimateContainer>
 					<DetailsBtn onClick={() => overviewHandle()}>More Details</DetailsBtn>

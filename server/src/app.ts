@@ -1,14 +1,18 @@
-import express, { Application, Request, Response, NextFunction } from 'express';
+import express, { Application } from 'express';
+import 'dotenv/config';
+import { errorHandler } from './middleware/errorMiddleware';
+import userRoutes from './routes/userRoutes';
+import { connectDB } from './config/db';
 
+connectDB();
+const port = process.env.PORT || 5000;
 const app: Application = express();
 
-const port = 5000;
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.get('/test', (req: Request, res: Response, next: NextFunction) => {
-	res.send('Hello World!');
-	console.log('Hello Wfsdforld!');
-});
+app.use('/api/users', userRoutes);
 
-app.listen(port, () => {
-	return console.log(`Express is listening at http://localhost:${port}`);
-});
+app.use(errorHandler);
+
+app.listen(port, () => console.log(`Server listening on ${port}`));

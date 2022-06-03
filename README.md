@@ -6,9 +6,7 @@ A web application that allows you to search through a database of films and tv s
 
 To start the project:
 
-### `cd server`
-
-### `npm run dev`
+### `npm run start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

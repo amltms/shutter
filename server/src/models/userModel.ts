@@ -19,6 +19,11 @@ const UserSchema: Schema = new Schema(
 			type: String,
 			required: [true, 'Please add a password'],
 		},
+		saved: [
+			{
+				type: String,
+			},
+		],
 	},
 	{
 		timestamps: true,

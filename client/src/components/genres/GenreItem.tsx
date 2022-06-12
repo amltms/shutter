@@ -15,8 +15,8 @@ const GenreImg = styled.img`
 	position: absolute;
 	z-index: -1;
 	object-fit: cover;
-	filter: brightness(20%);
-	transition: 0.5s;
+	transition: 0.4s;
+	filter: brightness(40%) grayscale(0);
 `;
 
 const GenreContainer = styled.div`
@@ -42,7 +42,7 @@ const GenreContainer = styled.div`
 	}
 	&:hover ${GenreImg} {
 		filter: brightness(15%) grayscale(1);
-		transform: scale(3);
+		transform: scale(1.5);
 	}
 `;
 

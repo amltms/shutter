@@ -1,13 +1,23 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel';
 
+// @desc    save an iotem
+// @route   POST /api/users/save
+// @access  Private
+const save = asyncHandler(async (req: Request, res: Response) => {
+	const { id } = req.body;
+
+	// Check for user email
+	const user = await User.findOne({ id });
+});
+
 // @desc    Register new user
 // @route   POST /api/users
 // @access  Public
-const register = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+const register = asyncHandler(async (req: Request, res: Response) => {
 	const { firstName, lastName, email, password } = req.body;
 
 	if (!firstName || !lastName || !email || !password) {
@@ -52,7 +62,7 @@ const register = asyncHandler(async (req: Request, res: Response, next: NextFunc
 // @desc    Authenticate a user
 // @route   POST /api/users/login
 // @access  Public
-const login = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+const login = asyncHandler(async (req: Request, res: Response) => {
 	const { email, password } = req.body;
 
 	// Check for user email
@@ -87,4 +97,4 @@ const generateToken = (id: string) => {
 	});
 };
 
-export default { login, register, getMe };
+export default { login, register, getMe, save };

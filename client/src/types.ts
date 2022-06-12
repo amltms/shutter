@@ -48,3 +48,13 @@ export interface Genre {
 	img?: string;
 	item?: ItemAttributes;
 }
+
+export interface User {
+	id?: number;
+	firstName?: string;
+	lastName?: string;
+	email: string;
+	password: string;
+	saved?: string[];
+	token?: string;
+}

@@ -9,6 +9,8 @@ import { useLocation } from 'react-router';
 import { SearchResults } from './pages/SearchResults';
 import { SavedItems } from './pages/SavedItems';
 import { Genre } from './pages/Genre';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
 
 function App() {
 	const [saved, setSaved] = useState<ItemAttributes[]>([]);
@@ -28,6 +30,8 @@ function App() {
 						<Route path=":type" element={<Trending />} />
 					</Route>
 					<Route path="/saved" element={<SavedItems />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/register" element={<Register />} />
 					<Route path="/overview/:type/:id" element={<Overview />} />
 					<Route path="/search/:search" element={<SearchResults />} />
 					<Route path="/:type/genre/:id" element={<Genre />} />

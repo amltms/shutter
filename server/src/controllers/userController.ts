@@ -1,17 +1,37 @@
-import { Request, Response } from 'express';
+import e, { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel';
 
-// @desc    save an iotem
-// @route   POST /api/users/save
+// @desc    add saved
+// @route   POST /api/users/saved
 // @access  Private
-const save = asyncHandler(async (req: Request, res: Response) => {
-	const { id } = req.body;
+const postSaved = asyncHandler(async (req: Request, res: Response) => {
+	const { savedId } = req.body;
+	const user = await User.findById(req['user']._id);
 
-	// Check for user email
-	const user = await User.findOne({ id });
+	if (!user.saved.includes(savedId)) {
+		// add to saved
+		const updatedSaves = await User.findByIdAndUpdate(req['user']._id, { $push: { saved: savedId } });
+
+		res.status(200).json(updatedSaves);
+	} else if (user.saved.includes(savedId)) {
+		//remove saved
+		const updatedSaves = await User.findByIdAndUpdate(req['user']._id, { $pull: { saved: savedId } });
+
+		res.status(200).json(updatedSaves);
+	} else {
+		res.status(400);
+		throw new Error('Invalid user data');
+	}
+});
+
+// @desc    get saved
+// @route   GET /api/users/saved
+// @access  Private
+const getSaved = asyncHandler(async (req: Request, res: Response) => {
+	res.status(200).json(req['user'].saved);
 });
 
 // @desc    Register new user
@@ -74,7 +94,7 @@ const login = asyncHandler(async (req: Request, res: Response) => {
 			firstName: user.firstName,
 			lastName: user.lastName,
 			email: user.email,
-			role: user.role,
+			saved: user.saved,
 			token: generateToken(user._id),
 		});
 	} else {
@@ -97,4 +117,4 @@ const generateToken = (id: string) => {
 	});
 };
 
-export default { login, register, getMe, save };
+export default { login, register, getMe, getSaved, postSaved };

@@ -1,5 +1,6 @@
 import axios from 'axios';
 const apikey = '5042d9bd250e2fbd1f65fceff13e225d';
+const API_URL = '/api/users/';
 
 const getData = async (url: string, urlVars?: string) => {
 	return await axios
@@ -32,6 +33,18 @@ const getSearch = async (search: String) => {
 	return getData(`search/multi`, `&query=${search}`);
 };
 
+const getSaved = async (token: string) => {
+	const config = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	};
+
+	const { data } = await axios.get(API_URL + 'saved', config);
+
+	return data;
+};
+
 const itemService = {
 	getTrending,
 	getItem,
@@ -39,6 +52,7 @@ const itemService = {
 	getCredits,
 	getGenres,
 	getGenreItems,
+	getSaved,
 };
 
 export default itemService;

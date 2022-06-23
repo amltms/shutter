@@ -1,7 +1,10 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { ItemContext } from '../components/context/ItemContext';
 import { ItemList } from '../components/items/ItemList';
+import { useAppSelector, useAppDispatch } from '../app/hooks';
+import { RootState } from '../app/store';
+import { getSaved } from '../features/item/itemSlice';
 
 const SavedContainer = styled.div`
 	padding: 10vw 6vw;
@@ -15,9 +18,22 @@ const Text = styled.div`
 	h2 {
 		color: #333;
 	}
+	p {
+		position: absolute;
+		top: 0;
+	}
 `;
 export const SavedItems: FC = () => {
 	const { saved } = useContext(ItemContext);
+	const dispatch = useAppDispatch();
+
+	const { savedItems } = useAppSelector((state: RootState) => state.item);
+	console.log(savedItems);
+
+	useEffect(() => {
+		dispatch(getSaved());
+	}, [dispatch]);
+
 	return (
 		<>
 			{Object.keys(saved).length !== 0 ? (
@@ -26,7 +42,7 @@ export const SavedItems: FC = () => {
 				</SavedContainer>
 			) : (
 				<Text>
-					<h2>No Items Saved</h2>
+					<h2>No Items</h2>
 				</Text>
 			)}
 		</>

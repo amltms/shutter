@@ -18,7 +18,7 @@ const LoginInputs = styled.div`
 	width: 28%;
 	position: absolute;
 	backdrop-filter: blur(20px);
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(0, 0, 0, 0.6);
 	z-index: 100;
 	height: 100%;
 	display: flex;
@@ -55,20 +55,7 @@ const LoginBackground = styled.img`
 	object-fit: cover;
 	width: 100%;
 	overflow: hidden;
-	filter: brightness(30%);
-`;
-
-const InputContainer = styled.div`
-	width: 25rem;
-	display: flex;
-	align-items: center;
-	padding: 1.2rem 0;
-	border-bottom: 1px solid #4c4c4c;
-	margin-bottom: 1rem;
-	svg {
-		fill: #4c4c4c;
-		font-size: 1.6rem;
-	}
+	filter: brightness(80%);
 `;
 
 const LoginForm = styled.form`
@@ -112,6 +99,19 @@ const LoginForm = styled.form`
 			}
 			border-color: ${palette.primary};
 		}
+	}
+`;
+
+const InputContainer = styled.div`
+	width: 25rem;
+	display: flex;
+	align-items: center;
+	padding: 1.2rem 0;
+	border-bottom: 1px solid #4c4c4c;
+	margin-bottom: 1rem;
+	svg {
+		fill: #4c4c4c;
+		font-size: 1.6rem;
 	}
 `;
 
@@ -178,7 +178,7 @@ export const Login: FC = () => {
 					</button>
 				</LoginForm>
 			</LoginInputs>
-			<LoginBackground src={`${process.env.PUBLIC_URL}/login-bg.jpg`} />
+			<LoginBackground src={`${process.env.PUBLIC_URL}/bg.jpg`} />
 		</LoginContainer>
 	);
 };

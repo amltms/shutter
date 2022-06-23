@@ -8,14 +8,12 @@ const userJson = localStorage.getItem('user');
 export interface AuthState {
 	user: User | null;
 	status: 'idle' | 'loading' | 'failed';
-	saved: string[];
 	message: any;
 }
 
 const initialState: AuthState = {
 	user: userJson !== null ? JSON.parse(userJson) : null,
 	status: 'idle',
-	saved: [],
 	message: '',
 };
 
@@ -28,10 +26,13 @@ export const login = createAsyncThunk('auth/login', async (user: User, thunkAPI)
 	}
 });
 
-export const register = createAsyncThunk('auth/register', async (user: User) => {
-	const response = await authService.register(user);
-
-	return response.results;
+export const register = createAsyncThunk('auth/register', async (user: User, thunkAPI) => {
+	try {
+		return await authService.register(user);
+	} catch (error: any) {
+		const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+		return thunkAPI.rejectWithValue(message);
+	}
 });
 
 export const logout = createAsyncThunk('auth/logout', async () => {
@@ -67,6 +68,11 @@ export const authSlice = createSlice({
 			.addCase(register.fulfilled, (state, action) => {
 				state.status = 'idle';
 				state.user = action.payload;
+			})
+			.addCase(register.rejected, (state, action) => {
+				state.status = 'failed';
+				state.message = action.payload;
+				state.user = null;
 			})
 			.addCase(logout.fulfilled, (state) => {
 				state.user = null;

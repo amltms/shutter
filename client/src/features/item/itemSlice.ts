@@ -1,21 +1,26 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import itemService from './itemService';
 import { Credits, Details, Genre } from '../../types';
+import { RootState } from '../../app/store';
 
 export interface ItemState {
 	items: any;
 	selectedItem: Details | null;
+	savedItems: string[];
 	status: 'idle' | 'loading' | 'failed';
 	credits: Credits | null;
 	genres: Genre[];
+	message: any;
 }
 
 const initialState: ItemState = {
 	items: [],
 	selectedItem: null,
+	savedItems: [],
 	status: 'idle',
 	credits: null,
 	genres: [],
+	message: '',
 };
 
 export const getTrending = createAsyncThunk('item/getTrending', async (contentType: string) => {
@@ -51,6 +56,21 @@ export const getGenreItems = createAsyncThunk('item/getGenreItems', async (genre
 export const getSearch = createAsyncThunk('item/getSearch', async (search: string) => {
 	const response = await itemService.getSearch(search);
 	return response.results;
+});
+
+export const getSaved = createAsyncThunk('auth/unsubscribe', async (_, thunkAPI) => {
+	try {
+		const state = thunkAPI.getState() as RootState;
+		const token = state.auth.user?.token;
+		if (!token) {
+			return thunkAPI.rejectWithValue('No token');
+		} else {
+			return await itemService.getSaved(token);
+		}
+	} catch (error: any) {
+		const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+		return thunkAPI.rejectWithValue(message);
+	}
 });
 
 export const itemSlice = createSlice({
@@ -102,6 +122,17 @@ export const itemSlice = createSlice({
 			.addCase(getSearch.fulfilled, (state, action) => {
 				state.status = 'idle';
 				state.items = action.payload;
+			})
+			.addCase(getSaved.pending, (state) => {
+				state.status = 'loading';
+			})
+			.addCase(getSaved.fulfilled, (state, action) => {
+				state.status = 'idle';
+				state.savedItems = action.payload;
+			})
+			.addCase(getSaved.rejected, (state, action) => {
+				state.status = 'failed';
+				state.message = action.payload;
 			});
 	},
 });

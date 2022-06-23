@@ -126,6 +126,9 @@ const Login = styled(Link)`
 	font-size: 1.3rem;
 	margin-left: 0.5rem;
 	display: inline-block;
+	border: 1px solid rgba(215, 215, 215, 0.3);
+	padding: 0.6rem;
+	border-radius: 10px;
 `;
 
 const DropDownMenu = styled.div`

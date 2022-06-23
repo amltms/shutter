@@ -19,11 +19,7 @@ const UserSchema: Schema = new Schema(
 			type: String,
 			required: [true, 'Please add a password'],
 		},
-		saved: [
-			{
-				type: String,
-			},
-		],
+		saved: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
 	},
 	{
 		timestamps: true,

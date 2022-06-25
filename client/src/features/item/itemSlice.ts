@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import itemService from './itemService';
-import { Credits, Details, Genre } from '../../types';
+import { Credits, Details, Genre, ItemAttributes } from '../../types';
 import { RootState } from '../../app/store';
 
 export interface ItemState {
 	items: any;
 	selectedItem: Details | null;
-	savedItems: string[];
+	savedItems: ItemAttributes[];
 	status: 'idle' | 'loading' | 'failed';
 	credits: Credits | null;
 	genres: Genre[];
@@ -29,7 +29,7 @@ export const getTrending = createAsyncThunk('item/getTrending', async (contentTy
 	return response.results;
 });
 
-export const getItem = createAsyncThunk('item/getItem', async (itemData: { type: string; id: string }) => {
+export const getItem = createAsyncThunk('item/getItem', async (itemData: { type: string; id: number }) => {
 	const { type, id } = itemData;
 	const response = await itemService.getItem(type, id);
 
@@ -58,7 +58,22 @@ export const getSearch = createAsyncThunk('item/getSearch', async (search: strin
 	return response.results;
 });
 
-export const getSaved = createAsyncThunk('auth/unsubscribe', async (_, thunkAPI) => {
+export const getSaved = createAsyncThunk('item/getSaved', async (_, thunkAPI) => {
+	try {
+		const state = thunkAPI.getState() as RootState;
+		const token = state.auth.user?.token;
+		if (!token) {
+			return thunkAPI.rejectWithValue('No token');
+		} else {
+			return await itemService.getSaved(token);
+		}
+	} catch (error: any) {
+		const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+		return thunkAPI.rejectWithValue(message);
+	}
+});
+
+export const configureSaved = createAsyncThunk('item/configureSaved', async (_, thunkAPI) => {
 	try {
 		const state = thunkAPI.getState() as RootState;
 		const token = state.auth.user?.token;

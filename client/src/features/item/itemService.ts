@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { ItemAttributes, ItemDB } from '../../types';
 const apikey = '5042d9bd250e2fbd1f65fceff13e225d';
-const API_URL = '/api/users/';
+const API_URL = '/api/items/';
 
 const getData = async (url: string, urlVars?: string) => {
 	return await axios
@@ -13,8 +14,10 @@ const getTrending = async (contentType: String) => {
 	return getData(`trending/${contentType}/week`);
 };
 
-const getItem = async (type: String, id: String) => {
-	return getData(`${type}/${id}`);
+const getItem = async (type: String, id: Number) => {
+	const data = await getData(`${type}/${id}`);
+	data.media_type = type;
+	return data;
 };
 
 const getCredits = async (type: String, id: String) => {
@@ -33,16 +36,24 @@ const getSearch = async (search: String) => {
 	return getData(`search/multi`, `&query=${search}`);
 };
 
-const getSaved = async (token: string) => {
+const getSaved = async (token: string): Promise<ItemAttributes[]> => {
 	const config = {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
 	};
+	const { data } = await axios.get(API_URL, config);
+	return await Promise.all(data.map((item: ItemDB) => getItem(item.mediaType, item.id)));
+};
 
-	const { data } = await axios.get(API_URL + 'saved', config);
-
-	return data;
+const configureSaved = async (type: string, id: number, token: string): Promise<ItemAttributes[]> => {
+	const config = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	};
+	const { data } = await axios.put(API_URL, config);
+	return await Promise.all(data.map((item: ItemDB) => getItem(item.mediaType, item.id)));
 };
 
 const itemService = {
@@ -53,6 +64,7 @@ const itemService = {
 	getGenres,
 	getGenreItems,
 	getSaved,
+	configureSaved,
 };
 
 export default itemService;

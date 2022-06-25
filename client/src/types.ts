@@ -11,6 +11,11 @@ export interface ItemAttributes {
 	first_air_date?: string;
 }
 
+export interface ItemDB {
+	id: number;
+	mediaType: string;
+}
+
 export interface Details {
 	id: number;
 	backdrop_path: string;

@@ -27,8 +27,7 @@ export const SavedItems: FC = () => {
 	const { saved } = useContext(ItemContext);
 	const dispatch = useAppDispatch();
 
-	const { savedItems } = useAppSelector((state: RootState) => state.item);
-	console.log(savedItems);
+	const { savedItems, status } = useAppSelector((state: RootState) => state.item);
 
 	useEffect(() => {
 		dispatch(getSaved());
@@ -36,9 +35,9 @@ export const SavedItems: FC = () => {
 
 	return (
 		<>
-			{Object.keys(saved).length !== 0 ? (
+			{Object.keys(saved).length !== 0 || (Object.keys(savedItems).length !== 0 && status !== 'loading') ? (
 				<SavedContainer>
-					<ItemList items={saved} />
+					<ItemList items={savedItems.length !== 0 ? savedItems : saved} />
 				</SavedContainer>
 			) : (
 				<Text>

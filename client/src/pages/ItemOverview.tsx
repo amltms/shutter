@@ -34,8 +34,8 @@ export const Overview: FC = () => {
 	let { type, id } = useParams();
 
 	useEffect(() => {
-		type && id && dispatch(getItem({ type: type, id: id }));
-		type && id && dispatch(getCredits({ type: type, id: id }));
+		type && id && dispatch(getItem({ type, id: +id }));
+		type && id && dispatch(getCredits({ type, id }));
 
 		return () => {
 			dispatch(reset());

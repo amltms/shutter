@@ -57,6 +57,8 @@ const PreviewContent = styled.div`
 	width: 100%;
 `;
 export const Item: FC<ItemProps> = ({ item }) => {
+	console.log(item);
+
 	const { saved, setSaved } = useContext(ItemContext);
 	let navigate = useNavigate();
 	let { type } = useParams();

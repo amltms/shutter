@@ -3,10 +3,11 @@ import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { FC, useContext } from 'react';
 import styled from 'styled-components';
 import { ItemContext } from '../context/ItemContext';
-import { ItemAttributes } from '../../types';
+import { ItemAttributes, ItemDB, User } from '../../types';
 
 export type ItemProps = {
 	item: ItemAttributes;
+	user: User | null;
 };
 
 const ItemContainer = styled.div`
@@ -56,7 +57,7 @@ const PreviewContent = styled.div`
 	cursor: pointer;
 	width: 100%;
 `;
-export const Item: FC<ItemProps> = ({ item }) => {
+export const Item: FC<ItemProps> = ({ item, user }) => {
 	console.log(item);
 
 	const { saved, setSaved } = useContext(ItemContext);
@@ -74,11 +75,12 @@ export const Item: FC<ItemProps> = ({ item }) => {
 	const overviewHandle = () => {
 		navigate(`/overview/${item.media_type ? item.media_type : type}/${item.id}`);
 	};
+	console.log(user);
 
 	return (
 		<ItemContainer>
 			<ItemPreview>
-				<SaveIcon onClick={() => savedValidation(item)}>{saved && saved.some((i: ItemAttributes) => i.id === item.id) ? <BsBookmarkFill /> : <BsBookmark />}</SaveIcon>
+				<SaveIcon onClick={() => savedValidation(item)}>{user?.saved?.some((i: ItemDB) => i.id === item.id) || saved.some((i: ItemAttributes) => i.id === item.id) ? <BsBookmarkFill /> : <BsBookmark />}</SaveIcon>
 				<PreviewContent onClick={() => overviewHandle()}></PreviewContent>
 			</ItemPreview>
 			<ItemImg src={`https://image.tmdb.org/t/p/w300/${item.poster_path}`} alt="poster" />

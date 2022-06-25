@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { FaUserCircle } from 'react-icons/fa';
 import { AiOutlineUser } from 'react-icons/ai';
 import { MdLogout } from 'react-icons/md';
 import { FC, useEffect, useState } from 'react';

@@ -60,6 +60,6 @@ export interface User {
 	lastName?: string;
 	email: string;
 	password: string;
-	saved?: string[];
+	saved?: ItemDB[];
 	token?: string;
 }

@@ -46,7 +46,7 @@ const register = asyncHandler(async (req: Request, res: Response) => {
 	}
 
 	// Check if user exists
-	const userExists = await User.findOne({ email });
+	const userExists = await User.findOne({ email }).populate('saved');
 
 	if (userExists) {
 		res.status(400);
@@ -86,7 +86,7 @@ const login = asyncHandler(async (req: Request, res: Response) => {
 	const { email, password } = req.body;
 
 	// Check for user email
-	const user = await User.findOne({ email });
+	const user = await User.findOne({ email }).populate('saved');
 
 	if (user && (await bcrypt.compare(password, user.password))) {
 		res.json({

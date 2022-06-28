@@ -1,6 +1,5 @@
-import { FC, useContext, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import styled from 'styled-components';
-import { ItemContext } from '../components/context/ItemContext';
 import { ItemList } from '../components/items/ItemList';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
@@ -24,20 +23,18 @@ const Text = styled.div`
 	}
 `;
 export const SavedItems: FC = () => {
-	const { saved } = useContext(ItemContext);
 	const dispatch = useAppDispatch();
-
-	const { savedItems, status } = useAppSelector((state: RootState) => state.item);
+	const { savedItems, savedItemsDB } = useAppSelector((state: RootState) => state.item);
 
 	useEffect(() => {
 		dispatch(getSaved());
-	}, [dispatch]);
+	}, [dispatch, savedItemsDB]);
 
 	return (
 		<>
-			{Object.keys(saved).length !== 0 || (Object.keys(savedItems).length !== 0 && status !== 'loading') ? (
+			{Object.keys(savedItems).length !== 0 ? (
 				<SavedContainer>
-					<ItemList items={savedItems.length !== 0 ? savedItems : saved} />
+					<ItemList items={savedItems} />
 				</SavedContainer>
 			) : (
 				<Text>

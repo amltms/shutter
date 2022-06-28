@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 
 const ItemSchema: Schema = new Schema(
 	{
-		mediaType: {
+		media_type: {
 			type: String,
 			required: [true, 'Please add media type'],
 		},

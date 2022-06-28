@@ -13,7 +13,7 @@ export interface ItemAttributes {
 
 export interface ItemDB {
 	id: number;
-	mediaType: string;
+	media_type: string;
 }
 
 export interface Details {

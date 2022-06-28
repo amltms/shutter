@@ -1,13 +1,14 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-import { ItemContext } from '../context/ItemContext';
-import { ItemAttributes, ItemDB, User } from '../../types';
+import { ItemAttributes, ItemDB } from '../../types';
+import { useAppDispatch } from '../../app/hooks';
+import { configureSaved } from '../../features/item/itemSlice';
 
 export type ItemProps = {
 	item: ItemAttributes;
-	user: User | null;
+	saved: ItemDB[];
 };
 
 const ItemContainer = styled.div`
@@ -57,31 +58,19 @@ const PreviewContent = styled.div`
 	cursor: pointer;
 	width: 100%;
 `;
-export const Item: FC<ItemProps> = ({ item, user }) => {
-	console.log(item);
-
-	const { saved, setSaved } = useContext(ItemContext);
+export const Item: FC<ItemProps> = ({ item, saved }) => {
 	let navigate = useNavigate();
-	let { type } = useParams();
+	const dispatch = useAppDispatch();
 
 	const savedValidation = (item: ItemAttributes) => {
-		if (saved && saved.some((i: ItemAttributes) => i.id === item.id)) {
-			setSaved(saved.filter((i: ItemAttributes) => i.id !== item.id));
-		} else {
-			setSaved([...saved, item]);
-		}
+		dispatch(configureSaved(item));
 	};
-
-	const overviewHandle = () => {
-		navigate(`/overview/${item.media_type ? item.media_type : type}/${item.id}`);
-	};
-	console.log(user);
 
 	return (
 		<ItemContainer>
 			<ItemPreview>
-				<SaveIcon onClick={() => savedValidation(item)}>{user?.saved?.some((i: ItemDB) => i.id === item.id) || saved.some((i: ItemAttributes) => i.id === item.id) ? <BsBookmarkFill /> : <BsBookmark />}</SaveIcon>
-				<PreviewContent onClick={() => overviewHandle()}></PreviewContent>
+				<SaveIcon onClick={() => savedValidation(item)}>{saved.some((i: ItemDB) => i.id === item.id) ? <BsBookmarkFill /> : <BsBookmark />}</SaveIcon>
+				<PreviewContent onClick={() => navigate(`/overview/${item.media_type}/${item.id}`)}></PreviewContent>
 			</ItemPreview>
 			<ItemImg src={`https://image.tmdb.org/t/p/w300/${item.poster_path}`} alt="poster" />
 		</ItemContainer>

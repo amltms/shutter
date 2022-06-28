@@ -10,6 +10,14 @@ const getData = async (url: string, urlVars?: string) => {
 		.catch((err) => console.log(err));
 };
 
+const config = (token: string) => {
+	return {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	};
+};
+
 const getTrending = async (contentType: String) => {
 	return getData(`trending/${contentType}/week`);
 };
@@ -36,24 +44,18 @@ const getSearch = async (search: String) => {
 	return getData(`search/multi`, `&query=${search}`);
 };
 
-const getSaved = async (token: string): Promise<ItemAttributes[]> => {
-	const config = {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	};
-	const { data } = await axios.get(API_URL, config);
-	return await Promise.all(data.map((item: ItemDB) => getItem(item.mediaType, item.id)));
+const getSavedDB = async (token: string): Promise<ItemDB[]> => {
+	const { data } = await axios.get(API_URL, config(token));
+	return data;
 };
 
-const configureSaved = async (type: string, id: number, token: string): Promise<ItemAttributes[]> => {
-	const config = {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	};
-	const { data } = await axios.put(API_URL, config);
-	return await Promise.all(data.map((item: ItemDB) => getItem(item.mediaType, item.id)));
+const getSaved = async (token: string): Promise<ItemAttributes[]> => {
+	return await Promise.all((await getSavedDB(token)).map((item: ItemDB) => getItem(item.media_type, item.id)));
+};
+
+const configureSaved = async (id: number, media_type: string, token: string) => {
+	const { data } = await axios.put(API_URL, { id, media_type }, config(token));
+	return data;
 };
 
 const itemService = {
@@ -63,6 +65,7 @@ const itemService = {
 	getCredits,
 	getGenres,
 	getGenreItems,
+	getSavedDB,
 	getSaved,
 	configureSaved,
 };

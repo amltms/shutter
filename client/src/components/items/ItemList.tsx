@@ -16,6 +16,7 @@ const Grid = styled.div`
 `;
 
 export const ItemList: FC<ItemListProps> = ({ items }) => {
-	const { user } = useAppSelector((state: RootState) => state.auth);
-	return <Grid>{items.map((i) => i.poster_path && <Item key={i.id} item={i} user={user} />)}</Grid>;
+	const { savedItemsDB } = useAppSelector((state: RootState) => state.item);
+
+	return <Grid>{items.map((i) => i.poster_path && <Item key={i.id} item={i} saved={savedItemsDB} />)}</Grid>;
 };

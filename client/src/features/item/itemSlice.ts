@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import itemService from './itemService';
-import { Credits, Details, Genre, ItemAttributes } from '../../types';
+import { Credits, Details, Genre, ItemAttributes, ItemDB } from '../../types';
 import { RootState } from '../../app/store';
 
 export interface ItemState {
 	items: any;
 	selectedItem: Details | null;
 	savedItems: ItemAttributes[];
+	savedItemsDB: ItemDB[];
 	status: 'idle' | 'loading' | 'failed';
 	credits: Credits | null;
 	genres: Genre[];
@@ -17,10 +18,27 @@ const initialState: ItemState = {
 	items: [],
 	selectedItem: null,
 	savedItems: [],
+	savedItemsDB: [],
 	status: 'idle',
 	credits: null,
 	genres: [],
 	message: '',
+};
+
+const accessPrivateRoot = async (thunkAPI: any, fn: any, params?: Array<any>): Promise<any> => {
+	try {
+		const state = thunkAPI.getState() as RootState;
+		const token = state.auth.user?.token;
+		if (!token) {
+			return thunkAPI.rejectWithValue('No token');
+		} else {
+			// line thats different
+			return params ? await fn(...params, token) : await fn(token);
+		}
+	} catch (error: any) {
+		const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+		return thunkAPI.rejectWithValue(message);
+	}
 };
 
 export const getTrending = createAsyncThunk('item/getTrending', async (contentType: string) => {
@@ -38,6 +56,7 @@ export const getItem = createAsyncThunk('item/getItem', async (itemData: { type:
 export const getCredits = createAsyncThunk('item/getCredits', async (itemData: { type: string; id: string }) => {
 	const { type, id } = itemData;
 	const response = await itemService.getCredits(type, id);
+
 	return response;
 });
 
@@ -58,41 +77,31 @@ export const getSearch = createAsyncThunk('item/getSearch', async (search: strin
 	return response.results;
 });
 
-export const getSaved = createAsyncThunk('item/getSaved', async (_, thunkAPI) => {
-	try {
-		const state = thunkAPI.getState() as RootState;
-		const token = state.auth.user?.token;
-		if (!token) {
-			return thunkAPI.rejectWithValue('No token');
-		} else {
-			return await itemService.getSaved(token);
-		}
-	} catch (error: any) {
-		const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-		return thunkAPI.rejectWithValue(message);
-	}
+export const getSavedDB = createAsyncThunk('item/getSavedDB', async (_, thunkAPI) => {
+	return accessPrivateRoot(thunkAPI, itemService.getSavedDB);
 });
 
-export const configureSaved = createAsyncThunk('item/configureSaved', async (_, thunkAPI) => {
-	try {
-		const state = thunkAPI.getState() as RootState;
-		const token = state.auth.user?.token;
-		if (!token) {
-			return thunkAPI.rejectWithValue('No token');
-		} else {
-			return await itemService.getSaved(token);
-		}
-	} catch (error: any) {
-		const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-		return thunkAPI.rejectWithValue(message);
-	}
+export const getSaved = createAsyncThunk('item/getSaved', async (_, thunkAPI) => {
+	return accessPrivateRoot(thunkAPI, itemService.getSaved);
+});
+
+export const configureSaved = createAsyncThunk('item/configureSaved', async (item: ItemAttributes, thunkAPI) => {
+	return accessPrivateRoot(thunkAPI, itemService.configureSaved, [item.id, item.media_type]);
 });
 
 export const itemSlice = createSlice({
 	name: 'item',
 	initialState,
 	reducers: {
-		reset: (state: any) => initialState,
+		reset: (state: any) => {
+			state.status = 'idle';
+			state.message = '';
+			state.items = [];
+			state.selectedItem = null;
+			state.savedItems = [];
+			state.credits = null;
+			state.genres = [];
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -138,6 +147,17 @@ export const itemSlice = createSlice({
 				state.status = 'idle';
 				state.items = action.payload;
 			})
+			.addCase(getSavedDB.pending, (state) => {
+				state.status = 'loading';
+			})
+			.addCase(getSavedDB.fulfilled, (state, action) => {
+				state.status = 'idle';
+				state.savedItemsDB = action.payload;
+			})
+			.addCase(getSavedDB.rejected, (state, action) => {
+				state.status = 'failed';
+				state.message = action.payload;
+			})
 			.addCase(getSaved.pending, (state) => {
 				state.status = 'loading';
 			})
@@ -146,6 +166,17 @@ export const itemSlice = createSlice({
 				state.savedItems = action.payload;
 			})
 			.addCase(getSaved.rejected, (state, action) => {
+				state.status = 'failed';
+				state.message = action.payload;
+			})
+			.addCase(configureSaved.pending, (state) => {
+				state.status = 'loading';
+			})
+			.addCase(configureSaved.fulfilled, (state, action) => {
+				state.status = 'idle';
+				state.savedItemsDB = action.payload;
+			})
+			.addCase(configureSaved.rejected, (state, action) => {
 				state.status = 'failed';
 				state.message = action.payload;
 			});

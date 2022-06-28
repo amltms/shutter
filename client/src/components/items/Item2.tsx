@@ -1,9 +1,8 @@
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ItemAttributes } from '../../types';
-import { ItemContext } from '../context/ItemContext';
 
 export type ItemProps = {
 	item: ItemAttributes;
@@ -65,21 +64,14 @@ const PreviewContent = styled.div`
 `;
 
 export const Item: FC<ItemProps> = ({ item }) => {
-	const { saved, setSaved } = useContext(ItemContext);
 	let navigate = useNavigate();
 
-	const savedValidation = (item: ItemAttributes) => {
-		if (saved && saved.some((i: ItemAttributes) => i.id === item.id)) {
-			setSaved(saved.filter((i: ItemAttributes) => i.id !== item.id));
-		} else {
-			setSaved([...saved, item]);
-		}
-	};
+	const savedValidation = (item: ItemAttributes) => {};
 
 	return (
 		<ItemContainer onClick={() => navigate(`/overview/${item.media_type}/${item.id}`)}>
 			<ItemPreview bg={`https://image.tmdb.org/t/p/original/${item?.backdrop_path}`}>
-				<SaveIcon onClick={() => savedValidation(item)}>{saved && saved.some((i: ItemAttributes) => i.id === item.id) ? <BsBookmarkFill /> : <BsBookmark />}</SaveIcon>
+				<SaveIcon onClick={() => savedValidation(item)}>{}</SaveIcon>
 				<PreviewContent>
 					<h2>{item.title || item.name}</h2>
 					<p>{(item.release_date || item.first_air_date || '----').substring(0, 4)}</p>

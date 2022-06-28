@@ -19,9 +19,8 @@ const Backdrop = styled.img`
 	width: 100%;
 	margin-left: 50%;
 	transform: translate(-50%, 0%);
-	@media screen and (max-width: 900px) {
+	@media (orientation: portrait) {
 		height: 100vh;
-		min-width: 100%;
 		width: auto;
 	}
 `;

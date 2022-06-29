@@ -17,9 +17,9 @@ const Content = styled.div`
 	z-index: 2;
 	bottom: 0;
 	width: 100%;
-	padding: 5vw 8vw;
+	padding: 5vw 4vw;
 	h1 {
-		font-size: 6vw;
+		font-size: 4vw;
 	}
 
 	@media screen and (max-width: 900px) {

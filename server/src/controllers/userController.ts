@@ -50,7 +50,7 @@ const register = asyncHandler(async (req: Request, res: Response) => {
 
 	if (userExists) {
 		res.status(400);
-		throw new Error('User already exists');
+		throw new Error('This email is already in use');
 	}
 
 	// Hash password

@@ -21,7 +21,7 @@ const NavBar = styled.div<Scroll>`
 	width: 100%;
 	position: fixed;
 	transition: 0.4s;
-	padding: 3rem 8vw;
+	padding: 3rem 4vw;
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;
@@ -38,7 +38,7 @@ const NavBar = styled.div<Scroll>`
 		z-index: -1;
 		transition: transform 0.3s;
 	}
-	${({ scrolled }) => scrolled && 'padding:1.5rem;'};
+	${({ scrolled }) => scrolled && 'padding:1.5rem 2vw;'};
 	@media screen and (max-width: 900px) {
 		padding: 1rem;
 	}
@@ -51,9 +51,9 @@ const MenuLinks = styled.div<NavProps>`
 		font-size: 22px;
 		padding: 0 1rem;
 		margin: 0;
-		color: ${palette.secondaryTextColor};
 		position: relative;
 		:after {
+			color: ${palette.primaryTextColor};
 			content: '';
 			position: absolute;
 			width: 100%;
@@ -68,7 +68,6 @@ const MenuLinks = styled.div<NavProps>`
 			transform: scaleX(1);
 		}
 		:hover {
-			color: ${palette.primaryTextColor};
 		}
 	}
 	@media screen and (max-width: 900px) {

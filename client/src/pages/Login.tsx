@@ -30,20 +30,20 @@ const LoginInputs = styled.div`
 		font-family: 'Roboto', sans-serif;
 		font-weight: 1000;
 		font-size: 4rem;
-		margin-bottom: 1rem;
+		margin-bottom: 2rem;
 	}
 	p {
 		text-align: center;
 		color: #a7a6a6;
 		margin-top: 1.5rem;
-		font-size: 1rem;
+		font-size: 1.2rem;
 		a {
 			color: ${palette.primary};
 			vertical-align: baseline;
 		}
 	}
 	@media (max-width: 1800px) {
-		width: 40%;
+		width: 45%;
 	}
 
 	@media (max-width: 1200px) {
@@ -55,7 +55,7 @@ const LoginBackground = styled.img`
 	object-fit: cover;
 	width: 100%;
 	overflow: hidden;
-	filter: brightness(80%);
+	filter: brightness(70%);
 `;
 
 const LoginForm = styled.form`
@@ -77,7 +77,7 @@ const LoginForm = styled.form`
 		}
 	}
 	button {
-		margin-top: 2rem;
+		margin-top: 4rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -108,7 +108,7 @@ const InputContainer = styled.div`
 	align-items: center;
 	padding: 1.2rem 0;
 	border-bottom: 1px solid #4c4c4c;
-	margin-bottom: 1rem;
+	margin-bottom: 1.5rem;
 	svg {
 		fill: #4c4c4c;
 		font-size: 1.6rem;
@@ -164,11 +164,11 @@ export const Login: FC = () => {
 					<h2>LOGIN</h2>
 					<InputContainer>
 						<MdOutlineAlternateEmail />
-						<input type="email" name="email" value={formData.email} placeholder="Email" onChange={onChange} />
+						<input type="email" name="email" value={formData.email} placeholder="Email" onChange={onChange} required />
 					</InputContainer>
 					<InputContainer>
 						<MdLockOutline />
-						<input type="password" name="password" value={formData.password} placeholder="Password" onChange={onChange} />
+						<input type="password" name="password" value={formData.password} placeholder="Password" onChange={onChange} required />
 					</InputContainer>
 					<p>
 						Don't have an account? <Link to={'/register'}>Sign up</Link>

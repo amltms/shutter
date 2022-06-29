@@ -32,7 +32,7 @@ const SearchBox = styled.div<searchProps>`
 	display: flex;
 	svg {
 		transition: 0.5s;
-		fill: ${({ active }) => (active ? 'white' : palette.secondaryTextColor)};
+		fill: ${({ active }) => (active ? palette.primaryTextColor : palette.secondaryTextColor)};
 	}
 	svg:hover {
 		fill: white;

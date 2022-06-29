@@ -9,16 +9,18 @@ import { SavedItems } from './pages/SavedItems';
 import { Genre } from './pages/Genre';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
-import { useAppDispatch } from './app/hooks';
+import { useAppSelector, useAppDispatch } from './app/hooks';
 import { getSavedDB } from './features/item/itemSlice';
+import { RootState } from './app/store';
 
 function App() {
 	const location = useLocation();
 	const dispatch = useAppDispatch();
+	const { user } = useAppSelector((state: RootState) => state.auth);
 
 	useEffect(() => {
 		dispatch(getSavedDB());
-	}, [dispatch]);
+	}, [dispatch, user]);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);

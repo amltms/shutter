@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Toast } from '../components/utilities/Toast';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
-import { register } from '../features/auth/authSlice';
+import { register, reset } from '../features/auth/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { palette } from '../styles/palette';
 import { BsArrowRightShort } from 'react-icons/bs';
@@ -138,7 +138,12 @@ export const Register: FC = () => {
 		}
 
 		if (user) {
+			navigate('/');
 		}
+
+		return () => {
+			dispatch(reset());
+		};
 	}, [user, status, navigate, dispatch, message]);
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -165,20 +170,20 @@ export const Register: FC = () => {
 				<NameContainer>
 					<InputContainer>
 						<MdAccountBox />
-						<input type="firstName" name="firstName" value={formData.firstName} placeholder="First Name" onChange={onChange} />
+						<input type="text" name="firstName" value={formData.firstName} placeholder="First Name" onChange={onChange} required />
 					</InputContainer>
 					<InputContainer>
 						<MdAccountBox />
-						<input type="lastName" name="lastName" value={formData.lastName} placeholder="Last Name" onChange={onChange} />
+						<input type="text" name="lastName" value={formData.lastName} placeholder="Last Name" onChange={onChange} required />
 					</InputContainer>
 				</NameContainer>
 				<InputContainer>
 					<MdOutlineAlternateEmail />
-					<input type="email" name="email" value={formData.email} placeholder="Email" onChange={onChange} />
+					<input type="email" name="email" value={formData.email} placeholder="Email" onChange={onChange} required />
 				</InputContainer>
 				<InputContainer>
 					<MdLockOutline />
-					<input type="password" name="password" value={formData.password} placeholder="Password" onChange={onChange} />
+					<input type="password" name="password" value={formData.password} placeholder="Password" onChange={onChange} required />
 				</InputContainer>
 				<button type="submit">
 					<BsArrowRightShort />

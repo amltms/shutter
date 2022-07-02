@@ -3,36 +3,7 @@ import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel';
-
-// @desc    add saved
-// @route   POST /api/users/saved
-// @access  Private
-const postSaved = asyncHandler(async (req: Request, res: Response) => {
-	const { savedId } = req.body;
-	const user = await User.findById(req['user']._id);
-
-	if (!user.saved.includes(savedId)) {
-		// add to saved
-		const updatedSaves = await User.findByIdAndUpdate(req['user']._id, { $push: { saved: savedId } });
-
-		res.status(200).json(updatedSaves);
-	} else if (user.saved.includes(savedId)) {
-		//remove saved
-		const updatedSaves = await User.findByIdAndUpdate(req['user']._id, { $pull: { saved: savedId } });
-
-		res.status(200).json(updatedSaves);
-	} else {
-		res.status(400);
-		throw new Error('Invalid user data');
-	}
-});
-
-// @desc    get saved
-// @route   GET /api/users/saved
-// @access  Private
-const getSaved = asyncHandler(async (req: Request, res: Response) => {
-	res.status(200).json(req['user'].saved);
-});
+import mongoose from 'mongoose';
 
 // @desc    Register new user
 // @route   POST /api/users
@@ -111,10 +82,10 @@ const getMe = asyncHandler(async (req: Request, res: Response) => {
 });
 
 // Generate JWT Token
-const generateToken = (id: string) => {
+const generateToken = (id: mongoose.Types.ObjectId) => {
 	return jwt.sign({ id }, process.env.JWT_SECRET, {
 		expiresIn: '30d',
 	});
 };
 
-export default { login, register, getMe, getSaved, postSaved };
+export default { login, register, getMe };

@@ -1,5 +1,10 @@
 import mongoose, { Schema } from 'mongoose';
 
+export interface Item extends Document {
+	media_type: string;
+	id: number;
+}
+
 const ItemSchema: Schema = new Schema(
 	{
 		media_type: {
@@ -16,4 +21,4 @@ const ItemSchema: Schema = new Schema(
 	}
 );
 
-export default mongoose.model('Item', ItemSchema);
+export default mongoose.model<Item>('Item', ItemSchema);

@@ -1,9 +1,9 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ItemList } from '../components/items/ItemList';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
-import { getSaved, getSavedDB } from '../features/item/itemSlice';
+import { getSaved } from '../features/item/itemSlice';
 import Spinner from '../components/utilities/Spinner';
 
 const SavedContainer = styled.div`

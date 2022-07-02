@@ -4,7 +4,8 @@ import { Credits, Details, Genre, ItemAttributes, ItemDB } from '../../types';
 import { RootState } from '../../app/store';
 
 export interface ItemState {
-	items: any;
+	items: ItemAttributes[];
+	searchItems: ItemAttributes[];
 	selectedItem: Details | null;
 	savedItems: ItemAttributes[];
 	savedItemsDB: ItemDB[];
@@ -16,6 +17,7 @@ export interface ItemState {
 
 const initialState: ItemState = {
 	items: [],
+	searchItems: [],
 	selectedItem: null,
 	savedItems: [],
 	savedItemsDB: [],
@@ -145,7 +147,7 @@ export const itemSlice = createSlice({
 			})
 			.addCase(getSearch.fulfilled, (state, action) => {
 				state.status = 'idle';
-				state.items = action.payload;
+				state.searchItems = action.payload;
 			})
 			.addCase(getSavedDB.pending, (state) => {
 				state.status = 'loading';

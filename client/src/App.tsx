@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Nav } from './components/utilities/Nav';
+import { Nav } from './components/Nav/Nav';
 import { Overview } from './pages/ItemOverview';
 import { Trending } from './pages/Trending';
 import { useLocation } from 'react-router';

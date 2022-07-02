@@ -18,16 +18,18 @@ const Content = styled.div`
 	bottom: 0;
 	width: 100%;
 	padding: 5vw 4vw;
+	width: 80%;
 	h1 {
-		font-size: 4vw;
+		font-size: 6vw;
 	}
 
+	@media screen and (max-width: 1600px) {
+		width: 100%;
+		bottom: 10%;
+	}
 	@media screen and (max-width: 900px) {
 		h1 {
-			font-size: 3rem;
-		}
-		p {
-			font-size: 1rem;
+			font-size: 3rem !important;
 		}
 	}
 `;

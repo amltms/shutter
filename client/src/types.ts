@@ -9,6 +9,7 @@ export interface ItemAttributes {
 	name?: string;
 	release_date?: string;
 	first_air_date?: string;
+	last_air_date?: string;
 }
 
 export interface ItemDB {
@@ -30,6 +31,7 @@ export interface Details {
 	name?: string;
 	release_date?: string;
 	first_air_date?: string;
+	last_air_date?: string;
 }
 
 export interface Credits {

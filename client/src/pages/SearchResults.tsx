@@ -23,7 +23,7 @@ export const SearchResults: FC = () => {
 	const { search } = useParams();
 	const [typing, setTyping] = useState(false);
 	let filterTimeout: { current: NodeJS.Timeout | null } = useRef(null);
-	const { items, status } = useAppSelector((state: RootState) => state.item);
+	const { searchItems, status } = useAppSelector((state: RootState) => state.item);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
@@ -38,13 +38,13 @@ export const SearchResults: FC = () => {
 
 	return (
 		<>
-			{items.length === 0 && status === 'idle' && typing === false ? (
+			{searchItems.length === 0 && status === 'idle' && typing === false ? (
 				<Text>
 					<h2>No Results</h2>
 				</Text>
 			) : (
 				<SearchContainer>
-					<ItemList items={items} />
+					<ItemList items={searchItems} />
 				</SearchContainer>
 			)}
 		</>

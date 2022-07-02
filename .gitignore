@@ -10,7 +10,7 @@
 /client/coverage
 
 # production
-/server/build
+/server/dist
 /client/build
 
 # misc

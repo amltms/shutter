@@ -1,5 +1,4 @@
 {
-	"homepage": "https://amltms.com/shutter",
 	"name": "shutter",
 	"version": "0.1.0",
 	"proxy": "http://localhost:5000/",

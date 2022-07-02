@@ -40,6 +40,8 @@ a {
 	transition: 0.2s;
 	text-decoration: none;
 	color: white;
+	font-weight: 300;
+	font-family: 'Roboto', sans-serif;
 }
 
 h1,
@@ -67,6 +69,7 @@ h3 {
 
 p {
 	font-size: 1.5rem;
+	font-weight: 300;
 	font-family: 'Roboto', sans-serif;
 }
 
@@ -137,8 +140,8 @@ hr {
 }
 
 .nav-icon {
-	width: 45px;
-	height: 40px;
+	width: 40px;
+	height: 30px;
 	position: relative;
 	transform: rotate(0deg);
 	transition: 0.5s ease-in-out;
@@ -148,7 +151,7 @@ hr {
 .nav-icon span {
 	display: block;
 	position: absolute;
-	height: 3px;
+	height: 2px;
 	width: 100%;
 	background: white;
 	opacity: 1;
@@ -163,11 +166,11 @@ hr {
 
 .nav-icon span:nth-child(2),
 .nav-icon span:nth-child(3) {
-	top: 18px;
+	top: 12px;
 }
 
 .nav-icon span:nth-child(4) {
-	top: 36px;
+	top: 26px;
 }
 
 .nav-icon.open span:nth-child(1) {
@@ -188,4 +191,18 @@ hr {
 	top: 18px;
 	width: 0%;
 	left: 50%;
+}
+@media screen and (max-width: 1600px) {
+	h1 {
+		font-size: 6vw !important;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	h1 {
+		font-size: 3rem !important;
+	}
+	p {
+		font-size: 1rem;
+	}
 }

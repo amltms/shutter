@@ -91,10 +91,16 @@ const PreviewContent = styled.div`
 `;
 export const Item: FC<ItemProps> = ({ item, saved }) => {
 	const [savedIcon, setSavedIcon] = useState(false);
+	const [titleRef, setTitleRef] = useState(null);
+
 	let navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	let { type } = useParams();
 	const title: any = useRef<HTMLHeadingElement>(null);
+
+	useEffect(() => {
+		title.current && setTitleRef(title.current.offsetWidth);
+	}, [title]);
 
 	useEffect(() => {
 		if (saved.find((i: ItemDB) => i.id === item.id)) {
@@ -109,7 +115,7 @@ export const Item: FC<ItemProps> = ({ item, saved }) => {
 
 	return (
 		<ItemContainer>
-			<ItemPreview titleWidth={title.current?.offsetWidth}>
+			<ItemPreview titleWidth={titleRef}>
 				<SaveIcon onClick={() => savedValidation(item)}>{savedIcon ? <BsBookmarkFill /> : <BsBookmark />}</SaveIcon>
 				<PreviewContent onClick={() => navigate(`/overview/${item.media_type ? item.media_type : type}/${item.id}`)}>
 					<h2 ref={title}>{item.title || item.name}</h2>

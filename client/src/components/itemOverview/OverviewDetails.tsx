@@ -93,13 +93,13 @@ export const OverviewDetails: FC<Props> = ({ item }) => {
 						<Attribute>{(item.release_date || item.first_air_date || '----').substring(0, 4)}</Attribute>
 						{item.runtime && <Attribute>{item.runtime} mins</Attribute>}
 						<Attribute>
-							{item.vote_average} <Star />
+							{item.vote_average.toFixed(1)} <Star />
 						</Attribute>
 					</p>
 
 					<Genres>
 						{item?.genres.map((g) => (
-							<div>{g.name}</div>
+							<div key={g.id}>{g.name}</div>
 						))}
 					</Genres>
 					<Synopsis>{item.overview}</Synopsis>

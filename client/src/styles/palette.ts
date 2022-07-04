@@ -4,7 +4,7 @@ export const palette = {
 	secondary: '#e74c3c',
 	success: '#2ecc71',
 	info: '#3498db',
-	warning: '#f1c40f',
+	warning: '#d5791d',
 	danger: '#e74c3c',
 	light: '#ecf0f1',
 	dark: '#95a5a6',

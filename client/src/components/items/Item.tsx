@@ -1,9 +1,10 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import styled from 'styled-components';
 import { ItemAttributes, ItemDB } from '../../types';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { RootState } from '../../app/store';
 import { configureSaved } from '../../features/item/itemSlice';
 import { palette } from '../../styles/palette';
 
@@ -78,6 +79,7 @@ const PreviewContent = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
+	user-select: none;
 	h2 {
 		font-size: 1.5rem;
 		margin-bottom: 0.6rem;
@@ -90,6 +92,7 @@ const PreviewContent = styled.div`
 	}
 `;
 export const Item: FC<ItemProps> = ({ item, saved }) => {
+	const { user } = useAppSelector((state: RootState) => state.auth);
 	const [savedIcon, setSavedIcon] = useState(false);
 	const [titleRef, setTitleRef] = useState(null);
 
@@ -116,7 +119,7 @@ export const Item: FC<ItemProps> = ({ item, saved }) => {
 	return (
 		<ItemContainer>
 			<ItemPreview titleWidth={titleRef}>
-				<SaveIcon onClick={() => savedValidation(item)}>{savedIcon ? <BsBookmarkFill /> : <BsBookmark />}</SaveIcon>
+				{user && <SaveIcon onClick={() => savedValidation(item)}>{savedIcon ? <BsBookmarkFill /> : <BsBookmark />}</SaveIcon>}
 				<PreviewContent onClick={() => navigate(`/overview/${item.media_type ? item.media_type : type}/${item.id}`)}>
 					<h2 ref={title}>{item.title || item.name}</h2>
 					<p>{(item.release_date || item.first_air_date || '----').substring(0, 4)}</p>

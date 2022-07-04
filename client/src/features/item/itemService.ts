@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ItemAttributes, ItemDB } from '../../types';
+import { ItemAttributes, ItemDB, Genre } from '../../types';
 const apikey = '5042d9bd250e2fbd1f65fceff13e225d';
 const API_URL = '/api/items/';
 
@@ -32,8 +32,17 @@ const getCredits = async (type: String, id: String) => {
 	return getData(`${type}/${id}/credits`);
 };
 
-const getGenres = async (type: String) => {
-	return getData(`/genre/${type}/list`);
+const getGenres = async (type: String): Promise<Genre[]> => {
+	if (type === 'all') {
+		const [movies, tv] = await Promise.all([getGenres('movie'), getGenres('tv')]);
+
+		const all = [...movies, ...tv];
+
+		return all.filter((value, index, self) => index === self.findIndex((t) => t.id === value.id && t.name === value.name));
+	} else {
+		const { genres } = await getData(`genre/${type}/list`);
+		return genres;
+	}
 };
 
 const getGenreItems = async (type: String, genre: number) => {

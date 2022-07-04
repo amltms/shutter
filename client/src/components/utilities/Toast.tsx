@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { FC, useEffect, useRef } from 'react';
 import { AiFillWarning } from 'react-icons/ai';
+import { palette } from '../../styles/palette';
 
 interface props {
 	toast: { visible: boolean; message: string };
@@ -13,7 +14,7 @@ interface ToastProps {
 const ToastContainer = styled.div<ToastProps>`
 	bottom: ${(props) => (props.visible ? '5%' : '-10%')};
 	z-index: 1000;
-	background-color: #c66505;
+	background-color: ${palette.warning};
 	position: fixed;
 	color: white;
 	border-radius: 0.4rem;

@@ -51,21 +51,15 @@ export const getTrending = createAsyncThunk('item/getTrending', async (contentTy
 
 export const getItem = createAsyncThunk('item/getItem', async (itemData: { type: string; id: number }) => {
 	const { type, id } = itemData;
-	const response = await itemService.getItem(type, id);
-
-	return response;
+	return await itemService.getItem(type, id);
 });
 export const getCredits = createAsyncThunk('item/getCredits', async (itemData: { type: string; id: string }) => {
 	const { type, id } = itemData;
-	const response = await itemService.getCredits(type, id);
-
-	return response;
+	return await itemService.getCredits(type, id);
 });
 
 export const getGenres = createAsyncThunk('item/getGenres', async (type: string) => {
-	const response = await itemService.getGenres(type);
-
-	return response.genres;
+	return await itemService.getGenres(type);
 });
 
 export const getGenreItems = createAsyncThunk('item/getGenreItems', async (genreData: { type: string; id: number }) => {

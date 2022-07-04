@@ -106,7 +106,7 @@ export const SlideContent: FC<Props> = ({ slideContent }) => {
 							<p>
 								{filteredGenres.map((genre) => (
 									<GenreName key={genre.id} onClick={() => handleGenre(genre.id)}>
-										{genre.name}{' '}
+										{genre.name}
 									</GenreName>
 								))}
 							</p>

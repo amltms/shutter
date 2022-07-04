@@ -14,7 +14,7 @@ export function Trending() {
 
 	useEffect(() => {
 		dispatch(getTrending(type || 'all'));
-		dispatch(getGenres(type || 'movie'));
+		dispatch(getGenres(type || 'all'));
 
 		return () => {
 			dispatch(reset());

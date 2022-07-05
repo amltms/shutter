@@ -39,7 +39,6 @@ const getGenres = async (type: String): Promise<Genre[]> => {
 		movies = movies.map((obj) => ({ ...obj, type: 'movie' }));
 		tv = tv.map((obj) => ({ ...obj, type: 'tv' }));
 		const all = [...movies, ...tv];
-		console.log(all);
 
 		return all.filter((value, index, self) => index === self.findIndex((t) => t.id === value.id && t.name === value.name));
 	} else {

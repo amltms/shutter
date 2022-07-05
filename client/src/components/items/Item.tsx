@@ -21,6 +21,7 @@ const ItemContainer = styled.div`
 	margin: 1rem 1rem 1rem 0rem;
 	transition: 0.3s;
 	position: relative;
+	overflow: hidden;
 	:hover {
 		transform: translate(0, -10%);
 	}
@@ -41,6 +42,7 @@ const ItemImg = styled.img`
 const ItemPreview = styled.div<PreviewItems>`
 	position: absolute;
 	background: rgba(0, 0, 0, 0.8);
+	border-radius: 1.2rem;
 	overflow: hidden;
 	height: 100%;
 	width: 100%;

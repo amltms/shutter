@@ -4,7 +4,8 @@ export interface ItemAttributes {
 	poster_path: string;
 	backdrop_path: string;
 	media_type: string;
-	genre_ids: number[];
+	genre_ids?: number[];
+	genres: Genre[];
 	title?: string;
 	name?: string;
 	release_date?: string;
@@ -20,7 +21,7 @@ export interface ItemDB {
 export interface Details {
 	id: number;
 	backdrop_path: string;
-	genres: { id: number; name: string }[];
+	genres: Genre[];
 	poster_path: string;
 	media_type: string;
 	overview: string;

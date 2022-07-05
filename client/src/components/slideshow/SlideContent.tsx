@@ -20,7 +20,7 @@ const Content = styled.div`
 	padding: 5vw 4vw;
 	width: 80%;
 	h1 {
-		font-size: 6vw;
+		font-size: 5vw;
 	}
 
 	@media screen and (max-width: 1600px) {
@@ -87,7 +87,7 @@ const GenreName = styled.span`
 export const SlideContent: FC<Props> = ({ slideContent }) => {
 	let navigate = useNavigate();
 	const { genres } = useAppSelector((state: RootState) => state.item);
-	const filteredGenres = slideContent?.genre_ids && genres.filter((genre) => slideContent.genre_ids.includes(genre.id));
+	const filteredGenres = slideContent?.genre_ids && genres.filter((genre) => slideContent.genre_ids?.includes(genre.id));
 
 	const handleOverview = () => {
 		navigate(`/overview/${slideContent.media_type}/${slideContent.id}`);
@@ -104,7 +104,7 @@ export const SlideContent: FC<Props> = ({ slideContent }) => {
 						<div key={slideContent.id} className="animate-text">
 							<h1>{slideContent.title || slideContent.name}</h1>
 							<p>
-								{filteredGenres.map((genre) => (
+								{filteredGenres?.map((genre) => (
 									<GenreName key={genre.id} onClick={() => handleGenre(genre.id)}>
 										{genre.name}
 									</GenreName>

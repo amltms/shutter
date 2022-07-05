@@ -3,6 +3,9 @@ import { GoStar } from 'react-icons/go';
 import styled from 'styled-components';
 import { palette } from '../../styles/palette';
 import { Details } from '../../types';
+import { Item } from '../items/Item';
+import { useAppSelector } from '../../app/hooks';
+import { RootState } from '../../app/store';
 interface Props {
 	item: Details;
 }
@@ -10,6 +13,11 @@ interface Props {
 const DetailsContainer = styled.div`
 	display: flex;
 	margin: 2.5rem 0;
+	> div:first-child {
+		transform: scale(1.2);
+		transform-origin: top left;
+		margin: 0 5rem 5rem 0;
+	}
 	@media screen and (max-width: 900px) {
 		flex-direction: column;
 		align-items: center;
@@ -53,23 +61,6 @@ const Genres = styled.div`
 	}
 `;
 
-const ItemImg = styled.img`
-	width: fit-content;
-	object-fit: contain;
-	border-radius: 1.2rem;
-	transition: 0.5s;
-	position: relative;
-	overflow: hidden;
-	margin-right: 2.5rem;
-	height: 20rem;
-	@media (min-width: 1900px) {
-		height: 15vw;
-	}
-	@media screen and (max-width: 900px) {
-		margin: 0 0 2.5rem 0rem;
-	}
-`;
-
 const Attribute = styled.div`
 	margin-right: 2rem;
 	display: inline-block;
@@ -82,12 +73,14 @@ const Star = styled(GoStar)`
 `;
 
 export const OverviewDetails: FC<Props> = ({ item }) => {
+	const { savedItemsDB } = useAppSelector((state: RootState) => state.item);
+
 	return (
 		<>
 			<h1>{item.title || item.name}</h1>
 
 			<DetailsContainer>
-				<ItemImg src={`https://image.tmdb.org/t/p/w300/${item.poster_path}`} alt="poster" />
+				<Item item={item} saved={savedItemsDB}></Item>
 				<Info>
 					<p>
 						<Attribute>{(item.release_date || item.first_air_date || '----').substring(0, 4)}</Attribute>

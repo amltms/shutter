@@ -34,9 +34,12 @@ const getCredits = async (type: String, id: String) => {
 
 const getGenres = async (type: String): Promise<Genre[]> => {
 	if (type === 'all') {
-		const [movies, tv] = await Promise.all([getGenres('movie'), getGenres('tv')]);
+		let [movies, tv] = await Promise.all([getGenres('movie'), getGenres('tv')]);
 
+		movies = movies.map((obj) => ({ ...obj, type: 'movie' }));
+		tv = tv.map((obj) => ({ ...obj, type: 'tv' }));
 		const all = [...movies, ...tv];
+		console.log(all);
 
 		return all.filter((value, index, self) => index === self.findIndex((t) => t.id === value.id && t.name === value.name));
 	} else {

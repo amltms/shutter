@@ -51,7 +51,7 @@ export const GenreItem: FC<ItemProps> = ({ genre }) => {
 
 	let { type } = useParams();
 	const handleClick = () => {
-		navigate(`/${type ? type : 'movie'}/genre/${genre.id}`);
+		navigate(`/${type ? type : genre.type}/genre/${genre.id}`);
 	};
 
 	return (

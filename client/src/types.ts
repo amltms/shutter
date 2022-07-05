@@ -53,6 +53,7 @@ export interface Genre {
 	id: number;
 	name: string;
 	img?: string;
+	type?: string;
 	item?: ItemAttributes;
 }
 

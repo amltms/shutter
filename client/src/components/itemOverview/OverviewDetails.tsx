@@ -51,7 +51,7 @@ const Genres = styled.div`
 	div {
 		margin-right: 2rem;
 		display: inline-block;
-		border: 2px solid rgba(255, 165, 20, 0.6);
+		border: 2px solid ${palette.primaryDark};
 		padding: 0.7rem;
 		margin: 0.5rem 1rem 0.5rem 0rem;
 		border-radius: 0.5rem;

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Toast } from '../components/utilities/Toast';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
@@ -55,7 +55,7 @@ const Background = styled.img`
 	filter: brightness(40%);
 `;
 
-export const Register: FC = () => {
+export const Register = () => {
 	const [formData, setFormData] = useState({
 		firstName: '',
 		lastName: '',

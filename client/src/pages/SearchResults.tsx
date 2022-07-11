@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
@@ -19,7 +19,7 @@ const Text = styled.div`
 	}
 `;
 
-export const SearchResults: FC = () => {
+export const SearchResults = () => {
 	const { search } = useParams();
 	const [typing, setTyping] = useState(false);
 	let filterTimeout: { current: NodeJS.Timeout | null } = useRef(null);

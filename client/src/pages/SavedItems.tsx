@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BiSearchAlt } from 'react-icons/bi';
 import styled from 'styled-components';
 import { ItemList } from '../components/items/ItemList';
@@ -53,23 +53,16 @@ const Alert = styled.div`
 	}
 `;
 
-export const SavedItems: FC = () => {
+export const SavedItems = () => {
 	const dispatch = useAppDispatch();
 	const { savedItems, savedItemsDB, status } = useAppSelector((state: RootState) => state.item);
 	const { user } = useAppSelector((state: RootState) => state.auth);
-	const [didMount, setDidMount] = useState(false);
-
-	useEffect(() => {
-		if (Object.keys(savedItems).length !== 0) {
-			setDidMount(true);
-		}
-	}, [savedItemsDB, savedItems]);
 
 	useEffect(() => {
 		dispatch(getSaved());
 	}, [dispatch, savedItemsDB]);
 
-	if (status === 'loading' && !didMount) {
+	if (status === 'loading' && savedItems.length === 0) {
 		return <Spinner />;
 	}
 

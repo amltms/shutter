@@ -72,7 +72,7 @@ const Star = styled(GoStar)`
 	margin-bottom: 0.15rem;
 `;
 
-export const OverviewDetails: FC<Props> = ({ item }) => {
+export const OverviewDetails = ({ item }: Props) => {
 	const { savedItemsDB } = useAppSelector((state: RootState) => state.item);
 
 	return (

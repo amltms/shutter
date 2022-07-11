@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MdOutlineAlternateEmail, MdLockOutline } from 'react-icons/md';
 import styled from 'styled-components';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
@@ -47,7 +47,7 @@ const Background = styled.img`
 	filter: brightness(70%);
 `;
 
-export const Login: FC = () => {
+export const Login = () => {
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',

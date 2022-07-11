@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { ItemCredits } from '../components/itemOverview/credits/ItemCredits';
@@ -27,7 +27,7 @@ const Backdrop = styled.img`
 	}
 `;
 
-export const Overview: FC = () => {
+export const Overview = () => {
 	const { selectedItem, credits, status } = useAppSelector((state: RootState) => state.item);
 	const dispatch = useAppDispatch();
 
@@ -42,7 +42,7 @@ export const Overview: FC = () => {
 		};
 	}, [id, type, dispatch]);
 
-	if (status === 'loading') {
+	if (status === 'loading' && selectedItem && Object.keys(selectedItem).length !== 0) {
 		return <Spinner />;
 	}
 

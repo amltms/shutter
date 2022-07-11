@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
@@ -14,7 +14,7 @@ const ItemDetails = styled.div`
 	}
 `;
 
-export const Genre: FC = () => {
+export const Genre = () => {
 	const { items, genres, status } = useAppSelector((state: RootState) => state.item);
 	const dispatch = useAppDispatch();
 

@@ -6,9 +6,10 @@ import { getGenres, getTrending, reset } from '../features/item/itemSlice';
 import { GenreCarousel } from '../components/genres/GenreCarousel';
 import { ItemList } from '../components/items/ItemList';
 import { SlideShow } from '../components/slideshow/SlideShow';
+import Spinner from '../components/utilities/Spinner';
 
-export function Trending() {
-	const { items, genres } = useAppSelector((state: RootState) => state.item);
+export const Trending = () => {
+	const { items, genres, status } = useAppSelector((state: RootState) => state.item);
 	let { type } = useParams();
 	const dispatch = useAppDispatch();
 
@@ -21,6 +22,10 @@ export function Trending() {
 		};
 	}, [dispatch, type]);
 
+	if (status === 'loading' && items.length === 0) {
+		return <Spinner />;
+	}
+
 	return (
 		<div>
 			<SlideShow items={items} />
@@ -28,4 +33,4 @@ export function Trending() {
 			<ItemList items={items} />
 		</div>
 	);
-}
+};

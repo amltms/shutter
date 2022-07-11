@@ -1,5 +1,4 @@
 import { Item } from './Item';
-import { FC } from 'react';
 import styled from 'styled-components';
 import { ItemAttributes } from '../../types';
 import { useAppSelector } from '../../app/hooks';
@@ -15,7 +14,7 @@ const Grid = styled.div`
 	justify-content: center;
 `;
 
-export const ItemList: FC<ItemListProps> = ({ items }) => {
+export const ItemList = ({ items }: ItemListProps) => {
 	const { savedItemsDB } = useAppSelector((state: RootState) => state.item);
 
 	return <Grid>{items.map((i) => i.poster_path && <Item key={i.id} item={i} saved={savedItemsDB} />)}</Grid>;

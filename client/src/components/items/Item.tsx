@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import styled from 'styled-components';
@@ -93,7 +93,7 @@ const PreviewContent = styled.div`
 		font-size: 1.2rem;
 	}
 `;
-export const Item: FC<ItemProps> = ({ item, saved }) => {
+export const Item = ({ item, saved }: ItemProps) => {
 	const { user } = useAppSelector((state: RootState) => state.auth);
 	const [savedIcon, setSavedIcon] = useState(false);
 	const [titleRef, setTitleRef] = useState(null);

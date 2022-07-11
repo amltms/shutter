@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLeft } from './NavLeft';
 import { NavRight } from './NavRight';
 import { NavFullScreen } from './NavFullScreen';
@@ -45,7 +45,7 @@ const HamburgerMenu = styled.div`
 	}
 `;
 
-export const Nav: FC = () => {
+export const Nav = () => {
 	const [scrolled, setScrolled] = useState(false);
 	const [showDropdown, setShowDropDown] = useState(false);
 	const location = useLocation();

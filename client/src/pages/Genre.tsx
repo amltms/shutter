@@ -34,11 +34,9 @@ export const Genre = () => {
 	}
 
 	return (
-		<>
-			<ItemDetails>
-				<h1>{genreName}</h1>
-				{items && <ItemList items={items} />}
-			</ItemDetails>
-		</>
+		<ItemDetails>
+			<h1>{genreName}</h1>
+			{items && <ItemList items={items} />}
+		</ItemDetails>
 	);
 };

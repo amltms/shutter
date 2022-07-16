@@ -21,6 +21,8 @@
 
 body {
 	background-color: black;
+	overflow: scroll;
+	overflow: overlay;
 }
 
 a,
@@ -93,25 +95,31 @@ hr {
 	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 	margin: 1rem 0;
 }
+
 /* width */
 ::-webkit-scrollbar {
-	width: 13px;
+	width: 15px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-	background: #111;
+	background: none;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #222;
-	transition: 1s;
+	border: 3px solid rgba(0, 0, 0, 0);
+	background-clip: padding-box;
+	border-radius: 1rem;
+	background-color: rgba(101, 101, 101, 0.5);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: #c47f0f;
+	border: 3px solid rgba(0, 0, 0, 0);
+	background-clip: padding-box;
+	border-radius: 1rem;
+	background-color: rgba(35, 35, 35, 0.8);
 }
 
 .active {

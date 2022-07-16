@@ -26,9 +26,13 @@ const Content = styled.div`
 	@media screen and (max-width: 1600px) {
 		width: 100%;
 		bottom: 10%;
+		h1 {
+			margin-bottom: 1rem;
+		}
 	}
 	@media screen and (max-width: 900px) {
 		h1 {
+			margin-bottom: 1rem;
 			font-size: 3rem !important;
 		}
 	}

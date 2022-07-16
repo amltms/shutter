@@ -9,8 +9,9 @@ import { MdAccountBox, MdLockOutline, MdOutlineAlternateEmail } from 'react-icon
 import { SubmitButton } from '../components/form/SubmitButton';
 import { Form } from '../components/form/Form';
 import { InputContainer } from '../components/form/InputContainer';
+import { motion } from 'framer-motion';
 
-const RegisterContainer = styled.div`
+const RegisterContainer = styled(motion.div)`
 	height: 100vh;
 	display: flex;
 	align-items: center;
@@ -92,7 +93,7 @@ export const Register = () => {
 	};
 
 	return (
-		<RegisterContainer>
+		<RegisterContainer initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
 			<Toast setToast={setToast} toast={toast} />
 			<LoginInputs>
 				<Form onSubmit={onSubmit}>

@@ -93,6 +93,7 @@ export const itemSlice = createSlice({
 			state.status = 'idle';
 			state.message = '';
 			state.items = [];
+			state.searchItems = [];
 			state.selectedItem = null;
 			state.savedItems = [];
 			state.credits = null;
@@ -165,11 +166,7 @@ export const itemSlice = createSlice({
 				state.status = 'failed';
 				state.message = action.payload;
 			})
-			.addCase(configureSaved.pending, (state) => {
-				state.status = 'loading';
-			})
 			.addCase(configureSaved.fulfilled, (state, action) => {
-				state.status = 'idle';
 				state.savedItemsDB = action.payload;
 			})
 			.addCase(configureSaved.rejected, (state, action) => {

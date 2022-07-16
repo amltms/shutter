@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { GoStar } from 'react-icons/go';
 import styled from 'styled-components';
 import { palette } from '../../styles/palette';

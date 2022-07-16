@@ -9,8 +9,9 @@ import { Toast } from '../components/utilities/Toast';
 import { SubmitButton } from '../components/form/SubmitButton';
 import { Form } from '../components/form/Form';
 import { InputContainer } from '../components/form/InputContainer';
+import { motion } from 'framer-motion';
 
-const LoginContainer = styled.div`
+const LoginContainer = styled(motion.div)`
 	height: 100vh;
 	display: flex;
 `;
@@ -82,7 +83,7 @@ export const Login = () => {
 	};
 
 	return (
-		<LoginContainer>
+		<LoginContainer initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
 			<Toast setToast={setToast} toast={toast} />
 			<LoginInputs>
 				<Form onSubmit={onSubmit}>

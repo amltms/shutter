@@ -7,6 +7,7 @@ import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { RootState } from '../app/store';
 import { getItem, getCredits, reset } from '../features/item/itemSlice';
 import Spinner from '../components/utilities/Spinner';
+import { motion } from 'framer-motion';
 
 const ItemDetails = styled.div`
 	padding: 20% 8vw;
@@ -42,17 +43,17 @@ export const Overview = () => {
 		};
 	}, [id, type, dispatch]);
 
-	if (status === 'loading' && selectedItem && Object.keys(selectedItem).length !== 0) {
+	if (status === 'loading') {
 		return <Spinner />;
 	}
 
 	return (
-		<>
+		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
 			<Backdrop src={`https://image.tmdb.org/t/p/original/${selectedItem?.backdrop_path}`} alt="backdrop" />
 			<ItemDetails>
 				{selectedItem && <OverviewDetails item={selectedItem} />}
 				{credits && <ItemCredits credits={credits} />}
 			</ItemDetails>
-		</>
+		</motion.div>
 	);
 };

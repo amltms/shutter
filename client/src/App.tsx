@@ -12,6 +12,7 @@ import { Register } from './pages/Register';
 import { useAppSelector, useAppDispatch } from './app/hooks';
 import { getSavedDB } from './features/item/itemSlice';
 import { RootState } from './app/store';
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
 	const location = useLocation();
@@ -29,18 +30,19 @@ function App() {
 	return (
 		<div className="App">
 			<Nav />
-
-			<Routes>
-				<Route path="/" element={<Trending />}>
-					<Route path=":type" element={<Trending />} />
-				</Route>
-				<Route path="/saved" element={<SavedItems />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/register" element={<Register />} />
-				<Route path="/overview/:type/:id" element={<Overview />} />
-				<Route path="/search/:search" element={<SearchResults />} />
-				<Route path="/:type/genre/:id" element={<Genre />} />
-			</Routes>
+			<AnimatePresence exitBeforeEnter initial={false}>
+				<Routes>
+					<Route path="/" element={<Trending />}>
+						<Route path=":type" element={<Trending />} />
+					</Route>
+					<Route path="/saved" element={<SavedItems />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/register" element={<Register />} />
+					<Route path="/overview/:type/:id" element={<Overview />} />
+					<Route path="/search/:search" element={<SearchResults />} />
+					<Route path="/:type/genre/:id" element={<Genre />} />
+				</Routes>
+			</AnimatePresence>
 		</div>
 	);
 }

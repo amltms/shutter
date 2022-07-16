@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-const SpinnerContainer = styled.div`
+import { motion } from 'framer-motion';
+
+const SpinnerContainer = styled(motion.div)`
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -20,7 +22,7 @@ const LoadingSpinner = styled.div`
 `;
 function Spinner() {
 	return (
-		<SpinnerContainer>
+		<SpinnerContainer animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }}>
 			<LoadingSpinner />
 		</SpinnerContainer>
 	);

@@ -71,6 +71,7 @@ const SaveIcon = styled.div`
 
 const PreviewContent = styled.div`
 	position: absolute;
+	width: 100%;
 	white-space: nowrap;
 	overflow: hidden;
 	padding: 1.2rem;
@@ -83,6 +84,7 @@ const PreviewContent = styled.div`
 	justify-content: flex-end;
 	user-select: none;
 	h2 {
+		width: fit-content;
 		font-size: 1.5rem;
 		margin-bottom: 0.6rem;
 		font-weight: 400;

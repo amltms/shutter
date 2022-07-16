@@ -12,6 +12,7 @@ import Spinner from '../components/utilities/Spinner';
 
 const LoginContainer = styled(motion.div)`
 	display: flex;
+	width: 100%;
 	form {
 		height: 100%;
 	}

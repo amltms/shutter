@@ -55,9 +55,8 @@ const ItemPreview = styled.div<PreviewItems>`
 	:hover h2 {
 		transition: ${({ titleWidth }) => (titleWidth > 250 ? `${titleWidth / 0.2}ms` : `${titleWidth / 0.4}ms`)};
 		transition-timing-function: linear;
-
 		transition-delay: 0.5s;
-		transform: translate(${({ titleWidth }) => (titleWidth > 180 ? `-${titleWidth - 170}px` : '0')});
+		transform: translate(${({ titleWidth }) => (titleWidth > 175 ? `-${titleWidth - 170}px` : '0')});
 	}
 `;
 
@@ -73,7 +72,6 @@ const PreviewContent = styled.div`
 	position: absolute;
 	width: 100%;
 	white-space: nowrap;
-	overflow: hidden;
 	padding: 1.2rem;
 	height: 100%;
 	left: 0;
@@ -83,6 +81,7 @@ const PreviewContent = styled.div`
 	flex-direction: column;
 	justify-content: flex-end;
 	user-select: none;
+
 	h2 {
 		width: fit-content;
 		font-size: 1.5rem;

@@ -1,51 +1,39 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import { Toast } from '../components/utilities/Toast';
-import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { RootState } from '../app/store';
-import { register, reset } from '../features/auth/authSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../app/hooks';
+import { register } from '../features/auth/authSlice';
+import { Link } from 'react-router-dom';
 import { MdAccountBox, MdLockOutline, MdOutlineAlternateEmail } from 'react-icons/md';
 import { SubmitButton } from '../components/form/SubmitButton';
 import { Form } from '../components/form/Form';
 import { InputContainer } from '../components/form/InputContainer';
 import { motion } from 'framer-motion';
+import Spinner from '../components/utilities/Spinner';
 
 const RegisterContainer = styled(motion.div)`
-	height: 100vh;
 	display: flex;
-	align-items: center;
 	justify-content: center;
-	flex-direction: column;
-`;
+	align-items: center;
 
-const LoginInputs = styled.div`
 	form {
-		left: 50%;
-		top: 50%;
-		padding: 5rem;
-		transform: translate(-50%, -50%);
 		border-radius: 2rem;
 	}
 
-	@media (max-width: 1500px) {
-		form {
-			width: 70%;
-			padding: 6vw;
-		}
-	}
 	@media (max-width: 1000px) {
 		form {
 			border-radius: 0;
 			height: 100%;
-			padding: 8vw;
 			width: 100%;
+			padding: 8vw;
 		}
 	}
 `;
 
 const NameContainer = styled.div`
 	display: flex;
+	@media (max-width: 1000px) {
+		flex-direction: column;
+	}
 `;
 
 const Background = styled.img`
@@ -57,45 +45,25 @@ const Background = styled.img`
 `;
 
 export const Register = () => {
+	const [imageLoaded, setImageLoaded] = useState(false);
+	const dispatch = useAppDispatch();
 	const [formData, setFormData] = useState({
 		firstName: '',
 		lastName: '',
 		email: '',
 		password: '',
 	});
-	const [toast, setToast] = useState({
-		visible: false,
-		message: '',
-	});
-	const navigate = useNavigate();
-	const dispatch = useAppDispatch();
-
-	const { user, status, message } = useAppSelector((state: RootState) => state.auth);
-
-	useEffect(() => {
-		if (status === 'failed') {
-			setToast((t) => ({ ...t, visible: true, message }));
-		}
-
-		if (user) {
-			navigate('/');
-		}
-
-		return () => {
-			dispatch(reset());
-		};
-	}, [user, status, navigate, dispatch, message]);
 
 	const onSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
-
 		dispatch(register(formData));
 	};
 
 	return (
 		<RegisterContainer initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
-			<Toast setToast={setToast} toast={toast} />
-			<LoginInputs>
+			{!imageLoaded ? (
+				<Spinner />
+			) : (
 				<Form onSubmit={onSubmit}>
 					<h2>SIGN UP</h2>
 					<p>
@@ -109,8 +77,8 @@ export const Register = () => {
 					<InputContainer name={'password'} icon={<MdLockOutline />} formData={formData} setFormData={setFormData} />
 					<SubmitButton />
 				</Form>
-			</LoginInputs>
-			<Background src={`${process.env.PUBLIC_URL}/login-bg.jpg`} />
+			)}
+			<Background src={`${process.env.PUBLIC_URL}/register-bg.jpg`} onLoad={() => setImageLoaded(true)} />
 		</RegisterContainer>
 	);
 };

@@ -1,28 +1,28 @@
-import { FC } from 'react';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { palette } from '../../styles/palette';
 
-export type FormProps = {
+type Props = {
 	onSubmit: any;
+	children: React.ReactNode;
 };
 
-const FormContainer = styled.form`
+const FormContainer = styled(motion.form)`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-
-	padding: 4vw;
 	position: absolute;
 	backdrop-filter: blur(20px);
 	background-color: rgba(0, 0, 0, 0.8);
 	z-index: 100;
+	padding: 4rem;
 	input {
 		background: none;
 		font-size: 1.5rem;
 		transition: 1s;
 		border: none;
 		margin-left: 0.8rem;
-		width: 100%;
+		width: 20rem;
 		&:-webkit-autofill,
 		&:-webkit-autofill:hover,
 		&:-webkit-autofill:focus,
@@ -50,6 +50,10 @@ const FormContainer = styled.form`
 	}
 `;
 
-export const Form: FC<FormProps> = ({ children, onSubmit }) => {
-	return <FormContainer onSubmit={onSubmit}>{children}</FormContainer>;
+export const Form = ({ children, onSubmit }: Props) => {
+	return (
+		<FormContainer initial={{ opacity: 0, x: -200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} onSubmit={onSubmit}>
+			{children}
+		</FormContainer>
+	);
 };

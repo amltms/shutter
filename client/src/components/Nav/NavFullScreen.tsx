@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import { FC } from 'react';
 import { palette } from '../../styles/palette';
-import { NavLink } from 'react-router-dom';
-
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { RootState } from '../../app/store';
+import { logout, reset } from '../../features/auth/authSlice';
 interface Props {
 	show: boolean;
 }
@@ -19,8 +21,10 @@ const FullScreenMenu = styled.div<Props>`
 	flex-direction: column;
 	display: ${({ show }) => (show ? 'flex' : 'none')};
 
-	a {
+	a,
+	button {
 		font-size: 2rem;
+		font-weight: 300;
 		padding: 1rem;
 		:hover {
 			color: ${palette.primary};
@@ -29,6 +33,16 @@ const FullScreenMenu = styled.div<Props>`
 `;
 
 export const NavFullScreen: FC<Props> = ({ show }) => {
+	const dispatch = useAppDispatch();
+	const { user } = useAppSelector((state: RootState) => state.auth);
+	const navigate = useNavigate();
+
+	const onLogout = () => {
+		dispatch(logout());
+		dispatch(reset());
+		navigate('/');
+	};
+
 	return (
 		<FullScreenMenu show={show}>
 			<NavLink to="movie" className={(navData) => (navData.isActive ? 'active' : '')}>
@@ -36,7 +50,7 @@ export const NavFullScreen: FC<Props> = ({ show }) => {
 			</NavLink>
 			<NavLink to="tv">TV</NavLink>
 			<NavLink to="saved">Saved</NavLink>
-			<NavLink to="login">Login</NavLink>
+			{user ? <button onClick={onLogout}>Logout</button> : <NavLink to="login">Login</NavLink>}
 		</FullScreenMenu>
 	);
 };

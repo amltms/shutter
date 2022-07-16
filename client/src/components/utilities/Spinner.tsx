@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 const SpinnerContainer = styled(motion.div)`
+	background: black;
 	position: fixed;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
-	z-index: 5000;
+	z-index: 400;
 	display: flex;
 	justify-content: center;
 	align-items: center;

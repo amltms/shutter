@@ -13,6 +13,7 @@ import { useAppSelector, useAppDispatch } from './app/hooks';
 import { getSavedDB } from './features/item/itemSlice';
 import { RootState } from './app/store';
 import { AnimatePresence } from 'framer-motion';
+import { AuthContainer } from './components/form/AuthContainer';
 
 function App() {
 	const location = useLocation();
@@ -36,8 +37,22 @@ function App() {
 						<Route path=":type" element={<Trending />} />
 					</Route>
 					<Route path="/saved" element={<SavedItems />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/register" element={<Register />} />
+					<Route
+						path="/login"
+						element={
+							<AuthContainer>
+								<Login />
+							</AuthContainer>
+						}
+					/>
+					<Route
+						path="/register"
+						element={
+							<AuthContainer>
+								<Register />
+							</AuthContainer>
+						}
+					/>
 					<Route path="/overview/:type/:id" element={<Overview />} />
 					<Route path="/search/:search" element={<SearchResults />} />
 					<Route path="/:type/genre/:id" element={<Genre />} />

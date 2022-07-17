@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { ItemAttributes } from '../../types';
 import { palette } from '../../styles/palette';
@@ -71,6 +71,20 @@ const DetailsBtn = styled.button`
 	}
 `;
 
+const textTransition = keyframes`
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+`;
+
+const AnimateDiv = styled.div`
+	animation: ${textTransition} 0.7s;
+`;
+
 const AnimateContainer = styled.div`
 	overflow: hidden;
 	display: flex;
@@ -105,7 +119,7 @@ export const SlideContent: FC<Props> = ({ slideContent }) => {
 			{slideContent && (
 				<Content>
 					<AnimateContainer>
-						<div key={slideContent.id} className="animate-text">
+						<AnimateDiv key={slideContent.id}>
 							<h1>{slideContent.title || slideContent.name}</h1>
 							<p>
 								{filteredGenres?.map((genre) => (
@@ -114,7 +128,7 @@ export const SlideContent: FC<Props> = ({ slideContent }) => {
 									</GenreName>
 								))}
 							</p>
-						</div>
+						</AnimateDiv>
 					</AnimateContainer>
 					<DetailsBtn onClick={() => handleOverview()}>More Details</DetailsBtn>
 				</Content>

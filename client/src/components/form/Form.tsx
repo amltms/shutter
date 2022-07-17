@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { palette } from '../../styles/palette';
 
@@ -7,15 +6,8 @@ type Props = {
 	children: React.ReactNode;
 };
 
-const FormContainer = styled(motion.form)`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	position: absolute;
-	backdrop-filter: blur(20px);
-	background-color: rgba(0, 0, 0, 0.8);
-	z-index: 100;
-	padding: 4rem;
+const FormContainer = styled.form`
+	width: 100%;
 	input {
 		background: none;
 		font-size: 1.5rem;
@@ -51,9 +43,5 @@ const FormContainer = styled(motion.form)`
 `;
 
 export const Form = ({ children, onSubmit }: Props) => {
-	return (
-		<FormContainer initial={{ opacity: 0, x: -200 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} onSubmit={onSubmit}>
-			{children}
-		</FormContainer>
-	);
+	return <FormContainer onSubmit={onSubmit}>{children}</FormContainer>;
 };

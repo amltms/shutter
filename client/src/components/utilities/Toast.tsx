@@ -13,6 +13,7 @@ interface ToastProps {
 
 const ToastContainer = styled.div<ToastProps>`
 	bottom: ${(props) => (props.visible ? '5%' : '-10%')};
+	opacity: ${(props) => (props.visible ? '1' : '0')};
 	z-index: 1000;
 	background-color: ${palette.warning};
 	position: fixed;

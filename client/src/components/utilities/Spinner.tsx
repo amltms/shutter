@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 
 const SpinnerContainer = styled(motion.div)`
@@ -13,14 +13,26 @@ const SpinnerContainer = styled(motion.div)`
 	justify-content: center;
 	align-items: center;
 `;
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
 const LoadingSpinner = styled.div`
 	width: 64px;
 	height: 64px;
 	border: 8px solid;
 	border-color: #000 transparent #555 transparent;
 	border-radius: 50%;
-	animation: spin 1.2s linear infinite;
+	animation: ${rotate} 1.2s linear infinite;
 `;
+
 function Spinner() {
 	return (
 		<SpinnerContainer animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }}>

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
+import { palette } from '../../styles/palette';
 
 export type InputProps = {
 	name: string;
@@ -15,9 +16,13 @@ const Input = styled.div`
 	padding: 1.2rem 0;
 	border-bottom: 1px solid #4c4c4c;
 	margin-bottom: 1rem;
+	transition: 0.5s;
 	svg {
 		fill: #4c4c4c;
 		font-size: 1.6rem;
+	}
+	:focus-within {
+		border-bottom: 1px solid ${palette.primary};
 	}
 `;
 

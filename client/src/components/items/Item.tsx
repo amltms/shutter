@@ -109,14 +109,19 @@ export const Item = ({ item, saved }: ItemProps) => {
 	}, [title]);
 
 	useEffect(() => {
-		if (saved.find((i: ItemDB) => i.id === item.id)) {
+		if (saved.length !== 0 && saved.find((i: ItemDB) => i.id === item.id)) {
 			setSavedIcon(true);
 		}
 	}, [item.id, saved]);
 
 	const savedValidation = (item: ItemAttributes) => {
 		setSavedIcon(!savedIcon);
-		dispatch(configureSaved(item));
+		if (type) {
+			const newSaved = { ...item, media_type: type };
+			dispatch(configureSaved(newSaved));
+		} else {
+			dispatch(configureSaved(item));
+		}
 	};
 
 	return (

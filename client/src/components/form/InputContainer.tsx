@@ -17,12 +17,36 @@ const Input = styled.div`
 	border-bottom: 1px solid #4c4c4c;
 	margin-bottom: 1rem;
 	transition: 0.5s;
+	input {
+		background: none;
+		font-size: 1.5rem;
+		transition: 1s;
+		border: none;
+		margin-left: 0.8rem;
+		&:-webkit-autofill,
+		&:-webkit-autofill:hover,
+		&:-webkit-autofill:focus,
+		&:-webkit-autofill:active {
+			-webkit-transition: 'color 9999s ease-out, background-color 9999s ease-out';
+			-webkit-transition-delay: 9999s;
+			transition: 'color 9999s ease-out, background-color 9999s ease-out';
+			transition-delay: 9999s;
+		}
+		width: 15vw;
+		@media (max-width: 1800px) {
+			width: 25vw;
+		}
+	}
 	svg {
 		fill: #4c4c4c;
 		font-size: 1.6rem;
+		transition: 0.5s;
 	}
 	:focus-within {
 		border-bottom: 1px solid ${palette.primary};
+		svg {
+			fill: ${palette.primary};
+		}
 	}
 `;
 

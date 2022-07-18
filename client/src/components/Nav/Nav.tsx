@@ -14,7 +14,7 @@ const NavBar = styled.div<Scroll>`
 	width: 100%;
 	position: fixed;
 	transition: 0.4s;
-	padding: 3rem 4vw;
+	padding: 2vw 4vw;
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;

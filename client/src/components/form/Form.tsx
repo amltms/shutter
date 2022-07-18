@@ -7,23 +7,10 @@ type Props = {
 };
 
 const FormContainer = styled.form`
-	width: 100%;
-	input {
-		background: none;
-		font-size: 1.5rem;
-		transition: 1s;
-		border: none;
-		margin-left: 0.8rem;
-		width: 20rem;
-		&:-webkit-autofill,
-		&:-webkit-autofill:hover,
-		&:-webkit-autofill:focus,
-		&:-webkit-autofill:active {
-			-webkit-transition: 'color 9999s ease-out, background-color 9999s ease-out';
-			-webkit-transition-delay: 9999s;
-			transition: 'color 9999s ease-out, background-color 9999s ease-out';
-			transition-delay: 9999s;
-		}
+	z-index: 100;
+	padding: 3vw;
+	@media (max-width: 1800px) {
+		padding: 3rem;
 	}
 	h2 {
 		font-family: 'Roboto', sans-serif;

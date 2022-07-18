@@ -16,23 +16,24 @@ const Content = styled.div`
 	width: 100%;
 	z-index: 2;
 	bottom: 0;
-	width: 100%;
-	padding: 5vw 4vw;
-	width: 80%;
+	padding: 0 4vw;
+	padding-bottom: 5vw;
+	width: auto;
 	h1 {
+		display: inline;
 		font-size: 5vw;
+		cursor: pointer;
+		transition: 0.5s;
+		:hover {
+			color: ${palette.primary};
+		}
 	}
 
 	@media screen and (max-width: 1600px) {
-		width: 100%;
 		bottom: 10%;
-		h1 {
-			margin-bottom: 1rem;
-		}
 	}
 	@media screen and (max-width: 900px) {
 		h1 {
-			margin-bottom: 1rem;
 			font-size: 3rem !important;
 		}
 	}
@@ -41,14 +42,13 @@ const Content = styled.div`
 const DetailsBtn = styled.button`
 	transition: 0.3s;
 	font-size: 1.5rem;
-	margin-top: 1.5rem;
-	margin-left: 0.5rem;
+	margin-top: 0.5rem;
 	padding: 1rem 0;
 	position: relative;
 	display: inline-block;
+	font-weight: 300;
 	@media screen and (max-width: 900px) {
-		padding: 0.8rem;
-		font-size: 1rem;
+		display: none;
 	}
 	:after {
 		content: '';
@@ -90,12 +90,23 @@ const AnimateContainer = styled.div`
 	display: flex;
 `;
 
+const Genres = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 1rem;
+`;
+
 const GenreName = styled.span`
 	font-size: 1.6rem;
+	padding: 0.5rem 0;
 	padding-right: 2rem;
 	color: ${palette.secondaryTextColor};
-	padding-left: 0.5rem;
 	transition: 0.4s;
+	white-space: nowrap;
+	font-weight: 300;
+	@media screen and (max-width: 900px) {
+		font-size: 1.3rem;
+	}
 	:hover {
 		cursor: pointer;
 		color: ${palette.primary};
@@ -120,14 +131,14 @@ export const SlideContent: FC<Props> = ({ slideContent }) => {
 				<Content>
 					<AnimateContainer>
 						<AnimateDiv key={slideContent.id}>
-							<h1>{slideContent.title || slideContent.name}</h1>
-							<p>
+							<h1 onClick={() => handleOverview()}>{slideContent.title || slideContent.name}</h1>
+							<Genres>
 								{filteredGenres?.map((genre) => (
 									<GenreName key={genre.id} onClick={() => handleGenre(genre.id)}>
 										{genre.name}
 									</GenreName>
 								))}
-							</p>
+							</Genres>
 						</AnimateDiv>
 					</AnimateContainer>
 					<DetailsBtn onClick={() => handleOverview()}>More Details</DetailsBtn>

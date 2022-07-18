@@ -41,12 +41,15 @@ const Synopsis = styled.p`
 	width: 80%;
 	@media screen and (max-width: 900px) {
 		width: 100%;
+		text-align: center;
 	}
 `;
 
 const Genres = styled.div`
 	margin: 1rem 0;
 	font-size: 1.25rem;
+	display: flex;
+	flex-wrap: wrap;
 	div {
 		margin-right: 2rem;
 		display: inline-block;
@@ -57,6 +60,9 @@ const Genres = styled.div`
 	}
 	div:last-child {
 		margin-right: 0;
+	}
+	@media screen and (max-width: 900px) {
+		justify-content: center;
 	}
 `;
 

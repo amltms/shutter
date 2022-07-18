@@ -9,6 +9,10 @@ import { getItem, getCredits, reset } from '../features/item/itemSlice';
 import Spinner from '../components/utilities/Spinner';
 import { motion } from 'framer-motion';
 
+const Container = styled(motion.div)`
+	overflow: hidden;
+	position: relative;
+`;
 const ItemDetails = styled.div`
 	padding: 20% 8vw;
 `;
@@ -48,12 +52,12 @@ export const Overview = () => {
 	}
 
 	return (
-		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
+		<Container initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
 			<Backdrop src={`https://image.tmdb.org/t/p/original/${selectedItem?.backdrop_path}`} alt="backdrop" />
 			<ItemDetails>
 				{selectedItem && <OverviewDetails item={selectedItem} />}
 				{credits && <ItemCredits credits={credits} />}
 			</ItemDetails>
-		</motion.div>
+		</Container>
 	);
 };

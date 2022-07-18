@@ -17,6 +17,9 @@ const Container = styled.div`
 	overflow: hidden;
 	padding: 1rem 4rem;
 	margin: 3rem 0;
+	@media (max-width: 900px) {
+		padding: 0;
+	}
 `;
 
 export const GenreCarousel: FC<ItemProps> = ({ genres }) => {

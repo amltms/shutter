@@ -23,6 +23,10 @@ const NavBtn = styled.button`
 	&:hover {
 		opacity: 1;
 	}
+
+	@media screen and (max-width: 900px) {
+		display: none;
+	}
 `;
 
 const DotContainer = styled.div`

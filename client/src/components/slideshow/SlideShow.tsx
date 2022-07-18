@@ -14,7 +14,7 @@ interface SliderProps {
 }
 
 const Container = styled.div`
-	height: auto;
+	min-height: 100vh;
 	position: relative;
 	overflow: hidden;
 `;

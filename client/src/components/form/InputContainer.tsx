@@ -36,6 +36,9 @@ const Input = styled.div`
 		@media (max-width: 1800px) {
 			width: 25vw;
 		}
+		@media (max-width: 900px) {
+			width: 100%;
+		}
 	}
 	svg {
 		fill: #4c4c4c;

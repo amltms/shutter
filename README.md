@@ -6,8 +6,6 @@ A web application that allows you to search through a database of films and tv s
 
 To start the project:
 
-### `cd server`
-
 ### `npm run dev`
 
 Runs the app in the development mode.\

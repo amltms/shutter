@@ -14,6 +14,7 @@ node_modules
 /client/build
 
 # misc
+.env
 /client/.DS_Store
 /client/.env.local
 /client/.env.development.local

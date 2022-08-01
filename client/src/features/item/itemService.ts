@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { ItemAttributes, ItemDB, Genre } from '../../types';
-const apikey = '5042d9bd250e2fbd1f65fceff13e225d';
 const API_URL = '/api/items/';
 
 const getData = async (url: string, urlVars?: string) => {
 	return await axios
-		.get(`https://api.themoviedb.org/3/${url}?api_key=${apikey}&language=en-UK${urlVars}`)
+		.get(`https://api.themoviedb.org/3/${url}?api_key=${process.env.REACT_APP_API_KEY}&language=en-UK${urlVars}`)
 		.then((res) => res.data)
 		.catch((err) => console.log(err));
 };

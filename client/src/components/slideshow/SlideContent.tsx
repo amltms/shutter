@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { ItemAttributes } from '../../types';
@@ -113,7 +112,7 @@ const GenreName = styled.span`
 	}
 `;
 
-export const SlideContent: FC<Props> = ({ slideContent }) => {
+export const SlideContent = ({ slideContent }: Props) => {
 	let navigate = useNavigate();
 	const { genres } = useAppSelector((state: RootState) => state.item);
 	const filteredGenres = slideContent?.genre_ids && genres.filter((genre) => slideContent.genre_ids?.includes(genre.id));

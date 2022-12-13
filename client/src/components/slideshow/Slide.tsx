@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import styled from 'styled-components';
 import { ItemAttributes } from '../../types';
 
@@ -25,7 +24,7 @@ const Backdrop = styled.img`
 	}
 `;
 
-export const Slide: FC<Props> = ({ item }) => {
+export const Slide = ({ item }: Props) => {
 	return (
 		<>
 			{item && (

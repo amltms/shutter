@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import styled from 'styled-components';
 import { palette } from '../../styles/palette';
@@ -50,7 +49,7 @@ const Indicator = styled.div<IndicatorProps>`
 	display: inline-block;
 `;
 
-export const SlideNavigation: FC<Props> = ({ setCurrentSlide, currentSlide, slideArr }) => {
+export const SlideNavigation = ({ setCurrentSlide, currentSlide, slideArr }: Props) => {
 	return (
 		<>
 			<NavBtn style={{ right: 0 }} onClick={() => setCurrentSlide(currentSlide + 1)}>

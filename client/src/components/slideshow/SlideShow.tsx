@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { ItemAttributes } from '../../types';
 import { Slide } from './Slide';
@@ -27,7 +27,7 @@ const Slider = styled.div<SliderProps>`
 	transform: translateX(${({ currentSlide }) => -currentSlide * 100}%);
 `;
 
-export const SlideShow: FC<Props> = ({ items }) => {
+export const SlideShow = ({ items }: Props) => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const timer: { current: NodeJS.Timeout | null } = useRef(null);
 	let slideArr = [0, 1, 2, 3];

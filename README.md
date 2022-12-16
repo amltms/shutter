@@ -4,7 +4,7 @@
 
 ## About
 
-Shutter is a web application that allows users to view information on films and TV shows, and save them to their account. It uses the [The Movie Database API](https:developers.themoviedb.org/3/getting-started/introduction) to fetch data. The backend is built with Express and MongoDB, and the frontend is built with React and Redux Toolkit.
+Shutter is a web application that allows users to view information on films and TV shows, and save them to their account. It uses the [The Movie Database API](https://developers.themoviedb.org/3/getting-started/introduction) to fetch data. The backend is built with Express and MongoDB, and the frontend is built with React and Redux Toolkit.
 
 ### Purpose
 

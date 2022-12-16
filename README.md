@@ -1,6 +1,6 @@
 # Shutter - Deprecated
 
-> This project is deprecrated. The new version can be found [here](https:github.com/amltms/shutternext).
+> This project is deprecrated. The new version can be found [here](https://github.com/amltms/shutternext).
 
 ## About
 
